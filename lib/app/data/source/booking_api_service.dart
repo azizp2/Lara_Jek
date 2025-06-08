@@ -17,4 +17,23 @@ abstract class BookingApiService {
 
   @GET(BOOKING_PATH_URL + '/{id}')
   Future<HttpResponse<DataState>> getById({@Path('id') required int id});
+
+  @POST(BOOKING_PATH_URL)
+  Future<HttpResponse<DataState>> create(
+      {@Body() required Map<String, dynamic> body});
+
+  @POST('/api/driver/booking/{id}/accet')
+  Future<HttpResponse<DataState>> accept({@Path('id') required int id});
+
+  @PUT('/api/driver/booking/{id}/status')
+  Future<HttpResponse<DataState>> updateStatus(
+      {@Path('id') required int id,
+      @Body() required Map<String, dynamic> body});
+
+  @POST(BOOKING_PATH_URL + '/{id}/cancel')
+  Future<HttpResponse<DataState>> cancel({@Path('id') required int id});
+
+  @POST(BOOKING_PATH_URL + '/price-check')
+  Future<HttpResponse<DataState>> checkPrice(
+      {@Body() required Map<String, dynamic> body});
 }

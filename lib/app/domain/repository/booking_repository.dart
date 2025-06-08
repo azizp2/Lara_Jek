@@ -6,4 +6,10 @@ abstract class BookingRepository {
       String? startDate, String? endDate);
 
   Future<DataState<BookingEntity>> getById(int id);
+  Future<DataState<BookingEntity>> create(BookingCreateParamEntity param);
+  Future<DataState<BookingEntity>> accept(int id);
+  Future<DataState> updateStatus(BookingStatusParamEntity param);
+  Future<DataState> cancel(int id);
+
+  Future<DataState<double>> checkPrice(double param);
 }

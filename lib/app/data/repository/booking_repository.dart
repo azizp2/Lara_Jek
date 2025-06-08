@@ -30,4 +30,46 @@ class BookingRepositoryImpl extends BookingRepository {
       return BookingEntity.fromJson(json);
     });
   }
+
+  @override
+  Future<DataState<BookingEntity>> create(BookingCreateParamEntity param) {
+    return handleResponse(() => _bookingApiService.create(body: param.toJson()),
+        (json) async {
+      return json['booking']['id'];
+    });
+  }
+
+  @override
+  Future<DataState<BookingEntity>> accept(int id) {
+    return handleResponse(() => _bookingApiService.accept(id: id),
+        (json) async {
+      return json['id'];
+    });
+  }
+
+  @override
+  Future<DataState> updateStatus(BookingStatusParamEntity param) {
+    return handleResponse(
+        () => _bookingApiService.updateStatus(
+            id: param.id, body: {'status': param.status}), (p0) async {
+      return null;
+    });
+  }
+
+  @override
+  Future<DataState> cancel(int id) {
+    return handleResponse(() => _bookingApiService.cancel(id: id),
+        (json) async {
+      return null;
+    });
+  }
+
+  @override
+  Future<DataState<double>> checkPrice(double param) {
+    return handleResponse(
+        () => _bookingApiService.checkPrice(body: {'distance': param}),
+        (data) async {
+      return data;
+    });
+  }
 }
