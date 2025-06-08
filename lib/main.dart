@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:lara_jek/app/persentation/login/login_screen.dart';
 import 'package:lara_jek/core/dependency/dependency.dart';
-import 'package:lara_jek/core/widget/error_app_widget.dart';
-import 'package:lara_jek/core/widget/loading_app_widget.dart';
 import 'package:lara_jek/theme/app_theme.dart';
 import 'package:intl/date_symbol_data_local.dart';
 

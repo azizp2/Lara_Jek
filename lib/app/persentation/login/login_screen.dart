@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:lara_jek/app/persentation/login/login_notifier.dart';
+import 'package:lara_jek/app/persentation/register/register_screen.dart';
 import 'package:lara_jek/core/helper/global_helper.dart';
 import 'package:lara_jek/core/widget/app_widget.dart';
 
@@ -7,102 +8,115 @@ class LoginScreen extends AppWidget<LoginNotifier, void, void> {
   @override
   Widget bodyBuild(BuildContext context) {
     return SafeArea(
-      child: Padding(
-        padding: const EdgeInsets.all(20),
-        child: ListView(
-          children: [
-            const SizedBox(height: 40),
-
-            // App Title
-            Text(
-              'Lara Jek',
-              style: GlobalHelper.getTextTheme(context,
-                      appTextStyle: AppTextStyle.HEADLINE_LARGE)
-                  ?.copyWith(
+      child: Stack(
+        children: [
+          // Background Lengkungan
+          Positioned(
+            top: 4,
+            left: 4,
+            right: 4,
+            child: Container(
+              height: 150,
+              decoration: BoxDecoration(
                 color: GlobalHelper.getColorScheme(context).primary,
+                borderRadius: const BorderRadius.only(
+                  bottomLeft: Radius.circular(20),
+                  bottomRight: Radius.circular(20),
+                  topRight: Radius.circular(20),
+                  topLeft: Radius.circular(20),
+                ),
               ),
             ),
+          ),
 
-            const SizedBox(height: 10),
-
-            // Welcome Messages
-            Text(
-              'Selamat datang kembali',
-              style: GlobalHelper.getTextTheme(context,
-                  appTextStyle: AppTextStyle.TITLE_LARGE),
-            ),
-            Text(
-              'Silahkan masuk untuk melanjutkan',
-              style: GlobalHelper.getTextTheme(context,
-                      appTextStyle: AppTextStyle.BODY_MEDIUM)
-                  ?.copyWith(
-                color: GlobalHelper.getColorScheme(context).onSurfaceVariant,
-              ),
-            ),
-
-            const SizedBox(height: 30),
-
-            // Email Field
-            Text(
-              'Email',
-              style: GlobalHelper.getTextTheme(context,
-                  appTextStyle: AppTextStyle.BODY_MEDIUM),
-            ),
-            const SizedBox(height: 10),
-            TextField(
-              keyboardType: TextInputType.emailAddress,
-              decoration: const InputDecoration(
-                hintText: 'Masukkan email anda',
-                prefixIcon: Icon(Icons.email_outlined),
-              ),
-            ),
-
-            const SizedBox(height: 20),
-
-            // Password Field
-            Text(
-              'Password',
-              style: GlobalHelper.getTextTheme(context,
-                  appTextStyle: AppTextStyle.BODY_MEDIUM),
-            ),
-            const SizedBox(height: 10),
-            TextField(
-              keyboardType: TextInputType.visiblePassword,
-              obscureText: true,
-              decoration: const InputDecoration(
-                hintText: 'Masukkan password anda',
-                prefixIcon: Icon(Icons.lock_outline),
-              ),
-            ),
-
-            const SizedBox(height: 30),
-
-            // Login Button
-            FilledButton(
-              onPressed: () {},
-              child: const Text('Login'),
-            ),
-
-            const SizedBox(height: 10),
-
-            // Register Prompt
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
+          // Konten Utama
+          Padding(
+            padding: const EdgeInsets.all(20),
+            child: ListView(
               children: [
+                const SizedBox(height: 20),
+                Text('Lara Jek',
+                    style: GlobalHelper.getTextTheme(context,
+                            appTextStyle: AppTextStyle.HEADLINE_LARGE)
+                        ?.copyWith(color: Colors.white)
+                        ?.copyWith(fontWeight: FontWeight.bold)),
+                const SizedBox(height: 10),
                 Text(
-                  'Belum punya akun?',
+                  'Selamat datang kembali',
+                  style: GlobalHelper.getTextTheme(context,
+                          appTextStyle: AppTextStyle.TITLE_LARGE)
+                      ?.copyWith(color: Colors.white70),
+                ),
+                const SizedBox(height: 10),
+                Text(
+                  'Silahkan masuk untuk melanjutkan',
+                  style: GlobalHelper.getTextTheme(context,
+                          appTextStyle: AppTextStyle.BODY_MEDIUM)
+                      ?.copyWith(
+                    color: Colors.white60,
+                  ),
+                ),
+                const SizedBox(height: 50),
+                Text(
+                  'Email',
                   style: GlobalHelper.getTextTheme(context,
                       appTextStyle: AppTextStyle.BODY_MEDIUM),
                 ),
-                TextButton(
+                const SizedBox(height: 10),
+                const TextField(
+                  keyboardType: TextInputType.emailAddress,
+                  decoration: InputDecoration(
+                    hintText: 'Masukkan email anda',
+                    prefixIcon: Icon(Icons.email_outlined),
+                  ),
+                ),
+                const SizedBox(height: 20),
+                Text(
+                  'Password',
+                  style: GlobalHelper.getTextTheme(context,
+                      appTextStyle: AppTextStyle.BODY_MEDIUM),
+                ),
+                const SizedBox(height: 10),
+                const TextField(
+                  keyboardType: TextInputType.visiblePassword,
+                  obscureText: true,
+                  decoration: InputDecoration(
+                    hintText: 'Masukkan password anda',
+                    prefixIcon: Icon(Icons.lock_outline),
+                  ),
+                ),
+                const SizedBox(height: 30),
+                FilledButton(
                   onPressed: () {},
-                  child: const Text('Daftar'),
+                  child: const Text('Login'),
+                ),
+                const SizedBox(height: 10),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      'Belum punya akun?',
+                      style: GlobalHelper.getTextTheme(context,
+                          appTextStyle: AppTextStyle.BODY_MEDIUM),
+                    ),
+                    TextButton(
+                      onPressed: () => _onPressRegister(context),
+                      child: const Text('Daftar'),
+                    ),
+                  ],
                 ),
               ],
             ),
-          ],
-        ),
+          ),
+        ],
       ),
+    );
+  }
+
+  _onPressRegister(BuildContext context) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => RegisterScreen()),
     );
   }
 }
