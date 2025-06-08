@@ -1,0 +1,44 @@
+// GENERATED CODE - DO NOT MODIFY BY HAND
+
+part of 'booking.dart';
+
+// **************************************************************************
+// JsonSerializableGenerator
+// **************************************************************************
+
+_$BookingEntityImpl _$$BookingEntityImplFromJson(Map<String, dynamic> json) =>
+    _$BookingEntityImpl(
+      id: (json['id'] as num).toInt(),
+      latitudeOrigin: (json['latitude_origin'] as num).toDouble(),
+      longitudeOrigin: (json['longitude_origin'] as num).toDouble(),
+      addressOrigin: json['address_origin'] as String,
+      latitudeDestination: (json['latitude_destination'] as num).toDouble(),
+      longitudeDestination: (json['longitude_destination'] as num).toDouble(),
+      addressDestination: json['address_destination'] as String,
+      distance: (json['distance'] as num).toDouble(),
+      timeEstimate: (json['time_estimate'] as num).toInt(),
+      price: (json['price'] as num).toDouble(),
+      status: json['status'] as String,
+      customer:
+          UserCustomerEntity.fromJson(json['customer'] as Map<String, dynamic>),
+      driver: json['driver'] == null
+          ? null
+          : UserDriverEntity.fromJson(json['driver'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$$BookingEntityImplToJson(_$BookingEntityImpl instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+      'latitude_origin': instance.latitudeOrigin,
+      'longitude_origin': instance.longitudeOrigin,
+      'address_origin': instance.addressOrigin,
+      'latitude_destination': instance.latitudeDestination,
+      'longitude_destination': instance.longitudeDestination,
+      'address_destination': instance.addressDestination,
+      'distance': instance.distance,
+      'time_estimate': instance.timeEstimate,
+      'price': instance.price,
+      'status': instance.status,
+      'customer': instance.customer,
+      'driver': instance.driver,
+    };
