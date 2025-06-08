@@ -4,4 +4,6 @@ import 'package:lara_jek/core/network/data_state.dart';
 abstract class BookingRepository {
   Future<DataState<List<BookingEntity>>> getAll(
       String? startDate, String? endDate);
+
+  Future<DataState<BookingEntity>> getById(int id);
 }

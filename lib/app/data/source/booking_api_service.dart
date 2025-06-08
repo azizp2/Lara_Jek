@@ -14,4 +14,7 @@ abstract class BookingApiService {
     @Query('start_date') String? startDate,
     @Query('end_date') String? endtDate,
   });
+
+  @GET(BOOKING_PATH_URL + '/{id}')
+  Future<HttpResponse<DataState>> getById({@Path('id') required int id});
 }

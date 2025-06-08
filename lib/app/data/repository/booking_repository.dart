@@ -22,4 +22,12 @@ class BookingRepositoryImpl extends BookingRepository {
           (json).map((item) => BookingEntity.fromJson(item)));
     });
   }
+
+  @override
+  Future<DataState<BookingEntity>> getById(int id) {
+    return handleResponse(() => _bookingApiService.getById(id: id),
+        (json) async {
+      return BookingEntity.fromJson(json);
+    });
+  }
 }
