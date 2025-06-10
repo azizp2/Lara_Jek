@@ -1,5 +1,7 @@
 import 'package:get_it/get_it.dart';
 import 'package:dio/dio.dart';
+import 'package:lara_jek/app/persentation/c_home/c_home_notifier.dart';
+import 'package:lara_jek/app/persentation/create_order/create_order_notifier.dart';
 import 'package:lara_jek/app/persentation/login/login_notifier.dart';
 import 'package:lara_jek/app/persentation/register/register_notifier.dart';
 import 'package:lara_jek/core/network/app_interceptor.dart';
@@ -26,5 +28,13 @@ void initDependency() {
 
   sl.registerFactoryParam<RegisterNotifier, void, void>(
     (param1, param2) => RegisterNotifier(),
+  );
+
+  sl.registerFactoryParam<CHomeNotifier, void, void>(
+    (param1, param2) => CHomeNotifier(),
+  );
+
+  sl.registerFactoryParam<CreateOrderNotifier, void, void>(
+    (param1, param2) => CreateOrderNotifier(),
   );
 }

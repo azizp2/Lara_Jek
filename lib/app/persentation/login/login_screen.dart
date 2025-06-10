@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lara_jek/app/persentation/c_home/c_home_screen.dart';
 import 'package:lara_jek/app/persentation/login/login_notifier.dart';
 import 'package:lara_jek/app/persentation/register/register_screen.dart';
 import 'package:lara_jek/core/helper/global_helper.dart';
@@ -19,12 +20,7 @@ class LoginScreen extends AppWidget<LoginNotifier, void, void> {
               height: 150,
               decoration: BoxDecoration(
                 color: GlobalHelper.getColorScheme(context).primary,
-                borderRadius: const BorderRadius.only(
-                  bottomLeft: Radius.circular(20),
-                  bottomRight: Radius.circular(20),
-                  topRight: Radius.circular(20),
-                  topLeft: Radius.circular(20),
-                ),
+                borderRadius: BorderRadius.circular(10),
               ),
             ),
           ),
@@ -87,7 +83,7 @@ class LoginScreen extends AppWidget<LoginNotifier, void, void> {
                 ),
                 const SizedBox(height: 30),
                 FilledButton(
-                  onPressed: () {},
+                  onPressed: () => _onPressLogin(context),
                   child: const Text('Login'),
                 ),
                 const SizedBox(height: 10),
@@ -117,6 +113,13 @@ class LoginScreen extends AppWidget<LoginNotifier, void, void> {
     Navigator.push(
       context,
       MaterialPageRoute(builder: (context) => RegisterScreen()),
+    );
+  }
+
+  _onPressLogin(BuildContext context) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => CHomeScreen()),
     );
   }
 }
