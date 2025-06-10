@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:lara_jek/app/persentation/c_home/c_home_notifier.dart';
 import 'package:lara_jek/app/persentation/create_order/create_order_screen.dart';
+import 'package:lara_jek/app/persentation/detail_order/detail_order_screen.dart';
+import 'package:lara_jek/app/persentation/history/history_screen.dart';
 import 'package:lara_jek/core/helper/global_helper.dart';
 import 'package:lara_jek/core/widget/app_widget.dart';
 import 'package:flutter_osm_plugin/flutter_osm_plugin.dart';
@@ -83,9 +85,9 @@ class CHomeScreen extends AppWidget<CHomeNotifier, void, void> {
         child: OSMFlutter(
             controller: notifier.mapController,
             osmOption: OSMOption(
-                userTrackingOption: UserTrackingOption(
+                userTrackingOption: const UserTrackingOption(
                     enableTracking: true, unFollowUser: false),
-                zoomOption: ZoomOption(
+                zoomOption: const ZoomOption(
                     initZoom: 14,
                     minZoomLevel: 14,
                     maxZoomLevel: 14,
@@ -108,7 +110,7 @@ class CHomeScreen extends AppWidget<CHomeNotifier, void, void> {
   _createOrderLayout(BuildContext context) {
     return Card(
       child: Padding(
-        padding: EdgeInsets.all(20),
+        padding: const EdgeInsets.all(20),
         child: Column(
           children: [
             Row(
@@ -118,7 +120,7 @@ class CHomeScreen extends AppWidget<CHomeNotifier, void, void> {
                     Container(
                       width: 10,
                       height: 10,
-                      decoration: BoxDecoration(
+                      decoration: const BoxDecoration(
                           color: Colors.green, shape: BoxShape.circle),
                     ),
                     Container(
@@ -130,7 +132,7 @@ class CHomeScreen extends AppWidget<CHomeNotifier, void, void> {
                     Container(
                       width: 10,
                       height: 10,
-                      decoration: BoxDecoration(
+                      decoration: const BoxDecoration(
                           color: Colors.red, shape: BoxShape.circle),
                     )
                   ],
@@ -154,7 +156,7 @@ class CHomeScreen extends AppWidget<CHomeNotifier, void, void> {
                                       .onSurfaceVariant)),
                       onTap: () => {},
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 10,
                     ),
                     TextField(
@@ -180,8 +182,8 @@ class CHomeScreen extends AppWidget<CHomeNotifier, void, void> {
             FilledButton(
                 onPressed: () => _onPressCreateOrder(context),
                 style: FilledButton.styleFrom(
-                    minimumSize: Size(double.maxFinite, 48)),
-                child: Text('Pesan Sekarang'))
+                    minimumSize: const Size(double.maxFinite, 48)),
+                child: const Text('Pesan Sekarang'))
           ],
         ),
       ),
@@ -201,7 +203,7 @@ class CHomeScreen extends AppWidget<CHomeNotifier, void, void> {
                   ?.copyWith(fontWeight: FontWeight.bold),
             ),
             TextButton(
-                onPressed: () => {},
+                onPressed: () => _onPressAllHistory(context),
                 child: Text(
                   'Lihat Semua',
                   style: GlobalHelper.getTextTheme(context,
@@ -217,8 +219,8 @@ class CHomeScreen extends AppWidget<CHomeNotifier, void, void> {
         ),
         ListView.separated(
             shrinkWrap: true,
-            physics: NeverScrollableScrollPhysics(),
-            separatorBuilder: (context, index) => SizedBox(
+            physics: const NeverScrollableScrollPhysics(),
+            separatorBuilder: (context, index) => const SizedBox(
                   height: 12,
                 ),
             itemCount: 5,
@@ -230,87 +232,90 @@ class CHomeScreen extends AppWidget<CHomeNotifier, void, void> {
   }
 
   _itemHistoryLayout(BuildContext context) {
-    return Card(
-      child: Padding(
-        padding: EdgeInsets.all(16),
-        child: Column(
-          children: [
-            Row(
-              children: [
-                Expanded(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        '22 Des 2024',
-                        style: GlobalHelper.getTextTheme(context,
-                                appTextStyle: AppTextStyle.BODY_SMALL)
-                            ?.copyWith(
-                                color: GlobalHelper.getColorScheme(context)
-                                    .onSurfaceVariant),
-                      ),
-                      Text(
-                        'Menuju monumen nasional',
-                        style: GlobalHelper.getTextTheme(context,
-                                appTextStyle: AppTextStyle.TITLE_MEDIUM)
-                            ?.copyWith(fontWeight: FontWeight.bold),
-                        maxLines: 2,
-                        overflow: TextOverflow.ellipsis,
-                      ),
-                    ],
+    return InkWell(
+      onTap: () => _onPressItemHistory(context),
+      child: Card(
+        child: Padding(
+          padding: const EdgeInsets.all(16),
+          child: Column(
+            children: [
+              Row(
+                children: [
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          '22 Des 2024',
+                          style: GlobalHelper.getTextTheme(context,
+                                  appTextStyle: AppTextStyle.BODY_SMALL)
+                              ?.copyWith(
+                                  color: GlobalHelper.getColorScheme(context)
+                                      .onSurfaceVariant),
+                        ),
+                        Text(
+                          'Menuju monumen nasional',
+                          style: GlobalHelper.getTextTheme(context,
+                                  appTextStyle: AppTextStyle.TITLE_MEDIUM)
+                              ?.copyWith(fontWeight: FontWeight.bold),
+                          maxLines: 2,
+                          overflow: TextOverflow.ellipsis,
+                        ),
+                      ],
+                    ),
                   ),
-                ),
-                Text(
-                  'Rp. 100.000',
-                  style: GlobalHelper.getTextTheme(context,
-                          appTextStyle: AppTextStyle.TITLE_MEDIUM)
-                      ?.copyWith(
-                          color: GlobalHelper.getColorScheme(context).primary)
-                      ?.copyWith(fontWeight: FontWeight.bold),
-                )
-              ],
-            ),
-            const SizedBox(
-              height: 12,
-            ),
-            Row(
-              children: [
-                Icon(
-                  Icons.location_on_outlined,
-                  size: 16,
-                  color: GlobalHelper.getColorScheme(context).primary,
-                ),
-                const SizedBox(
-                  width: 5,
-                ),
-                Text('5 KM',
+                  Text(
+                    'Rp. 100.000',
                     style: GlobalHelper.getTextTheme(context,
-                            appTextStyle: AppTextStyle.BODY_SMALL)
+                            appTextStyle: AppTextStyle.TITLE_MEDIUM)
                         ?.copyWith(
-                      color:
-                          GlobalHelper.getColorScheme(context).onSurfaceVariant,
-                    )),
-                const SizedBox(
-                  width: 5,
-                ),
-                Icon(
-                  Icons.timelapse_sharp,
-                  size: 16,
-                  color: GlobalHelper.getColorScheme(context).primary,
-                ),
-                const SizedBox(
-                  width: 5,
-                ),
-                Text('Dalam Perjalanan',
-                    style: GlobalHelper.getTextTheme(context,
-                            appTextStyle: AppTextStyle.BODY_SMALL)
-                        ?.copyWith(
-                      color:
-                          GlobalHelper.getColorScheme(context).onSurfaceVariant,
-                    )),
-              ],
-            )
-          ],
+                            color: GlobalHelper.getColorScheme(context).primary)
+                        ?.copyWith(fontWeight: FontWeight.bold),
+                  )
+                ],
+              ),
+              const SizedBox(
+                height: 12,
+              ),
+              Row(
+                children: [
+                  Icon(
+                    Icons.location_on_outlined,
+                    size: 16,
+                    color: GlobalHelper.getColorScheme(context).primary,
+                  ),
+                  const SizedBox(
+                    width: 5,
+                  ),
+                  Text('5 KM',
+                      style: GlobalHelper.getTextTheme(context,
+                              appTextStyle: AppTextStyle.BODY_SMALL)
+                          ?.copyWith(
+                        color: GlobalHelper.getColorScheme(context)
+                            .onSurfaceVariant,
+                      )),
+                  const SizedBox(
+                    width: 5,
+                  ),
+                  Icon(
+                    Icons.timelapse_sharp,
+                    size: 16,
+                    color: GlobalHelper.getColorScheme(context).primary,
+                  ),
+                  const SizedBox(
+                    width: 5,
+                  ),
+                  Text('Dalam Perjalanan',
+                      style: GlobalHelper.getTextTheme(context,
+                              appTextStyle: AppTextStyle.BODY_SMALL)
+                          ?.copyWith(
+                        color: GlobalHelper.getColorScheme(context)
+                            .onSurfaceVariant,
+                      )),
+                ],
+              )
+            ],
+          ),
         ),
       ),
     );
@@ -319,5 +324,15 @@ class CHomeScreen extends AppWidget<CHomeNotifier, void, void> {
   _onPressCreateOrder(BuildContext context) {
     Navigator.push(
         context, MaterialPageRoute(builder: (context) => CreateOrderScreen()));
+  }
+
+  _onPressAllHistory(BuildContext context) {
+    Navigator.push(
+        context, MaterialPageRoute(builder: (context) => HistoryScreen()));
+  }
+
+  _onPressItemHistory(BuildContext context) {
+    Navigator.push(
+        context, MaterialPageRoute(builder: (context) => DetailOrderScreen()));
   }
 }

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_osm_plugin/flutter_osm_plugin.dart';
 import 'package:lara_jek/app/persentation/create_order/create_order_notifier.dart';
+import 'package:lara_jek/app/persentation/map/map_screen.dart';
 import 'package:lara_jek/core/helper/global_helper.dart';
 import 'package:lara_jek/core/widget/app_widget.dart';
 
@@ -129,7 +130,7 @@ class CreateOrderScreen extends AppWidget<CreateOrderNotifier, void, void> {
                               width: 10,
                             ),
                             IconButton(
-                                onPressed: () => {},
+                                onPressed: () => _onPressOgiginMap(context),
                                 icon: const Icon(Icons.map))
                           ],
                         ),
@@ -298,5 +299,10 @@ class CreateOrderScreen extends AppWidget<CreateOrderNotifier, void, void> {
       padding: const EdgeInsets.only(left: 10, right: 10),
       child: FilledButton(onPressed: () => {}, child: Text('Pesan Seakrang')),
     );
+  }
+
+  _onPressOgiginMap(BuildContext context) {
+    Navigator.push(
+        context, MaterialPageRoute(builder: (context) => const MapScreen()));
   }
 }

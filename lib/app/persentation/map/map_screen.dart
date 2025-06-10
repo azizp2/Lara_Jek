@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:location_picker_flutter_map/location_picker_flutter_map.dart';
 
 class MapScreen extends StatelessWidget {
   const MapScreen({super.key});
@@ -7,12 +8,27 @@ class MapScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: _appBarBuild(context),
+      body: _bodyBuil(context),
     );
   }
 
   _appBarBuild(BuildContext context) {
     return AppBar(
       title: Text('Ambil Lokasi '),
+    );
+  }
+
+  _bodyBuil(BuildContext context) {
+    return SafeArea(
+      child: FlutterLocationPicker(
+          initZoom: 11,
+          minZoomLevel: 5,
+          maxZoomLevel: 16,
+          trackMyPosition: true,
+          searchBarBackgroundColor: Colors.white,
+          mapLanguage: 'id',
+          selectLocationButtonText: 'Pilih Lokasi',
+          onPicked: (onPicked) => {}),
     );
   }
 }

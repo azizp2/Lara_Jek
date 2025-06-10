@@ -2,6 +2,9 @@ import 'package:get_it/get_it.dart';
 import 'package:dio/dio.dart';
 import 'package:lara_jek/app/persentation/c_home/c_home_notifier.dart';
 import 'package:lara_jek/app/persentation/create_order/create_order_notifier.dart';
+import 'package:lara_jek/app/persentation/d_home/d_home_notifier.dart';
+import 'package:lara_jek/app/persentation/detail_order/detail_order_notifier.dart';
+import 'package:lara_jek/app/persentation/history/history_notifier.dart';
 import 'package:lara_jek/app/persentation/login/login_notifier.dart';
 import 'package:lara_jek/app/persentation/register/register_notifier.dart';
 import 'package:lara_jek/core/network/app_interceptor.dart';
@@ -36,5 +39,17 @@ void initDependency() {
 
   sl.registerFactoryParam<CreateOrderNotifier, void, void>(
     (param1, param2) => CreateOrderNotifier(),
+  );
+
+  sl.registerFactoryParam<HistoryNotifier, void, void>(
+    (param1, param2) => HistoryNotifier(),
+  );
+
+  sl.registerFactoryParam<DetailOrderNotifier, void, void>(
+    (param1, param2) => DetailOrderNotifier(),
+  );
+
+  sl.registerFactoryParam<DHomeNotifier, void, void>(
+    (param1, param2) => DHomeNotifier(),
   );
 }
