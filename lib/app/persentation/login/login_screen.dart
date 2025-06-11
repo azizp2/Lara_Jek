@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:lara_jek/app/persentation/c_home/c_home_screen.dart';
+import 'package:lara_jek/app/persentation/confirm_order/confirm_order_screen.dart';
 import 'package:lara_jek/app/persentation/d_home/d_home_screen.dart';
 import 'package:lara_jek/app/persentation/login/login_notifier.dart';
 import 'package:lara_jek/app/persentation/register/register_screen.dart';
@@ -120,7 +121,7 @@ class LoginScreen extends AppWidget<LoginNotifier, void, void> {
   _onPressLogin(BuildContext context) {
     Navigator.push(
       context,
-      MaterialPageRoute(builder: (context) => DHomeScreen()),
+      MaterialPageRoute(builder: (context) => ConfirmOrderScreen()),
     );
   }
 }
