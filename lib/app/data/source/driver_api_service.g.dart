@@ -14,7 +14,7 @@ class _DriverApiService implements DriverApiService {
     this.baseUrl,
     this.errorLogger,
   }) {
-    baseUrl ??= 'http://127.0.0.1:8000';
+    baseUrl ??= 'http://192.168.29.108:8000/';
   }
 
   final Dio _dio;

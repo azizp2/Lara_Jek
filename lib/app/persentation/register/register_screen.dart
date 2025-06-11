@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:lara_jek/app/persentation/login/login_notifier.dart';
+import 'package:lara_jek/app/persentation/register/register_notifier.dart';
 import 'package:lara_jek/core/helper/global_helper.dart';
 import 'package:lara_jek/core/widget/app_widget.dart';
 
-class RegisterScreen extends AppWidget<LoginNotifier, void, void> {
+class RegisterScreen extends AppWidget<RegisterNotifier, void, void> {
   @override
   Widget bodyBuild(BuildContext context) {
     return SafeArea(
@@ -57,10 +57,11 @@ class RegisterScreen extends AppWidget<LoginNotifier, void, void> {
                         appTextStyle: AppTextStyle.BODY_MEDIUM),
                   ),
                   const SizedBox(height: 10),
-                  const TextField(
+                  TextField(
+                    controller: notifier.nameController,
                     keyboardType: TextInputType.name,
                     textCapitalization: TextCapitalization.words,
-                    decoration: InputDecoration(
+                    decoration: const InputDecoration(
                       hintText: 'Masukkan nama lengkap anda',
                       prefixIcon: Icon(Icons.person_2_outlined),
                     ),
@@ -74,9 +75,10 @@ class RegisterScreen extends AppWidget<LoginNotifier, void, void> {
                         appTextStyle: AppTextStyle.BODY_MEDIUM),
                   ),
                   const SizedBox(height: 10),
-                  const TextField(
+                  TextField(
+                    controller: notifier.emailController,
                     keyboardType: TextInputType.emailAddress,
-                    decoration: InputDecoration(
+                    decoration: const InputDecoration(
                       hintText: 'Masukkan email anda',
                       prefixIcon: Icon(Icons.mail_outline),
                     ),
@@ -90,9 +92,10 @@ class RegisterScreen extends AppWidget<LoginNotifier, void, void> {
                         appTextStyle: AppTextStyle.BODY_MEDIUM),
                   ),
                   const SizedBox(height: 10),
-                  const TextField(
+                  TextField(
+                    controller: notifier.phoneController,
                     keyboardType: TextInputType.phone,
-                    decoration: InputDecoration(
+                    decoration: const InputDecoration(
                       hintText: 'Masukkan no telepon anda',
                       prefixIcon: Icon(Icons.phone),
                     ),
@@ -106,10 +109,11 @@ class RegisterScreen extends AppWidget<LoginNotifier, void, void> {
                         appTextStyle: AppTextStyle.BODY_MEDIUM),
                   ),
                   const SizedBox(height: 10),
-                  const TextField(
+                  TextField(
+                    controller: notifier.passwordController,
                     obscureText: true,
                     keyboardType: TextInputType.visiblePassword,
-                    decoration: InputDecoration(
+                    decoration: const InputDecoration(
                       hintText: 'Masukkan password anda',
                       prefixIcon: Icon(Icons.lock_outline),
                     ),
@@ -117,25 +121,25 @@ class RegisterScreen extends AppWidget<LoginNotifier, void, void> {
 
                   const SizedBox(height: 15),
 
-                  Text(
-                    'Konfirmasi Password',
-                    style: GlobalHelper.getTextTheme(context,
-                        appTextStyle: AppTextStyle.BODY_MEDIUM),
-                  ),
-                  const SizedBox(height: 10),
-                  const TextField(
-                    obscureText: true,
-                    keyboardType: TextInputType.visiblePassword,
-                    decoration: InputDecoration(
-                      hintText: 'Masukkan konfirmasi password anda',
-                      prefixIcon: Icon(Icons.lock_outline),
-                    ),
-                  ),
+                  // Text(
+                  //   'Konfirmasi Password',
+                  //   style: GlobalHelper.getTextTheme(context,
+                  //       appTextStyle: AppTextStyle.BODY_MEDIUM),
+                  // ),
+                  // const SizedBox(height: 10),
+                  // const TextField(
+                  //   obscureText: true,
+                  //   keyboardType: TextInputType.visiblePassword,
+                  //   decoration: InputDecoration(
+                  //     hintText: 'Masukkan konfirmasi password anda',
+                  //     prefixIcon: Icon(Icons.lock_outline),
+                  //   ),
+                  // ),
 
                   const SizedBox(height: 30),
 
                   FilledButton(
-                    onPressed: () {},
+                    onPressed: () => _onPressRegister(context),
                     child: const Text('Daftar'),
                   ),
 
@@ -164,7 +168,18 @@ class RegisterScreen extends AppWidget<LoginNotifier, void, void> {
     );
   }
 
+  @override
+  checkVariableAfterUi(BuildContext context) {
+    if (notifier.isSuccess) {
+      Navigator.pop(context);
+    }
+  }
+
   void _onPressLogin(BuildContext context) {
     Navigator.pop(context);
+  }
+
+  _onPressRegister(BuildContext context) {
+    notifier.register(context);
   }
 }

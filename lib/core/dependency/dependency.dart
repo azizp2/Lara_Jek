@@ -1,5 +1,9 @@
 import 'package:get_it/get_it.dart';
 import 'package:dio/dio.dart';
+import 'package:lara_jek/app/data/repository/auth_repository.dart';
+import 'package:lara_jek/app/data/source/auth_api_service.dart';
+import 'package:lara_jek/app/domain/entity/auth.dart';
+import 'package:lara_jek/app/domain/repository/auth_repository.dart';
 import 'package:lara_jek/app/persentation/c_home/c_home_notifier.dart';
 import 'package:lara_jek/app/persentation/confirm_order/confirm_order_notifier.dart';
 import 'package:lara_jek/app/persentation/create_order/create_order_notifier.dart';
@@ -8,6 +12,7 @@ import 'package:lara_jek/app/persentation/detail_order/detail_order_notifier.dar
 import 'package:lara_jek/app/persentation/history/history_notifier.dart';
 import 'package:lara_jek/app/persentation/login/login_notifier.dart';
 import 'package:lara_jek/app/persentation/register/register_notifier.dart';
+import 'package:lara_jek/app/use_case/auth_register.dart';
 import 'package:lara_jek/core/network/app_interceptor.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 
@@ -25,13 +30,22 @@ void initDependency() {
 
   sl.registerSingleton<Dio>(dio);
 
+// Api Service
+  sl.registerSingleton<AuthApiService>(AuthApiService(dio));
+
+// Repository
+  sl.registerSingleton<AuthRepository>(AuthRepositoryImpl(sl()));
+
+// Use Case
+  sl.registerSingleton<AuthRegisterUseCase>(AuthRegisterUseCase(sl()));
+
 // Provider
   sl.registerFactoryParam<LoginNotifier, void, void>(
     (param1, param2) => LoginNotifier(),
   );
 
   sl.registerFactoryParam<RegisterNotifier, void, void>(
-    (param1, param2) => RegisterNotifier(),
+    (param1, param2) => RegisterNotifier(sl()),
   );
 
   sl.registerFactoryParam<CHomeNotifier, void, void>(

@@ -4,6 +4,7 @@ import 'package:lara_jek/app/persentation/confirm_order/confirm_order_screen.dar
 import 'package:lara_jek/app/persentation/d_home/d_home_screen.dart';
 import 'package:lara_jek/app/persentation/login/login_notifier.dart';
 import 'package:lara_jek/app/persentation/register/register_screen.dart';
+import 'package:lara_jek/app/persentation/widget/custom_snackbar.dart';
 import 'package:lara_jek/core/helper/global_helper.dart';
 import 'package:lara_jek/core/widget/app_widget.dart';
 
@@ -110,6 +111,20 @@ class LoginScreen extends AppWidget<LoginNotifier, void, void> {
       ),
     );
   }
+
+  // @override
+  // Widget build(BuildContext context) {
+  //   WidgetsBinding.instance.addPostFrameCallback((_) {
+  //     showCustomSnackbar(context, "Data berhasil disimpan");
+  //   });
+
+  //   return Scaffold(
+  //     appBar: AppBar(title: Text("Contoh Snackbar")),
+  //     body: Center(
+  //       child: Text("Ini halaman contoh"),
+  //     ),
+  //   );
+  // }
 
   _onPressRegister(BuildContext context) {
     Navigator.push(
