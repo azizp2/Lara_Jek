@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:lara_jek/app/persentation/c_home/c_home_screen.dart';
-import 'package:lara_jek/app/persentation/confirm_order/confirm_order_screen.dart';
 import 'package:lara_jek/app/persentation/d_home/d_home_screen.dart';
 import 'package:lara_jek/app/persentation/login/login_notifier.dart';
 import 'package:lara_jek/app/persentation/register/register_screen.dart';
-import 'package:lara_jek/app/persentation/widget/custom_snackbar.dart';
+import 'package:lara_jek/core/constant/constant.dart';
 import 'package:lara_jek/core/helper/global_helper.dart';
 import 'package:lara_jek/core/widget/app_widget.dart';
 
@@ -62,7 +61,8 @@ class LoginScreen extends AppWidget<LoginNotifier, void, void> {
                       appTextStyle: AppTextStyle.BODY_MEDIUM),
                 ),
                 const SizedBox(height: 10),
-                const TextField(
+                TextField(
+                  controller: notifier.emailController,
                   keyboardType: TextInputType.emailAddress,
                   decoration: InputDecoration(
                     hintText: 'Masukkan email anda',
@@ -76,7 +76,8 @@ class LoginScreen extends AppWidget<LoginNotifier, void, void> {
                       appTextStyle: AppTextStyle.BODY_MEDIUM),
                 ),
                 const SizedBox(height: 10),
-                const TextField(
+                TextField(
+                  controller: notifier.passwordController,
                   keyboardType: TextInputType.visiblePassword,
                   obscureText: true,
                   decoration: InputDecoration(
@@ -126,6 +127,20 @@ class LoginScreen extends AppWidget<LoginNotifier, void, void> {
   //   );
   // }
 
+  @override
+  checkVariabelAfterUi(BuildContext context) {
+    if (notifier.role == ROLE_CUSTOMER) {
+      Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(
+            builder: (context) => CHomeScreen(),
+          ));
+    } else if (notifier.role == ROLE_DRIVER) {
+      Navigator.pushReplacement(
+          context, MaterialPageRoute(builder: (context) => DHomeScreen()));
+    }
+  }
+
   _onPressRegister(BuildContext context) {
     Navigator.push(
       context,
@@ -134,9 +149,6 @@ class LoginScreen extends AppWidget<LoginNotifier, void, void> {
   }
 
   _onPressLogin(BuildContext context) {
-    Navigator.push(
-      context,
-      MaterialPageRoute(builder: (context) => ConfirmOrderScreen()),
-    );
+    notifier.login();
   }
 }

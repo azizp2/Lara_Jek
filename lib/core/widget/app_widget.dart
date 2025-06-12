@@ -32,9 +32,20 @@ abstract class AppWidget<T extends AppProvider, P1, P2>
               context: context, text: notifier.snackBarMessage);
           notifier.snackBarMessage = '';
         }
-        checkVariableAfterUi(context);
+        checkVariabelAfterUi(context);
       },
     );
+
+    // WidgetsBinding.instance.addPostFrameCallback((_) {
+    //   if (notifier.snackBarMessage.isNotEmpty) {
+    //     DialogHelper.showSnackBar(
+    //       context: context,
+    //       text: notifier.snackBarMessage,
+    //       // isError: notifier.isErrorMessage, // kalau kamu punya flag error
+    //     );
+    //     notifier.snackBarMessage = '';
+    //   }
+    // });
 
     return Scaffold(
       appBar: appBarBuild(context),
@@ -56,6 +67,5 @@ abstract class AppWidget<T extends AppProvider, P1, P2>
   }
 
   Widget bodyBuild(BuildContext context);
-
-  checkVariableAfterUi(BuildContext context) {}
+  checkVariabelAfterUi(BuildContext context) {}
 }

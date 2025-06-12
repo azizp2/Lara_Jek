@@ -12,6 +12,7 @@ import 'package:lara_jek/app/persentation/detail_order/detail_order_notifier.dar
 import 'package:lara_jek/app/persentation/history/history_notifier.dart';
 import 'package:lara_jek/app/persentation/login/login_notifier.dart';
 import 'package:lara_jek/app/persentation/register/register_notifier.dart';
+import 'package:lara_jek/app/use_case/auth_login.dart';
 import 'package:lara_jek/app/use_case/auth_register.dart';
 import 'package:lara_jek/core/network/app_interceptor.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
@@ -38,10 +39,11 @@ void initDependency() {
 
 // Use Case
   sl.registerSingleton<AuthRegisterUseCase>(AuthRegisterUseCase(sl()));
+  sl.registerSingleton<AuthLoginUseCase>(AuthLoginUseCase(sl()));
 
 // Provider
   sl.registerFactoryParam<LoginNotifier, void, void>(
-    (param1, param2) => LoginNotifier(),
+    (param1, param2) => LoginNotifier(sl()),
   );
 
   sl.registerFactoryParam<RegisterNotifier, void, void>(

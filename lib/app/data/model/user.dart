@@ -10,7 +10,7 @@ sealed class User with _$User {
       required int id,
       required String name,
       required String email,
-      required String rolem,
+      required String role,
       @JsonKey(name: 'whatsapp') required String phone,
       @JsonKey(name: 'photo_url') required String? photoUrl,
       DriverModel? driver}) = UserModel;

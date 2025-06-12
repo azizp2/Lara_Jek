@@ -26,7 +26,7 @@ class AuthRepositoryImpl extends AuthRepository {
       await SharedPreferencesHelper.setInt(PREF_ID, user.id);
       await SharedPreferencesHelper.setString(PREF_NAME, user.name);
       await SharedPreferencesHelper.setString(PREF_EMAIL, user.email);
-      await SharedPreferencesHelper.setString(PREF_ROLE, user.rolem);
+      await SharedPreferencesHelper.setString(PREF_ROLE, user.role);
       await SharedPreferencesHelper.setString(PREF_PHONE, user.phone);
       await SharedPreferencesHelper.setString(
           PREF_PHOTO_URL, user.photoUrl ?? '');
@@ -61,7 +61,7 @@ class AuthRepositoryImpl extends AuthRepository {
           id: userModel.id,
           name: userModel.name,
           email: userModel.email,
-          role: userModel.rolem,
+          role: userModel.role,
           photoUrl: userModel.photoUrl!,
           phone: userModel.phone,
           isActive: userModel.driver!.isActive,

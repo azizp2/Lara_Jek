@@ -139,7 +139,7 @@ class RegisterScreen extends AppWidget<RegisterNotifier, void, void> {
                   const SizedBox(height: 30),
 
                   FilledButton(
-                    onPressed: () => _onPressRegister(context),
+                    onPressed: () => _onPressRegister(),
                     child: const Text('Daftar'),
                   ),
 
@@ -169,7 +169,7 @@ class RegisterScreen extends AppWidget<RegisterNotifier, void, void> {
   }
 
   @override
-  checkVariableAfterUi(BuildContext context) {
+  checkVariabelAfterUi(BuildContext context) {
     if (notifier.isSuccess) {
       Navigator.pop(context);
     }
@@ -179,7 +179,7 @@ class RegisterScreen extends AppWidget<RegisterNotifier, void, void> {
     Navigator.pop(context);
   }
 
-  _onPressRegister(BuildContext context) {
-    notifier.register(context);
+  _onPressRegister() {
+    notifier.register();
   }
 }

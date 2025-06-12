@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:lara_jek/app/persentation/widget/snackbar/custom_snackbar.dart';
 import 'package:lara_jek/core/helper/global_helper.dart';
 
 class DialogHelper {
   static showSnackBar({required BuildContext context, required String text}) {
+    // showCustomSnackbar(context, text);
     ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(text)));
   }
 

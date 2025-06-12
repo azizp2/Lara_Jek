@@ -12,7 +12,7 @@ _$UserModelImpl _$$UserModelImplFromJson(Map<String, dynamic> json) =>
       id: (json['id'] as num).toInt(),
       name: json['name'] as String,
       email: json['email'] as String,
-      rolem: json['rolem'] as String,
+      role: json['role'] as String,
       phone: json['whatsapp'] as String,
       photoUrl: json['photo_url'] as String?,
       driver: json['driver'] == null
@@ -26,7 +26,7 @@ Map<String, dynamic> _$$UserModelImplToJson(_$UserModelImpl instance) =>
       'id': instance.id,
       'name': instance.name,
       'email': instance.email,
-      'rolem': instance.rolem,
+      'role': instance.role,
       'whatsapp': instance.phone,
       'photo_url': instance.photoUrl,
       'driver': instance.driver,

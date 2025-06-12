@@ -24,7 +24,7 @@ mixin _$User {
   int get id => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
   String get email => throw _privateConstructorUsedError;
-  String get rolem => throw _privateConstructorUsedError;
+  String get role => throw _privateConstructorUsedError;
   @JsonKey(name: 'whatsapp')
   String get phone => throw _privateConstructorUsedError;
   @JsonKey(name: 'photo_url')
@@ -37,7 +37,7 @@ mixin _$User {
             int id,
             String name,
             String email,
-            String rolem,
+            String role,
             @JsonKey(name: 'whatsapp') String phone,
             @JsonKey(name: 'photo_url') String? photoUrl,
             DriverModel? driver)
@@ -51,7 +51,7 @@ mixin _$User {
             int id,
             String name,
             String email,
-            String rolem,
+            String role,
             @JsonKey(name: 'whatsapp') String phone,
             @JsonKey(name: 'photo_url') String? photoUrl,
             DriverModel? driver)?
@@ -65,7 +65,7 @@ mixin _$User {
             int id,
             String name,
             String email,
-            String rolem,
+            String role,
             @JsonKey(name: 'whatsapp') String phone,
             @JsonKey(name: 'photo_url') String? photoUrl,
             DriverModel? driver)?
@@ -109,7 +109,7 @@ abstract class $UserCopyWith<$Res> {
       int id,
       String name,
       String email,
-      String rolem,
+      String role,
       @JsonKey(name: 'whatsapp') String phone,
       @JsonKey(name: 'photo_url') String? photoUrl,
       DriverModel? driver});
@@ -134,7 +134,7 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
     Object? id = null,
     Object? name = null,
     Object? email = null,
-    Object? rolem = null,
+    Object? role = null,
     Object? phone = null,
     Object? photoUrl = freezed,
     Object? driver = freezed,
@@ -156,9 +156,9 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
           ? _value.email
           : email // ignore: cast_nullable_to_non_nullable
               as String,
-      rolem: null == rolem
-          ? _value.rolem
-          : rolem // ignore: cast_nullable_to_non_nullable
+      role: null == role
+          ? _value.role
+          : role // ignore: cast_nullable_to_non_nullable
               as String,
       phone: null == phone
           ? _value.phone
@@ -188,7 +188,7 @@ abstract class _$$UserModelImplCopyWith<$Res> implements $UserCopyWith<$Res> {
       int id,
       String name,
       String email,
-      String rolem,
+      String role,
       @JsonKey(name: 'whatsapp') String phone,
       @JsonKey(name: 'photo_url') String? photoUrl,
       DriverModel? driver});
@@ -211,7 +211,7 @@ class __$$UserModelImplCopyWithImpl<$Res>
     Object? id = null,
     Object? name = null,
     Object? email = null,
-    Object? rolem = null,
+    Object? role = null,
     Object? phone = null,
     Object? photoUrl = freezed,
     Object? driver = freezed,
@@ -233,9 +233,9 @@ class __$$UserModelImplCopyWithImpl<$Res>
           ? _value.email
           : email // ignore: cast_nullable_to_non_nullable
               as String,
-      rolem: null == rolem
-          ? _value.rolem
-          : rolem // ignore: cast_nullable_to_non_nullable
+      role: null == role
+          ? _value.role
+          : role // ignore: cast_nullable_to_non_nullable
               as String,
       phone: null == phone
           ? _value.phone
@@ -261,7 +261,7 @@ class _$UserModelImpl implements UserModel {
       required this.id,
       required this.name,
       required this.email,
-      required this.rolem,
+      required this.role,
       @JsonKey(name: 'whatsapp') required this.phone,
       @JsonKey(name: 'photo_url') required this.photoUrl,
       this.driver});
@@ -278,7 +278,7 @@ class _$UserModelImpl implements UserModel {
   @override
   final String email;
   @override
-  final String rolem;
+  final String role;
   @override
   @JsonKey(name: 'whatsapp')
   final String phone;
@@ -290,7 +290,7 @@ class _$UserModelImpl implements UserModel {
 
   @override
   String toString() {
-    return 'User.model(token: $token, id: $id, name: $name, email: $email, rolem: $rolem, phone: $phone, photoUrl: $photoUrl, driver: $driver)';
+    return 'User.model(token: $token, id: $id, name: $name, email: $email, role: $role, phone: $phone, photoUrl: $photoUrl, driver: $driver)';
   }
 
   @override
@@ -302,7 +302,7 @@ class _$UserModelImpl implements UserModel {
             (identical(other.id, id) || other.id == id) &&
             (identical(other.name, name) || other.name == name) &&
             (identical(other.email, email) || other.email == email) &&
-            (identical(other.rolem, rolem) || other.rolem == rolem) &&
+            (identical(other.role, role) || other.role == role) &&
             (identical(other.phone, phone) || other.phone == phone) &&
             (identical(other.photoUrl, photoUrl) ||
                 other.photoUrl == photoUrl) &&
@@ -311,7 +311,7 @@ class _$UserModelImpl implements UserModel {
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(runtimeType, token, id, name, email, rolem,
+  int get hashCode => Object.hash(runtimeType, token, id, name, email, role,
       phone, photoUrl, const DeepCollectionEquality().hash(driver));
 
   /// Create a copy of User
@@ -330,13 +330,13 @@ class _$UserModelImpl implements UserModel {
             int id,
             String name,
             String email,
-            String rolem,
+            String role,
             @JsonKey(name: 'whatsapp') String phone,
             @JsonKey(name: 'photo_url') String? photoUrl,
             DriverModel? driver)
         model,
   }) {
-    return model(token, id, name, email, rolem, phone, photoUrl, driver);
+    return model(token, id, name, email, role, phone, photoUrl, driver);
   }
 
   @override
@@ -347,13 +347,13 @@ class _$UserModelImpl implements UserModel {
             int id,
             String name,
             String email,
-            String rolem,
+            String role,
             @JsonKey(name: 'whatsapp') String phone,
             @JsonKey(name: 'photo_url') String? photoUrl,
             DriverModel? driver)?
         model,
   }) {
-    return model?.call(token, id, name, email, rolem, phone, photoUrl, driver);
+    return model?.call(token, id, name, email, role, phone, photoUrl, driver);
   }
 
   @override
@@ -364,7 +364,7 @@ class _$UserModelImpl implements UserModel {
             int id,
             String name,
             String email,
-            String rolem,
+            String role,
             @JsonKey(name: 'whatsapp') String phone,
             @JsonKey(name: 'photo_url') String? photoUrl,
             DriverModel? driver)?
@@ -372,7 +372,7 @@ class _$UserModelImpl implements UserModel {
     required TResult orElse(),
   }) {
     if (model != null) {
-      return model(token, id, name, email, rolem, phone, photoUrl, driver);
+      return model(token, id, name, email, role, phone, photoUrl, driver);
     }
     return orElse();
   }
@@ -419,7 +419,7 @@ abstract class UserModel implements User {
       required final int id,
       required final String name,
       required final String email,
-      required final String rolem,
+      required final String role,
       @JsonKey(name: 'whatsapp') required final String phone,
       @JsonKey(name: 'photo_url') required final String? photoUrl,
       final DriverModel? driver}) = _$UserModelImpl;
@@ -436,7 +436,7 @@ abstract class UserModel implements User {
   @override
   String get email;
   @override
-  String get rolem;
+  String get role;
   @override
   @JsonKey(name: 'whatsapp')
   String get phone;

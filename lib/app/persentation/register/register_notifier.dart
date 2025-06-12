@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:lara_jek/app/domain/entity/auth.dart';
-import 'package:lara_jek/app/persentation/widget/custom_snackbar.dart';
+import 'package:lara_jek/app/persentation/widget/snackbar/custom_snackbar.dart';
 import 'package:lara_jek/app/use_case/auth_register.dart';
 import 'package:lara_jek/core/provider/app_provider.dart';
 
@@ -25,7 +25,7 @@ class RegisterNotifier extends AppProvider {
   Future<void> init() async {}
 
   // register() async {
-  Future<void> register(BuildContext context) async {
+  register() async {
     showLoading();
 
     final param = AuthRegisterParamEntity(
@@ -39,8 +39,13 @@ class RegisterNotifier extends AppProvider {
       _isSuccess = true;
     }
 
+    snackBarMessage = response.message;
+
     // snackBarMessage = response.message;
-    showCustomSnackbar(context, snackBarMessage);
+    // ignore: use_build_context_synchronously
+    // showCustomSnackbar(context, response.message, isError: !response.success);
+    // ignore: use_build_context_synchronously
+    // showCustomSnackbar(context, response.message, isError: _isSuccess);
 
     hideLoading();
   }

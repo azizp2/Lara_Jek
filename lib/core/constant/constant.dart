@@ -10,3 +10,6 @@ const String PREF_ROLE = 'pref_role';
 const String PREF_PHONE = 'pref_phone';
 const String PREF_PHOTO_URL = 'pref_photo_url';
 const String PREF_VEHICLE_NUMBER = 'pref_vehicle_number';
+
+const String ROLE_CUSTOMER = 'customer';
+const String ROLE_DRIVER = 'driver';

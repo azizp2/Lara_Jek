@@ -9,14 +9,15 @@ void showCustomSnackbar(
     backgroundColor: Colors.transparent,
     elevation: 0,
     behavior: SnackBarBehavior.floating,
-    duration: isError ? const Duration(days: 1) : const Duration(seconds: 4),
+    duration:
+        isError ? const Duration(seconds: 10) : const Duration(seconds: 4),
     content: Container(
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
       decoration: BoxDecoration(
         gradient: LinearGradient(
           colors: isError
               ? [Colors.red, Colors.redAccent]
-              : [Colors.green, Colors.lightGreen],
+              : [const Color(0xFF16A34A), Colors.lightGreen],
           begin: Alignment.centerLeft,
           end: Alignment.centerRight,
         ),
@@ -28,7 +29,7 @@ void showCustomSnackbar(
             isError ? Icons.error : Icons.check_circle,
             color: Colors.white,
           ),
-          const SizedBox(width: 12),
+          const SizedBox(width: 10),
           Expanded(
             child: Text(
               message,
