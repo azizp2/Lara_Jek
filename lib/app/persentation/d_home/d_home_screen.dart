@@ -270,7 +270,7 @@ class DHomeScreen extends AppWidget<DHomeNotifier, void, void> {
 
   _itemHistoryLayout(BuildContext context) {
     return InkWell(
-      onTap: () => _onPressItemHistory(context),
+      onTap: () => _onPressItemHistory(context, 0),
       child: Card(
         child: Padding(
           padding: const EdgeInsets.all(16),
@@ -368,9 +368,9 @@ class DHomeScreen extends AppWidget<DHomeNotifier, void, void> {
         context, MaterialPageRoute(builder: (context) => HistoryScreen()));
   }
 
-  _onPressItemHistory(BuildContext context) {
-    Navigator.push(
-        context, MaterialPageRoute(builder: (context) => DetailOrderScreen()));
+  _onPressItemHistory(BuildContext context, int id) {
+    Navigator.push(context,
+        MaterialPageRoute(builder: (context) => DetailOrderScreen(param1: id)));
   }
 
   _onPressLogout() {

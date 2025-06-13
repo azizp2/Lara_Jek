@@ -67,7 +67,7 @@ dev_dependencies:
   retrofit_generator: ^8.0.6
   build_runner: ^2.4.9
   json_serializable: ^6.5.0
-  freezed: ^2.5.2
+  freezed: ^2.5.2 
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

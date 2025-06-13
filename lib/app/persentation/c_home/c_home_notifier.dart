@@ -1,7 +1,7 @@
 import 'package:flutter_osm_plugin/flutter_osm_plugin.dart';
 import 'package:lara_jek/app/domain/entity/booking.dart';
-import 'package:lara_jek/app/use_case/auth_logout.dart';
-import 'package:lara_jek/app/use_case/booking_get_today.dart';
+import 'package:lara_jek/app/use_case/auth/auth_logout.dart';
+import 'package:lara_jek/app/use_case/booking/booking_get_today.dart';
 import 'package:lara_jek/core/helper/shared_preferences_helper.dart';
 import 'package:lara_jek/core/provider/app_provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';

@@ -248,7 +248,7 @@ class CHomeScreen extends AppWidget<CHomeNotifier, void, void> {
 
   _itemHistoryLayout(BuildContext context, BookingEntity item) {
     return InkWell(
-      onTap: () => _onPressItemHistory(context),
+      onTap: () => _onPressItemHistory(context, item.id),
       child: Card(
         child: Padding(
           padding: const EdgeInsets.all(16),
@@ -357,9 +357,13 @@ class CHomeScreen extends AppWidget<CHomeNotifier, void, void> {
         context, MaterialPageRoute(builder: (context) => HistoryScreen()));
   }
 
-  _onPressItemHistory(BuildContext context) {
+  _onPressItemHistory(BuildContext context, int id) {
     Navigator.push(
-        context, MaterialPageRoute(builder: (context) => DetailOrderScreen()));
+        context,
+        MaterialPageRoute(
+            builder: (context) => DetailOrderScreen(
+                  param1: id,
+                )));
   }
 
   _onPressLogout() {

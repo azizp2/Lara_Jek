@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:lara_jek/app/domain/entity/auth.dart';
 import 'package:lara_jek/app/persentation/widget/snackbar/custom_snackbar.dart';
-import 'package:lara_jek/app/use_case/auth_register.dart';
+import 'package:lara_jek/app/use_case/auth/auth_register.dart';
 import 'package:lara_jek/core/provider/app_provider.dart';
 
 class RegisterNotifier extends AppProvider {

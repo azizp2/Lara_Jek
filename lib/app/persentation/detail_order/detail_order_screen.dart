@@ -1,13 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_osm_plugin/flutter_osm_plugin.dart';
 import 'package:lara_jek/app/persentation/detail_order/detail_order_notifier.dart';
+import 'package:lara_jek/core/constant/constant.dart';
 import 'package:lara_jek/core/helper/dialog_helper.dart';
 import 'package:lara_jek/core/helper/global_helper.dart';
+import 'package:lara_jek/core/helper/number_helper.dart';
 import 'package:lara_jek/core/widget/app_widget.dart';
 import 'package:lara_jek/core/widget/loading_app_widget.dart';
 
 // ignore: must_be_immutable
-class DetailOrderScreen extends AppWidget<DetailOrderNotifier, void, void> {
+class DetailOrderScreen extends AppWidget<DetailOrderNotifier, int, void> {
+  DetailOrderScreen({required super.param1});
+
   @override
   AppBar? appBarBuild(BuildContext context) {
     // TODO: implement appBarBuild
@@ -29,9 +33,11 @@ class DetailOrderScreen extends AppWidget<DetailOrderNotifier, void, void> {
               children: [
                 _mapLayout(context),
                 const SizedBox(height: 20),
-                _customerLayout(context),
-                const SizedBox(height: 20),
-                _driverLayout(context),
+                (notifier.role == ROLE_DRIVER)
+                    ? _customerLayout(context)
+                    : (notifier.role == ROLE_CUSTOMER)
+                        ? _driverLayout(context)
+                        : const SizedBox(),
                 const SizedBox(height: 20),
                 _tripLayout(context),
                 const SizedBox(height: 20),
@@ -66,7 +72,18 @@ class DetailOrderScreen extends AppWidget<DetailOrderNotifier, void, void> {
               children: [
                 Expanded(
                   child: Text(
-                    'Status',
+                    (notifier.booking?.status == STATUS_FINDING_DRIVER)
+                        ? 'Mencari Driver'
+                        : (notifier.booking?.status == STATUS_DRIVER_PICKUP)
+                            ? 'Driver Menuju Titik Jemput'
+                            : (notifier.booking?.status ==
+                                    STATUS_DRIVER_DELIVER)
+                                ? 'Driver Menuju Titik Tujuan'
+                                : (notifier.booking?.status == STATUS_ARRIVED)
+                                    ? 'Sampai Tujuan'
+                                    : (notifier.booking?.status == STATUS_PAID)
+                                        ? 'Dibayar'
+                                        : 'Dibatalkan',
                     style: GlobalHelper.getTextTheme(context,
                             appTextStyle: AppTextStyle.TITLE_MEDIUM)
                         ?.copyWith(
@@ -75,7 +92,7 @@ class DetailOrderScreen extends AppWidget<DetailOrderNotifier, void, void> {
                   ),
                 ),
                 Text(
-                  'ID #19201382190',
+                  'ID #${notifier.booking?.id}',
                   style: GlobalHelper.getTextTheme(context,
                           appTextStyle: AppTextStyle.TITLE_MEDIUM)
                       ?.copyWith(
@@ -105,7 +122,9 @@ class DetailOrderScreen extends AppWidget<DetailOrderNotifier, void, void> {
                   userTrackingOption: UserTrackingOption(
                       enableTracking: true, unFollowUser: false),
                 ),
-                onMapIsReady: (p0) => {},
+                onMapIsReady: (p0) {
+                  if (p0) notifier.setRoute();
+                },
                 mapIsLoading: const Padding(
                   padding: EdgeInsets.all(20),
                   child: LoadingAppWidget(),
@@ -118,11 +137,14 @@ class DetailOrderScreen extends AppWidget<DetailOrderNotifier, void, void> {
             child: Row(
               children: [
                 Expanded(
-                    child: _itemLayout(
-                        context, Icons.route_rounded, 'Jarak', '4KM')),
+                    child: _itemLayout(context, Icons.route_rounded, 'Jarak',
+                        '${notifier.booking?.distance} KM')),
                 Expanded(
-                    child: _itemLayout(context, Icons.timer_outlined,
-                        'Estimasi Waktu', '10 Menit')),
+                    child: _itemLayout(
+                        context,
+                        Icons.timer_outlined,
+                        'Estimasi Waktu',
+                        '${notifier.booking?.timeEstimate != null ? Duration(seconds: notifier.booking!.timeEstimate!).inMinutes : 0}  Menit')),
                 IconButton(
                     onPressed: () => _onPressMapFullscreen(context),
                     icon: const Icon(Icons.fullscreen))
@@ -196,7 +218,7 @@ class DetailOrderScreen extends AppWidget<DetailOrderNotifier, void, void> {
               ),
               Expanded(
                   child: Text(
-                'Nama Customer',
+                notifier.booking?.customer.name ?? '',
                 style: GlobalHelper.getTextTheme(context,
                     appTextStyle: AppTextStyle.TITLE_MEDIUM),
               ))
@@ -223,17 +245,17 @@ class DetailOrderScreen extends AppWidget<DetailOrderNotifier, void, void> {
           ),
           Row(
             children: [
-              const CircleAvatar(
+              CircleAvatar(
                 radius: 24,
-                backgroundImage: NetworkImage(
-                    'https://e7.pngegg.com/pngimages/799/987/png-clipart-computer-icons-avatar-icon-design-avatar-heroes-computer-wallpaper-thumbnail.png'),
+                backgroundImage:
+                    NetworkImage(notifier.booking?.driver?.photoUrl ?? ''),
               ),
               const SizedBox(
                 width: 10,
               ),
               Expanded(
                   child: Text(
-                'Nama Pengemudi',
+                notifier.booking?.driver?.name ?? '',
                 style: GlobalHelper.getTextTheme(context,
                     appTextStyle: AppTextStyle.TITLE_MEDIUM),
               ))
@@ -282,7 +304,7 @@ class DetailOrderScreen extends AppWidget<DetailOrderNotifier, void, void> {
                                   .onSurfaceVariant),
                     ),
                     Text(
-                      'Alamat',
+                      notifier.booking?.addressOrigin ?? '',
                       style: GlobalHelper.getTextTheme(context,
                               appTextStyle: AppTextStyle.BODY_LARGE)
                           ?.copyWith(fontWeight: FontWeight.bold),
@@ -316,7 +338,7 @@ class DetailOrderScreen extends AppWidget<DetailOrderNotifier, void, void> {
                                   .onSurfaceVariant),
                     ),
                     Text(
-                      'Alamat Tujuan',
+                      notifier.booking?.addressDestination ?? '',
                       style: GlobalHelper.getTextTheme(context,
                               appTextStyle: AppTextStyle.BODY_LARGE)
                           ?.copyWith(fontWeight: FontWeight.bold),
@@ -331,45 +353,10 @@ class DetailOrderScreen extends AppWidget<DetailOrderNotifier, void, void> {
     );
   }
 
-  // _paymentLayout(BuildContext context) {
-  //   return Card(
-  //     child: Padding(
-  //       padding: EdgeInsets.all(29),
-  //       child: Column(
-  //         crossAxisAlignment: CrossAxisAlignment.start,
-  //         children: [
-  //           Text(
-  //             'Detail Pembayaran',
-  //             style: GlobalHelper.getTextTheme(context,
-  //                     appTextStyle: AppTextStyle.TITLE_MEDIUM)
-  //                 ?.copyWith(fontWeight: FontWeight.bold),
-  //           ),
-  //           const SizedBox(
-  //             height: 20,
-  //           ),
-  //           Row(
-  //             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-  //             children: [
-  //               Text('Biaya',
-  //                   style: GlobalHelper.getTextTheme(context,
-  //                           appTextStyle: AppTextStyle.TITLE_MEDIUM)
-  //                       ?.copyWith(fontWeight: FontWeight.bold)),
-  //               Text('Rp. 54.000',
-  //                   style: GlobalHelper.getTextTheme(context,
-  //                           appTextStyle: AppTextStyle.TITLE_MEDIUM)
-  //                       ?.copyWith(color: Colors.green)),
-  //             ],
-  //           )
-  //         ],
-  //       ),
-  //     ),
-  //   );
-  // }
-
-  Widget _paymentLayout(BuildContext context) {
+  _paymentLayout(BuildContext context) {
     return Card(
       child: Padding(
-        padding: const EdgeInsets.all(29),
+        padding: EdgeInsets.all(29),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -379,83 +366,147 @@ class DetailOrderScreen extends AppWidget<DetailOrderNotifier, void, void> {
                       appTextStyle: AppTextStyle.TITLE_MEDIUM)
                   ?.copyWith(fontWeight: FontWeight.bold),
             ),
-            const SizedBox(height: 20),
+            const SizedBox(
+              height: 20,
+            ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text(
-                  'Biaya',
-                  style: GlobalHelper.getTextTheme(context,
-                          appTextStyle: AppTextStyle.TITLE_MEDIUM)
-                      ?.copyWith(fontWeight: FontWeight.bold),
-                ),
-                Text(
-                  'Rp. 54.000',
-                  style: GlobalHelper.getTextTheme(context,
-                          appTextStyle: AppTextStyle.TITLE_MEDIUM)
-                      ?.copyWith(color: Colors.green),
-                ),
+                Text('Biaya',
+                    style: GlobalHelper.getTextTheme(context,
+                            appTextStyle: AppTextStyle.TITLE_MEDIUM)
+                        ?.copyWith(fontWeight: FontWeight.bold)),
+                Text(NumberHelper.formatIdr(notifier.booking?.price ?? 0.0),
+                    style: GlobalHelper.getTextTheme(context,
+                            appTextStyle: AppTextStyle.TITLE_MEDIUM)
+                        ?.copyWith(color: Colors.green)),
               ],
-            ),
-            const SizedBox(height: 30),
-            Text(
-              'Metode Pembayaran',
-              style: GlobalHelper.getTextTheme(context,
-                      appTextStyle: AppTextStyle.TITLE_MEDIUM)
-                  ?.copyWith(fontWeight: FontWeight.bold),
-            ),
-            const SizedBox(height: 10),
-
-            // Tampilan statis metode pembayaran
-            const Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                ListTile(
-                  leading: Icon(Icons.qr_code),
-                  title: Text('QRIS'),
-                  trailing: Icon(Icons.radio_button_unchecked),
-                ),
-                ListTile(
-                  leading: Icon(Icons.credit_card),
-                  title: Text('Kartu Kredit'),
-                  trailing: Icon(Icons.radio_button_unchecked),
-                ),
-                ListTile(
-                  leading: Icon(Icons.account_balance_wallet),
-                  title: Text('GoPay'),
-                  trailing: Icon(Icons.radio_button_unchecked),
-                ),
-                ListTile(
-                  leading: Icon(Icons.money),
-                  title: Text('Bayar Tunai'),
-                  trailing: Icon(Icons.radio_button_unchecked),
-                ),
-              ],
-            ),
+            )
           ],
         ),
       ),
     );
   }
 
+  // Widget _paymentLayout(BuildContext context) {
+  //   return Card(
+  //     child: Padding(
+  //       padding: const EdgeInsets.all(29),
+  //       child: Column(
+  //         crossAxisAlignment: CrossAxisAlignment.start,
+  //         children: [
+  //           Text(
+  //             'Detail Pembayaran',
+  //             style: GlobalHelper.getTextTheme(context,
+  //                     appTextStyle: AppTextStyle.TITLE_MEDIUM)
+  //                 ?.copyWith(fontWeight: FontWeight.bold),
+  //           ),
+  //           const SizedBox(height: 20),
+  //           Row(
+  //             mainAxisAlignment: MainAxisAlignment.spaceBetween,
+  //             children: [
+  //               Text(
+  //                 'Biaya',
+  //                 style: GlobalHelper.getTextTheme(context,
+  //                         appTextStyle: AppTextStyle.TITLE_MEDIUM)
+  //                     ?.copyWith(fontWeight: FontWeight.bold),
+  //               ),
+  //               Text(
+  //                 'Rp. 54.000',
+  //                 style: GlobalHelper.getTextTheme(context,
+  //                         appTextStyle: AppTextStyle.TITLE_MEDIUM)
+  //                     ?.copyWith(color: Colors.green),
+  //               ),
+  //             ],
+  //           ),
+  //           const SizedBox(height: 30),
+  //           Text(
+  //             'Metode Pembayaran',
+  //             style: GlobalHelper.getTextTheme(context,
+  //                     appTextStyle: AppTextStyle.TITLE_MEDIUM)
+  //                 ?.copyWith(fontWeight: FontWeight.bold),
+  //           ),
+  //           const SizedBox(height: 10),
+
+  //           // Tampilan statis metode pembayaran
+  //           const Column(
+  //             crossAxisAlignment: CrossAxisAlignment.start,
+  //             children: [
+  //               ListTile(
+  //                 leading: Icon(Icons.qr_code),
+  //                 title: Text('QRIS'),
+  //                 trailing: Icon(Icons.radio_button_unchecked),
+  //               ),
+  //               ListTile(
+  //                 leading: Icon(Icons.credit_card),
+  //                 title: Text('Kartu Kredit'),
+  //                 trailing: Icon(Icons.radio_button_unchecked),
+  //               ),
+  //               ListTile(
+  //                 leading: Icon(Icons.account_balance_wallet),
+  //                 title: Text('GoPay'),
+  //                 trailing: Icon(Icons.radio_button_unchecked),
+  //               ),
+  //               ListTile(
+  //                 leading: Icon(Icons.money),
+  //                 title: Text('Bayar Tunai'),
+  //                 trailing: Icon(Icons.radio_button_unchecked),
+  //               ),
+  //             ],
+  //           ),
+  //         ],
+  //       ),
+  //     ),
+  //   );
+  // }
+
   _footerLayout(BuildContext context) {
-    return ElevatedButton(
-        onPressed: () => {},
-        child: Text('Batalkan Pesana'),
-        style: ElevatedButton.styleFrom(
-            backgroundColor: Colors.red,
-            minimumSize: Size(double.maxFinite, 48)));
+    if (notifier.role == ROLE_CUSTOMER &&
+        notifier.booking?.status == STATUS_FINDING_DRIVER) {
+      return ElevatedButton(
+          onPressed: () => _onPressCancel(),
+          child: Text('Batalkan Pesana'),
+          style: ElevatedButton.styleFrom(
+              backgroundColor: Colors.red,
+              minimumSize: Size(double.maxFinite, 48)));
+    } else if (notifier.role == ROLE_DRIVER &&
+        notifier.booking?.status == STATUS_PAID &&
+        notifier.booking?.status != STATUS_CANCELLED) {
+      return ElevatedButton(
+          onPressed: () => _onPressUpdateStatus(),
+          child: Text((notifier.booking?.status == STATUS_DRIVER_PICKUP)
+              ? 'Sampai Titik Jemput'
+              : (notifier.booking?.status == STATUS_DRIVER_DELIVER)
+                  ? 'Sampai Tujuan'
+                  : (notifier.booking?.status == STATUS_ARRIVED)
+                      ? 'Sudah Dibayar'
+                      : ''));
+    } else {
+      return const SizedBox();
+    }
   }
 
-  _onPressMapFullscreen(BuildContext context) {
-    return DialogHelper.showFullScreenDialog(
+  _onPressMapFullscreen(BuildContext context) async {
+    notifier.isShowDialog = true;
+    await DialogHelper.showFullScreenDialog(
         context: context,
         title: 'Map',
         content: OSMFlutter(
           controller: notifier.mapFullScreenController,
           osmOption: OSMOption(zoomOption: ZoomOption(stepZoom: 1)),
-          onMapIsReady: (p0) => {},
+          onMapIsReady: (p0) {
+            if (p0) notifier.setRoute();
+          },
           mapIsLoading: LoadingAppWidget(),
         ));
+    notifier.isShowDialog = false;
+  }
+
+  _onPressCancel() {
+    notifier.cancel();
+  }
+
+  _onPressUpdateStatus() {
+    notifier.updateStatus();
   }
 }

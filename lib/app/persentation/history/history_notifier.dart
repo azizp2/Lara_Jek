@@ -1,5 +1,5 @@
 import 'package:lara_jek/app/domain/entity/booking.dart';
-import 'package:lara_jek/app/use_case/booking_get_all.dart';
+import 'package:lara_jek/app/use_case/booking/booking_get_all.dart';
 import 'package:lara_jek/core/provider/app_provider.dart';
 
 class HistoryNotifier extends AppProvider {

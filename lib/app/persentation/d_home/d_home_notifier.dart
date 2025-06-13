@@ -1,4 +1,4 @@
-import 'package:lara_jek/app/use_case/auth_logout.dart';
+import 'package:lara_jek/app/use_case/auth/auth_logout.dart';
 import 'package:lara_jek/core/helper/shared_preferences_helper.dart';
 import 'package:lara_jek/core/provider/app_provider.dart';
 

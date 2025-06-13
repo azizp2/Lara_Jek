@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:lara_jek/app/domain/entity/auth.dart';
-import 'package:lara_jek/app/use_case/auth_login.dart';
+import 'package:lara_jek/app/use_case/auth/auth_login.dart';
 import 'package:lara_jek/core/constant/constant.dart';
 import 'package:lara_jek/core/helper/shared_preferences_helper.dart';
 import 'package:lara_jek/core/provider/app_provider.dart';

@@ -2,10 +2,13 @@ import 'package:get_it/get_it.dart';
 import 'package:dio/dio.dart';
 import 'package:lara_jek/app/data/repository/auth_repository.dart';
 import 'package:lara_jek/app/data/repository/booking_repository.dart';
+import 'package:lara_jek/app/data/repository/tracking_repository.dart';
 import 'package:lara_jek/app/data/source/auth_api_service.dart';
 import 'package:lara_jek/app/data/source/booking_api_service.dart';
+import 'package:lara_jek/app/data/source/tracking_api_service.dart';
 import 'package:lara_jek/app/domain/repository/auth_repository.dart';
 import 'package:lara_jek/app/domain/repository/booking_repository.dart';
+import 'package:lara_jek/app/domain/repository/tracking_repository.dart';
 import 'package:lara_jek/app/persentation/c_home/c_home_notifier.dart';
 import 'package:lara_jek/app/persentation/confirm_order/confirm_order_notifier.dart';
 import 'package:lara_jek/app/persentation/create_order/create_order_notifier.dart';
@@ -14,11 +17,15 @@ import 'package:lara_jek/app/persentation/detail_order/detail_order_notifier.dar
 import 'package:lara_jek/app/persentation/history/history_notifier.dart';
 import 'package:lara_jek/app/persentation/login/login_notifier.dart';
 import 'package:lara_jek/app/persentation/register/register_notifier.dart';
-import 'package:lara_jek/app/use_case/auth_login.dart';
-import 'package:lara_jek/app/use_case/auth_logout.dart';
-import 'package:lara_jek/app/use_case/auth_register.dart';
-import 'package:lara_jek/app/use_case/booking_get_all.dart';
-import 'package:lara_jek/app/use_case/booking_get_today.dart';
+import 'package:lara_jek/app/use_case/auth/auth_login.dart';
+import 'package:lara_jek/app/use_case/auth/auth_logout.dart';
+import 'package:lara_jek/app/use_case/auth/auth_register.dart';
+import 'package:lara_jek/app/use_case/booking/booking_cancel.dart';
+import 'package:lara_jek/app/use_case/booking/booking_get_all.dart';
+import 'package:lara_jek/app/use_case/booking/booking_get_by_id.dart';
+import 'package:lara_jek/app/use_case/booking/booking_get_today.dart';
+import 'package:lara_jek/app/use_case/booking/booking_update_status.dart';
+import 'package:lara_jek/app/use_case/booking/tracking_get_by_id.dart';
 import 'package:lara_jek/core/network/app_interceptor.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 
@@ -39,17 +46,24 @@ void initDependency() {
 // Api Service
   sl.registerSingleton<AuthApiService>(AuthApiService(dio));
   sl.registerSingleton<BookingApiService>(BookingApiService(dio));
+  sl.registerSingleton<TrackingApiService>(TrackingApiService(dio));
 
 // Repository
   sl.registerSingleton<AuthRepository>(AuthRepositoryImpl(sl()));
   sl.registerSingleton<BookingRepository>(BookingRepositoryImpl(sl()));
+  sl.registerSingleton<TrackingRepository>(TrackingRepositoryImpl(sl()));
 
 // Use Case
-  sl.registerSingleton<AuthRegisterUseCase>(AuthRegisterUseCase(sl()));
   sl.registerSingleton<AuthLoginUseCase>(AuthLoginUseCase(sl()));
   sl.registerSingleton<AuthLogoutUseCase>(AuthLogoutUseCase(sl()));
-  sl.registerSingleton<BookingGetTodayUseCase>(BookingGetTodayUseCase(sl()));
+  sl.registerSingleton<AuthRegisterUseCase>(AuthRegisterUseCase(sl()));
   sl.registerSingleton<BookingGetAllUseCase>(BookingGetAllUseCase(sl()));
+  sl.registerSingleton<BookingGetByIdUseCase>(BookingGetByIdUseCase(sl()));
+  sl.registerSingleton<BookingGetTodayUseCase>(BookingGetTodayUseCase(sl()));
+  sl.registerSingleton<BookingUpdateStatusUseCase>(
+      BookingUpdateStatusUseCase(sl()));
+  sl.registerSingleton<BookingCancelUseCase>(BookingCancelUseCase(sl()));
+  sl.registerSingleton<TrackingGetByIdUseCase>(TrackingGetByIdUseCase(sl()));
 
 // Provider
   sl.registerFactoryParam<LoginNotifier, void, void>(
@@ -72,8 +86,8 @@ void initDependency() {
     (param1, param2) => HistoryNotifier(sl()),
   );
 
-  sl.registerFactoryParam<DetailOrderNotifier, void, void>(
-    (param1, param2) => DetailOrderNotifier(),
+  sl.registerFactoryParam<DetailOrderNotifier, int, void>(
+    (param1, param2) => DetailOrderNotifier(param1, sl(), sl(), sl(), sl()),
   );
 
   sl.registerFactoryParam<DHomeNotifier, void, void>(
