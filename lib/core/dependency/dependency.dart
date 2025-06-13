@@ -17,6 +17,7 @@ import 'package:lara_jek/app/persentation/register/register_notifier.dart';
 import 'package:lara_jek/app/use_case/auth_login.dart';
 import 'package:lara_jek/app/use_case/auth_logout.dart';
 import 'package:lara_jek/app/use_case/auth_register.dart';
+import 'package:lara_jek/app/use_case/booking_get_all.dart';
 import 'package:lara_jek/app/use_case/booking_get_today.dart';
 import 'package:lara_jek/core/network/app_interceptor.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
@@ -48,6 +49,7 @@ void initDependency() {
   sl.registerSingleton<AuthLoginUseCase>(AuthLoginUseCase(sl()));
   sl.registerSingleton<AuthLogoutUseCase>(AuthLogoutUseCase(sl()));
   sl.registerSingleton<BookingGetTodayUseCase>(BookingGetTodayUseCase(sl()));
+  sl.registerSingleton<BookingGetAllUseCase>(BookingGetAllUseCase(sl()));
 
 // Provider
   sl.registerFactoryParam<LoginNotifier, void, void>(
@@ -67,7 +69,7 @@ void initDependency() {
   );
 
   sl.registerFactoryParam<HistoryNotifier, void, void>(
-    (param1, param2) => HistoryNotifier(),
+    (param1, param2) => HistoryNotifier(sl()),
   );
 
   sl.registerFactoryParam<DetailOrderNotifier, void, void>(
