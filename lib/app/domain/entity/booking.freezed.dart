@@ -48,7 +48,8 @@ mixin _$Booking {
             double price,
             String status,
             UserCustomerEntity customer,
-            UserDriverEntity? driver)
+            UserDriverEntity? driver,
+            @JsonKey(name: 'created_at') String createdAt)
         driverEntity,
     required TResult Function(
             @JsonKey(name: 'latitude_origin') double latitudeOrigin,
@@ -79,7 +80,8 @@ mixin _$Booking {
             double price,
             String status,
             UserCustomerEntity customer,
-            UserDriverEntity? driver)?
+            UserDriverEntity? driver,
+            @JsonKey(name: 'created_at') String createdAt)?
         driverEntity,
     TResult? Function(
             @JsonKey(name: 'latitude_origin') double latitudeOrigin,
@@ -110,7 +112,8 @@ mixin _$Booking {
             double price,
             String status,
             UserCustomerEntity customer,
-            UserDriverEntity? driver)?
+            UserDriverEntity? driver,
+            @JsonKey(name: 'created_at') String createdAt)?
         driverEntity,
     TResult Function(
             @JsonKey(name: 'latitude_origin') double latitudeOrigin,
@@ -196,7 +199,8 @@ abstract class _$$BookingEntityImplCopyWith<$Res> {
       double price,
       String status,
       UserCustomerEntity customer,
-      UserDriverEntity? driver});
+      UserDriverEntity? driver,
+      @JsonKey(name: 'created_at') String createdAt});
 }
 
 /// @nodoc
@@ -225,6 +229,7 @@ class __$$BookingEntityImplCopyWithImpl<$Res>
     Object? status = null,
     Object? customer = freezed,
     Object? driver = freezed,
+    Object? createdAt = null,
   }) {
     return _then(_$BookingEntityImpl(
       id: null == id
@@ -279,6 +284,10 @@ class __$$BookingEntityImplCopyWithImpl<$Res>
           ? _value.driver
           : driver // ignore: cast_nullable_to_non_nullable
               as UserDriverEntity?,
+      createdAt: null == createdAt
+          ? _value.createdAt
+          : createdAt // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -301,6 +310,7 @@ class _$BookingEntityImpl implements BookingEntity {
       required this.status,
       required this.customer,
       this.driver,
+      @JsonKey(name: 'created_at') required this.createdAt,
       final String? $type})
       : $type = $type ?? 'driverEntity';
 
@@ -340,13 +350,16 @@ class _$BookingEntityImpl implements BookingEntity {
   final UserCustomerEntity customer;
   @override
   final UserDriverEntity? driver;
+  @override
+  @JsonKey(name: 'created_at')
+  final String createdAt;
 
   @JsonKey(name: 'runtimeType')
   final String $type;
 
   @override
   String toString() {
-    return 'Booking.driverEntity(id: $id, latitudeOrigin: $latitudeOrigin, longitudeOrigin: $longitudeOrigin, addressOrigin: $addressOrigin, latitudeDestination: $latitudeDestination, longitudeDestination: $longitudeDestination, addressDestination: $addressDestination, distance: $distance, timeEstimate: $timeEstimate, price: $price, status: $status, customer: $customer, driver: $driver)';
+    return 'Booking.driverEntity(id: $id, latitudeOrigin: $latitudeOrigin, longitudeOrigin: $longitudeOrigin, addressOrigin: $addressOrigin, latitudeDestination: $latitudeDestination, longitudeDestination: $longitudeDestination, addressDestination: $addressDestination, distance: $distance, timeEstimate: $timeEstimate, price: $price, status: $status, customer: $customer, driver: $driver, createdAt: $createdAt)';
   }
 
   @override
@@ -374,7 +387,9 @@ class _$BookingEntityImpl implements BookingEntity {
             (identical(other.price, price) || other.price == price) &&
             (identical(other.status, status) || other.status == status) &&
             const DeepCollectionEquality().equals(other.customer, customer) &&
-            const DeepCollectionEquality().equals(other.driver, driver));
+            const DeepCollectionEquality().equals(other.driver, driver) &&
+            (identical(other.createdAt, createdAt) ||
+                other.createdAt == createdAt));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
@@ -393,7 +408,8 @@ class _$BookingEntityImpl implements BookingEntity {
       price,
       status,
       const DeepCollectionEquality().hash(customer),
-      const DeepCollectionEquality().hash(driver));
+      const DeepCollectionEquality().hash(driver),
+      createdAt);
 
   /// Create a copy of Booking
   /// with the given fields replaced by the non-null parameter values.
@@ -419,7 +435,8 @@ class _$BookingEntityImpl implements BookingEntity {
             double price,
             String status,
             UserCustomerEntity customer,
-            UserDriverEntity? driver)
+            UserDriverEntity? driver,
+            @JsonKey(name: 'created_at') String createdAt)
         driverEntity,
     required TResult Function(
             @JsonKey(name: 'latitude_origin') double latitudeOrigin,
@@ -447,7 +464,8 @@ class _$BookingEntityImpl implements BookingEntity {
         price,
         status,
         customer,
-        driver);
+        driver,
+        createdAt);
   }
 
   @override
@@ -466,7 +484,8 @@ class _$BookingEntityImpl implements BookingEntity {
             double price,
             String status,
             UserCustomerEntity customer,
-            UserDriverEntity? driver)?
+            UserDriverEntity? driver,
+            @JsonKey(name: 'created_at') String createdAt)?
         driverEntity,
     TResult? Function(
             @JsonKey(name: 'latitude_origin') double latitudeOrigin,
@@ -494,7 +513,8 @@ class _$BookingEntityImpl implements BookingEntity {
         price,
         status,
         customer,
-        driver);
+        driver,
+        createdAt);
   }
 
   @override
@@ -513,7 +533,8 @@ class _$BookingEntityImpl implements BookingEntity {
             double price,
             String status,
             UserCustomerEntity customer,
-            UserDriverEntity? driver)?
+            UserDriverEntity? driver,
+            @JsonKey(name: 'created_at') String createdAt)?
         driverEntity,
     TResult Function(
             @JsonKey(name: 'latitude_origin') double latitudeOrigin,
@@ -543,7 +564,8 @@ class _$BookingEntityImpl implements BookingEntity {
           price,
           status,
           customer,
-          driver);
+          driver,
+          createdAt);
     }
     return orElse();
   }
@@ -610,7 +632,9 @@ abstract class BookingEntity implements Booking {
       required final double price,
       required final String status,
       required final UserCustomerEntity customer,
-      final UserDriverEntity? driver}) = _$BookingEntityImpl;
+      final UserDriverEntity? driver,
+      @JsonKey(name: 'created_at')
+      required final String createdAt}) = _$BookingEntityImpl;
 
   factory BookingEntity.fromJson(Map<String, dynamic> json) =
       _$BookingEntityImpl.fromJson;
@@ -635,6 +659,8 @@ abstract class BookingEntity implements Booking {
   String get status;
   UserCustomerEntity get customer;
   UserDriverEntity? get driver;
+  @JsonKey(name: 'created_at')
+  String get createdAt;
 
   /// Create a copy of Booking
   /// with the given fields replaced by the non-null parameter values.
@@ -833,7 +859,8 @@ class _$BookingCreateParamEntityImpl implements BookingCreateParamEntity {
             double price,
             String status,
             UserCustomerEntity customer,
-            UserDriverEntity? driver)
+            UserDriverEntity? driver,
+            @JsonKey(name: 'created_at') String createdAt)
         driverEntity,
     required TResult Function(
             @JsonKey(name: 'latitude_origin') double latitudeOrigin,
@@ -875,7 +902,8 @@ class _$BookingCreateParamEntityImpl implements BookingCreateParamEntity {
             double price,
             String status,
             UserCustomerEntity customer,
-            UserDriverEntity? driver)?
+            UserDriverEntity? driver,
+            @JsonKey(name: 'created_at') String createdAt)?
         driverEntity,
     TResult? Function(
             @JsonKey(name: 'latitude_origin') double latitudeOrigin,
@@ -917,7 +945,8 @@ class _$BookingCreateParamEntityImpl implements BookingCreateParamEntity {
             double price,
             String status,
             UserCustomerEntity customer,
-            UserDriverEntity? driver)?
+            UserDriverEntity? driver,
+            @JsonKey(name: 'created_at') String createdAt)?
         driverEntity,
     TResult Function(
             @JsonKey(name: 'latitude_origin') double latitudeOrigin,
@@ -1134,7 +1163,8 @@ class _$BookingStatusParamEntityImpl implements BookingStatusParamEntity {
             double price,
             String status,
             UserCustomerEntity customer,
-            UserDriverEntity? driver)
+            UserDriverEntity? driver,
+            @JsonKey(name: 'created_at') String createdAt)
         driverEntity,
     required TResult Function(
             @JsonKey(name: 'latitude_origin') double latitudeOrigin,
@@ -1168,7 +1198,8 @@ class _$BookingStatusParamEntityImpl implements BookingStatusParamEntity {
             double price,
             String status,
             UserCustomerEntity customer,
-            UserDriverEntity? driver)?
+            UserDriverEntity? driver,
+            @JsonKey(name: 'created_at') String createdAt)?
         driverEntity,
     TResult? Function(
             @JsonKey(name: 'latitude_origin') double latitudeOrigin,
@@ -1202,7 +1233,8 @@ class _$BookingStatusParamEntityImpl implements BookingStatusParamEntity {
             double price,
             String status,
             UserCustomerEntity customer,
-            UserDriverEntity? driver)?
+            UserDriverEntity? driver,
+            @JsonKey(name: 'created_at') String createdAt)?
         driverEntity,
     TResult Function(
             @JsonKey(name: 'latitude_origin') double latitudeOrigin,
@@ -1386,7 +1418,8 @@ class _$BookingNotifEntityImpl implements BookingNotifEntity {
             double price,
             String status,
             UserCustomerEntity customer,
-            UserDriverEntity? driver)
+            UserDriverEntity? driver,
+            @JsonKey(name: 'created_at') String createdAt)
         driverEntity,
     required TResult Function(
             @JsonKey(name: 'latitude_origin') double latitudeOrigin,
@@ -1420,7 +1453,8 @@ class _$BookingNotifEntityImpl implements BookingNotifEntity {
             double price,
             String status,
             UserCustomerEntity customer,
-            UserDriverEntity? driver)?
+            UserDriverEntity? driver,
+            @JsonKey(name: 'created_at') String createdAt)?
         driverEntity,
     TResult? Function(
             @JsonKey(name: 'latitude_origin') double latitudeOrigin,
@@ -1454,7 +1488,8 @@ class _$BookingNotifEntityImpl implements BookingNotifEntity {
             double price,
             String status,
             UserCustomerEntity customer,
-            UserDriverEntity? driver)?
+            UserDriverEntity? driver,
+            @JsonKey(name: 'created_at') String createdAt)?
         driverEntity,
     TResult Function(
             @JsonKey(name: 'latitude_origin') double latitudeOrigin,

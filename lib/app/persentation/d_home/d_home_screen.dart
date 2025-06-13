@@ -3,6 +3,7 @@ import 'package:lara_jek/app/persentation/create_order/create_order_screen.dart'
 import 'package:lara_jek/app/persentation/d_home/d_home_notifier.dart';
 import 'package:lara_jek/app/persentation/detail_order/detail_order_screen.dart';
 import 'package:lara_jek/app/persentation/history/history_screen.dart';
+import 'package:lara_jek/app/persentation/login/login_screen.dart';
 import 'package:lara_jek/core/helper/global_helper.dart';
 import 'package:lara_jek/core/widget/app_widget.dart';
 
@@ -21,6 +22,17 @@ class DHomeScreen extends AppWidget<DHomeNotifier, void, void> {
         _historyOrderLayout(context)
       ],
     );
+  }
+
+  @override
+  checkVariabelAfterUi(BuildContext context) {
+    if (notifier.isLogout) {
+      Navigator.pushAndRemoveUntil(
+        context,
+        MaterialPageRoute(builder: (context) => LoginScreen()),
+        (route) => false,
+      );
+    }
   }
 
   Widget _headerLayout(BuildContext context) {
@@ -56,12 +68,12 @@ class DHomeScreen extends AppWidget<DHomeNotifier, void, void> {
                   ),
                 ),
                 IconButton(
-                  onPressed: () {},
-                  icon: Icon(Icons.logout, color: Colors.white),
+                  onPressed: () => _onPressLogout(),
+                  icon: const Icon(Icons.logout, color: Colors.white),
                 ),
               ],
             ),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
 
             // Top Row (Profile & Logout)
             Row(
@@ -69,9 +81,10 @@ class DHomeScreen extends AppWidget<DHomeNotifier, void, void> {
                 CircleAvatar(
                   radius: 28,
                   backgroundColor: Colors.white.withOpacity(0.2),
-                  child: Icon(Icons.person, color: Colors.white, size: 28),
+                  child:
+                      const Icon(Icons.person, color: Colors.white, size: 28),
                 ),
-                SizedBox(width: 16),
+                const SizedBox(width: 16),
                 Expanded(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -81,7 +94,7 @@ class DHomeScreen extends AppWidget<DHomeNotifier, void, void> {
                               fontSize: 18,
                               fontWeight: FontWeight.bold,
                               color: Colors.white)),
-                      SizedBox(height: 4),
+                      const SizedBox(height: 4),
                       Text("Driver Ojek Motor",
                           style: text?.copyWith(
                               color: Colors.white70, fontSize: 14))
@@ -91,7 +104,7 @@ class DHomeScreen extends AppWidget<DHomeNotifier, void, void> {
               ],
             ),
 
-            SizedBox(height: 24),
+            const SizedBox(height: 24),
 
             // Stats
             Row(
@@ -102,7 +115,7 @@ class DHomeScreen extends AppWidget<DHomeNotifier, void, void> {
                   value: 'Rp 150.000',
                   color: Colors.green,
                 ),
-                SizedBox(width: 12),
+                const SizedBox(width: 12),
                 _dashboardTile(
                   icon: Icons.delivery_dining,
                   label: 'Order Hari Ini',
@@ -112,16 +125,16 @@ class DHomeScreen extends AppWidget<DHomeNotifier, void, void> {
               ],
             ),
 
-            SizedBox(height: 24),
+            const SizedBox(height: 24),
 
             // Status Switch
             Container(
               width: double.infinity,
-              padding: EdgeInsets.symmetric(vertical: 16, horizontal: 20),
+              padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 20),
               decoration: BoxDecoration(
                 color: Colors.white,
                 borderRadius: BorderRadius.circular(18),
-                boxShadow: [
+                boxShadow: const [
                   BoxShadow(
                     color: Colors.black12,
                     blurRadius: 10,
@@ -132,7 +145,7 @@ class DHomeScreen extends AppWidget<DHomeNotifier, void, void> {
               child: Row(
                 children: [
                   Icon(Icons.wifi_tethering, color: Colors.grey[700]),
-                  SizedBox(width: 12),
+                  const SizedBox(width: 12),
                   Expanded(
                     child: Text(
                       'Status Online',
@@ -358,5 +371,9 @@ class DHomeScreen extends AppWidget<DHomeNotifier, void, void> {
   _onPressItemHistory(BuildContext context) {
     Navigator.push(
         context, MaterialPageRoute(builder: (context) => DetailOrderScreen()));
+  }
+
+  _onPressLogout() {
+    notifier.logout();
   }
 }

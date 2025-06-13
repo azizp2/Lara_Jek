@@ -13,3 +13,10 @@ const String PREF_VEHICLE_NUMBER = 'pref_vehicle_number';
 
 const String ROLE_CUSTOMER = 'customer';
 const String ROLE_DRIVER = 'driver';
+
+const String STATUS_FINDING_DRIVER = 'finding_driver';
+const String STATUS_DRIVER_PICKUP = 'driver_pickup';
+const String STATUS_DRIVER_DELIVER = 'driver_deliver';
+const String STATUS_ARRIVED = 'arrived';
+const String STATUS_PAID = 'paid';
+const String STATUS_CANCELLED = 'cancelled';

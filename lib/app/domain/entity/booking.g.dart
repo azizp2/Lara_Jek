@@ -24,6 +24,7 @@ _$BookingEntityImpl _$$BookingEntityImplFromJson(Map<String, dynamic> json) =>
       driver: json['driver'] == null
           ? null
           : UserDriverEntity.fromJson(json['driver'] as Map<String, dynamic>),
+      createdAt: json['created_at'] as String,
       $type: json['runtimeType'] as String?,
     );
 
@@ -42,6 +43,7 @@ Map<String, dynamic> _$$BookingEntityImplToJson(_$BookingEntityImpl instance) =>
       'status': instance.status,
       'customer': instance.customer,
       'driver': instance.driver,
+      'created_at': instance.createdAt,
       'runtimeType': instance.$type,
     };
 

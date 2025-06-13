@@ -1,11 +1,14 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
+import 'package:lara_jek/app/domain/entity/booking.dart';
 import 'package:lara_jek/app/persentation/c_home/c_home_notifier.dart';
 import 'package:lara_jek/app/persentation/create_order/create_order_screen.dart';
 import 'package:lara_jek/app/persentation/detail_order/detail_order_screen.dart';
 import 'package:lara_jek/app/persentation/history/history_screen.dart';
+import 'package:lara_jek/app/persentation/login/login_screen.dart';
+import 'package:lara_jek/core/constant/constant.dart';
+import 'package:lara_jek/core/helper/date_time_helper.dart';
 import 'package:lara_jek/core/helper/global_helper.dart';
+import 'package:lara_jek/core/helper/number_helper.dart';
 import 'package:lara_jek/core/widget/app_widget.dart';
 import 'package:flutter_osm_plugin/flutter_osm_plugin.dart';
 
@@ -29,6 +32,17 @@ class CHomeScreen extends AppWidget<CHomeNotifier, void, void> {
         )
       ],
     );
+  }
+
+  @override
+  checkVariabelAfterUi(BuildContext context) {
+    if (notifier.isLogout) {
+      Navigator.pushAndRemoveUntil(
+        context,
+        MaterialPageRoute(builder: (context) => LoginScreen()),
+        (route) => false,
+      );
+    }
   }
 
   _headerLayout(BuildContext context) {
@@ -67,7 +81,7 @@ class CHomeScreen extends AppWidget<CHomeNotifier, void, void> {
             ],
           ),
           IconButton(
-              onPressed: () => {},
+              onPressed: () => _onPressLogout(),
               icon: Icon(
                 Icons.logout,
                 color: GlobalHelper.getColorScheme(context).onPrimary,
@@ -223,15 +237,16 @@ class CHomeScreen extends AppWidget<CHomeNotifier, void, void> {
             separatorBuilder: (context, index) => const SizedBox(
                   height: 12,
                 ),
-            itemCount: 5,
+            itemCount: notifier.list.length,
             itemBuilder: (context, index) {
-              return _itemHistoryLayout(context);
+              final item = notifier.list[index];
+              return _itemHistoryLayout(context, item);
             })
       ],
     );
   }
 
-  _itemHistoryLayout(BuildContext context) {
+  _itemHistoryLayout(BuildContext context, BookingEntity item) {
     return InkWell(
       onTap: () => _onPressItemHistory(context),
       child: Card(
@@ -246,7 +261,9 @@ class CHomeScreen extends AppWidget<CHomeNotifier, void, void> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          '22 Des 2024',
+                          DateTimeHelper.reformatDateTimeFromString(
+                              dateTimeString: item.createdAt,
+                              format: 'dd MMM yyyy HH:mm'),
                           style: GlobalHelper.getTextTheme(context,
                                   appTextStyle: AppTextStyle.BODY_SMALL)
                               ?.copyWith(
@@ -254,7 +271,7 @@ class CHomeScreen extends AppWidget<CHomeNotifier, void, void> {
                                       .onSurfaceVariant),
                         ),
                         Text(
-                          'Menuju monumen nasional',
+                          'Menuju ke ${item.addressDestination}',
                           style: GlobalHelper.getTextTheme(context,
                                   appTextStyle: AppTextStyle.TITLE_MEDIUM)
                               ?.copyWith(fontWeight: FontWeight.bold),
@@ -265,7 +282,7 @@ class CHomeScreen extends AppWidget<CHomeNotifier, void, void> {
                     ),
                   ),
                   Text(
-                    'Rp. 100.000',
+                    NumberHelper.formatIdr(item.price),
                     style: GlobalHelper.getTextTheme(context,
                             appTextStyle: AppTextStyle.TITLE_MEDIUM)
                         ?.copyWith(
@@ -287,7 +304,7 @@ class CHomeScreen extends AppWidget<CHomeNotifier, void, void> {
                   const SizedBox(
                     width: 5,
                   ),
-                  Text('5 KM',
+                  Text('${item.distance} KM',
                       style: GlobalHelper.getTextTheme(context,
                               appTextStyle: AppTextStyle.BODY_SMALL)
                           ?.copyWith(
@@ -298,14 +315,23 @@ class CHomeScreen extends AppWidget<CHomeNotifier, void, void> {
                     width: 5,
                   ),
                   Icon(
-                    Icons.timelapse_sharp,
+                    (item.status == STATUS_PAID)
+                        ? Icons.check_circle_rounded
+                        : (item.status == STATUS_CANCELLED)
+                            ? Icons.clear
+                            : Icons.timeline_sharp,
                     size: 16,
                     color: GlobalHelper.getColorScheme(context).primary,
                   ),
                   const SizedBox(
                     width: 5,
                   ),
-                  Text('Dalam Perjalanan',
+                  Text(
+                      (item.status == STATUS_PAID)
+                          ? 'Selesai'
+                          : (item.status == STATUS_CANCELLED)
+                              ? 'Dibatalkan'
+                              : 'Dalam Perjalanan',
                       style: GlobalHelper.getTextTheme(context,
                               appTextStyle: AppTextStyle.BODY_SMALL)
                           ?.copyWith(
@@ -334,5 +360,9 @@ class CHomeScreen extends AppWidget<CHomeNotifier, void, void> {
   _onPressItemHistory(BuildContext context) {
     Navigator.push(
         context, MaterialPageRoute(builder: (context) => DetailOrderScreen()));
+  }
+
+  _onPressLogout() {
+    notifier.logout();
   }
 }
