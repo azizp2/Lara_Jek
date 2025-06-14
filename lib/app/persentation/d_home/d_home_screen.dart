@@ -5,6 +5,7 @@ import 'package:lara_jek/app/persentation/detail_order/detail_order_screen.dart'
 import 'package:lara_jek/app/persentation/history/history_screen.dart';
 import 'package:lara_jek/app/persentation/login/login_screen.dart';
 import 'package:lara_jek/core/helper/global_helper.dart';
+import 'package:lara_jek/core/helper/number_helper.dart';
 import 'package:lara_jek/core/widget/app_widget.dart';
 
 // ignore: must_be_immutable
@@ -111,14 +112,15 @@ class DHomeScreen extends AppWidget<DHomeNotifier, void, void> {
                 _dashboardTile(
                   icon: Icons.attach_money,
                   label: 'Pendapatan',
-                  value: 'Rp 150.000',
+                  value: NumberHelper.formatKIdr(
+                      notifier.statistic?.totalEarnings ?? 0),
                   color: Colors.green,
                 ),
                 const SizedBox(width: 12),
                 _dashboardTile(
                   icon: Icons.delivery_dining,
-                  label: 'Order Hari Ini',
-                  value: '8',
+                  label: 'Order Perjalanan',
+                  value: '${notifier.statistic?.totalBookings ?? 0}',
                   color: Colors.orange,
                 ),
               ],
