@@ -20,7 +20,7 @@ User _$UserFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$User {
-  String get token => throw _privateConstructorUsedError;
+  String? get token => throw _privateConstructorUsedError;
   int get id => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
   String get email => throw _privateConstructorUsedError;
@@ -33,7 +33,7 @@ mixin _$User {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(
-            String token,
+            String? token,
             int id,
             String name,
             String email,
@@ -47,7 +47,7 @@ mixin _$User {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(
-            String token,
+            String? token,
             int id,
             String name,
             String email,
@@ -61,7 +61,7 @@ mixin _$User {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(
-            String token,
+            String? token,
             int id,
             String name,
             String email,
@@ -105,7 +105,7 @@ abstract class $UserCopyWith<$Res> {
       _$UserCopyWithImpl<$Res, User>;
   @useResult
   $Res call(
-      {String token,
+      {String? token,
       int id,
       String name,
       String email,
@@ -130,7 +130,7 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? token = null,
+    Object? token = freezed,
     Object? id = null,
     Object? name = null,
     Object? email = null,
@@ -140,10 +140,10 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
     Object? driver = freezed,
   }) {
     return _then(_value.copyWith(
-      token: null == token
+      token: freezed == token
           ? _value.token
           : token // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -184,7 +184,7 @@ abstract class _$$UserModelImplCopyWith<$Res> implements $UserCopyWith<$Res> {
   @override
   @useResult
   $Res call(
-      {String token,
+      {String? token,
       int id,
       String name,
       String email,
@@ -207,7 +207,7 @@ class __$$UserModelImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? token = null,
+    Object? token = freezed,
     Object? id = null,
     Object? name = null,
     Object? email = null,
@@ -217,10 +217,10 @@ class __$$UserModelImplCopyWithImpl<$Res>
     Object? driver = freezed,
   }) {
     return _then(_$UserModelImpl(
-      token: null == token
+      token: freezed == token
           ? _value.token
           : token // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -270,7 +270,7 @@ class _$UserModelImpl implements UserModel {
       _$$UserModelImplFromJson(json);
 
   @override
-  final String token;
+  final String? token;
   @override
   final int id;
   @override
@@ -326,7 +326,7 @@ class _$UserModelImpl implements UserModel {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(
-            String token,
+            String? token,
             int id,
             String name,
             String email,
@@ -343,7 +343,7 @@ class _$UserModelImpl implements UserModel {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(
-            String token,
+            String? token,
             int id,
             String name,
             String email,
@@ -360,7 +360,7 @@ class _$UserModelImpl implements UserModel {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(
-            String token,
+            String? token,
             int id,
             String name,
             String email,
@@ -415,7 +415,7 @@ class _$UserModelImpl implements UserModel {
 
 abstract class UserModel implements User {
   factory UserModel(
-      {required final String token,
+      {required final String? token,
       required final int id,
       required final String name,
       required final String email,
@@ -428,7 +428,7 @@ abstract class UserModel implements User {
       _$UserModelImpl.fromJson;
 
   @override
-  String get token;
+  String? get token;
   @override
   int get id;
   @override
@@ -460,28 +460,28 @@ Driver _$DriverFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$Driver {
-  @JsonKey(name: 'vechicle_number')
+  @JsonKey(name: 'vehicle_number')
   String get vehicleNumber => throw _privateConstructorUsedError;
   @JsonKey(name: 'is_active')
   bool get isActive => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(
-            @JsonKey(name: 'vechicle_number') String vehicleNumber,
+            @JsonKey(name: 'vehicle_number') String vehicleNumber,
             @JsonKey(name: 'is_active') bool isActive)
         model,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(@JsonKey(name: 'vechicle_number') String vehicleNumber,
+    TResult? Function(@JsonKey(name: 'vehicle_number') String vehicleNumber,
             @JsonKey(name: 'is_active') bool isActive)?
         model,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(@JsonKey(name: 'vechicle_number') String vehicleNumber,
+    TResult Function(@JsonKey(name: 'vehicle_number') String vehicleNumber,
             @JsonKey(name: 'is_active') bool isActive)?
         model,
     required TResult orElse(),
@@ -519,7 +519,7 @@ abstract class $DriverCopyWith<$Res> {
       _$DriverCopyWithImpl<$Res, Driver>;
   @useResult
   $Res call(
-      {@JsonKey(name: 'vechicle_number') String vehicleNumber,
+      {@JsonKey(name: 'vehicle_number') String vehicleNumber,
       @JsonKey(name: 'is_active') bool isActive});
 }
 
@@ -563,7 +563,7 @@ abstract class _$$DriverModelImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {@JsonKey(name: 'vechicle_number') String vehicleNumber,
+      {@JsonKey(name: 'vehicle_number') String vehicleNumber,
       @JsonKey(name: 'is_active') bool isActive});
 }
 
@@ -600,14 +600,14 @@ class __$$DriverModelImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$DriverModelImpl implements DriverModel {
   _$DriverModelImpl(
-      {@JsonKey(name: 'vechicle_number') required this.vehicleNumber,
+      {@JsonKey(name: 'vehicle_number') required this.vehicleNumber,
       @JsonKey(name: 'is_active') required this.isActive});
 
   factory _$DriverModelImpl.fromJson(Map<String, dynamic> json) =>
       _$$DriverModelImplFromJson(json);
 
   @override
-  @JsonKey(name: 'vechicle_number')
+  @JsonKey(name: 'vehicle_number')
   final String vehicleNumber;
   @override
   @JsonKey(name: 'is_active')
@@ -645,7 +645,7 @@ class _$DriverModelImpl implements DriverModel {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(
-            @JsonKey(name: 'vechicle_number') String vehicleNumber,
+            @JsonKey(name: 'vehicle_number') String vehicleNumber,
             @JsonKey(name: 'is_active') bool isActive)
         model,
   }) {
@@ -655,7 +655,7 @@ class _$DriverModelImpl implements DriverModel {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(@JsonKey(name: 'vechicle_number') String vehicleNumber,
+    TResult? Function(@JsonKey(name: 'vehicle_number') String vehicleNumber,
             @JsonKey(name: 'is_active') bool isActive)?
         model,
   }) {
@@ -665,7 +665,7 @@ class _$DriverModelImpl implements DriverModel {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(@JsonKey(name: 'vechicle_number') String vehicleNumber,
+    TResult Function(@JsonKey(name: 'vehicle_number') String vehicleNumber,
             @JsonKey(name: 'is_active') bool isActive)?
         model,
     required TResult orElse(),
@@ -714,15 +714,15 @@ class _$DriverModelImpl implements DriverModel {
 
 abstract class DriverModel implements Driver {
   factory DriverModel(
-      {@JsonKey(name: 'vechicle_number') required final String vehicleNumber,
-      @JsonKey(name: 'is_active')
-      required final bool isActive}) = _$DriverModelImpl;
+          {@JsonKey(name: 'vehicle_number') required final String vehicleNumber,
+          @JsonKey(name: 'is_active') required final bool isActive}) =
+      _$DriverModelImpl;
 
   factory DriverModel.fromJson(Map<String, dynamic> json) =
       _$DriverModelImpl.fromJson;
 
   @override
-  @JsonKey(name: 'vechicle_number')
+  @JsonKey(name: 'vehicle_number')
   String get vehicleNumber;
   @override
   @JsonKey(name: 'is_active')

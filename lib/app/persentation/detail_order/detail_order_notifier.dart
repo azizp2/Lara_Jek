@@ -52,8 +52,8 @@ class DetailOrderNotifier extends AppProvider {
 
   @override
   Future<void> init() async {
-    await _getBooking();
     if (errorMessage.isEmpty) await _getDetailUser();
+    await _getBooking();
   }
 
   @override

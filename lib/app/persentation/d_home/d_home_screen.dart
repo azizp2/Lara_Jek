@@ -81,21 +81,20 @@ class DHomeScreen extends AppWidget<DHomeNotifier, void, void> {
                 CircleAvatar(
                   radius: 28,
                   backgroundColor: Colors.white.withOpacity(0.2),
-                  child:
-                      const Icon(Icons.person, color: Colors.white, size: 28),
+                  backgroundImage: NetworkImage(notifier.photoUrl),
                 ),
                 const SizedBox(width: 16),
                 Expanded(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text("Fahri Ramadhan",
+                      Text(notifier.name,
                           style: text?.copyWith(
                               fontSize: 18,
                               fontWeight: FontWeight.bold,
                               color: Colors.white)),
                       const SizedBox(height: 4),
-                      Text("Driver Ojek Motor",
+                      Text(notifier.vehicleNumber,
                           style: text?.copyWith(
                               color: Colors.white70, fontSize: 14))
                     ],
@@ -145,22 +144,38 @@ class DHomeScreen extends AppWidget<DHomeNotifier, void, void> {
               child: Row(
                 children: [
                   Icon(Icons.wifi_tethering, color: Colors.grey[700]),
-                  const SizedBox(width: 12),
-                  Expanded(
-                    child: Text(
-                      'Status Online',
-                      style: text?.copyWith(
-                        fontSize: 16,
-                        fontWeight: FontWeight.w500,
-                        color: Colors.black87,
-                      ),
+                  const SizedBox(width: 8),
+                  Text(
+                    'Status Driver',
+                    style: text?.copyWith(
+                      fontSize: 16,
+                      fontWeight: FontWeight.w500,
+                      color: Colors.black87,
                     ),
                   ),
+                  Expanded(
+                    child: SizedBox(),
+                  ),
+                  Text(
+                    notifier.isOnline ? 'Online' : 'Offline',
+                    style: text?.copyWith(
+                      fontSize: 16,
+                      fontWeight: FontWeight.w500,
+                      color: notifier.isOnline ? Colors.green : Colors.red,
+                    ),
+                  ),
+                  SizedBox(
+                    width: 8,
+                  ),
                   Switch.adaptive(
-                    value: true,
-                    onChanged: (val) {},
+                    value: notifier.isOnline,
+                    onChanged: (val) {
+                      notifier.isOnline = val;
+                    },
                     activeColor: Colors.green,
+                    activeTrackColor: Colors.green.withOpacity(0.2),
                     inactiveThumbColor: Colors.red,
+                    inactiveTrackColor: Colors.red.withOpacity(0.2),
                   ),
                 ],
               ),

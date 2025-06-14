@@ -8,7 +8,7 @@ part of 'user.dart';
 
 _$UserModelImpl _$$UserModelImplFromJson(Map<String, dynamic> json) =>
     _$UserModelImpl(
-      token: json['token'] as String,
+      token: json['token'] as String?,
       id: (json['id'] as num).toInt(),
       name: json['name'] as String,
       email: json['email'] as String,
@@ -34,12 +34,12 @@ Map<String, dynamic> _$$UserModelImplToJson(_$UserModelImpl instance) =>
 
 _$DriverModelImpl _$$DriverModelImplFromJson(Map<String, dynamic> json) =>
     _$DriverModelImpl(
-      vehicleNumber: json['vechicle_number'] as String,
+      vehicleNumber: json['vehicle_number'] as String,
       isActive: json['is_active'] as bool,
     );
 
 Map<String, dynamic> _$$DriverModelImplToJson(_$DriverModelImpl instance) =>
     <String, dynamic>{
-      'vechicle_number': instance.vehicleNumber,
+      'vehicle_number': instance.vehicleNumber,
       'is_active': instance.isActive,
     };

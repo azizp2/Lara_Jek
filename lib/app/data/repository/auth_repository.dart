@@ -21,7 +21,7 @@ class AuthRepositoryImpl extends AuthRepository {
         (json) async {
       final user = UserModel.fromJson(json);
       await SharedPreferencesHelper.setString(
-          PREF_AUTH, 'Bearer ' + user.token);
+          PREF_AUTH, 'Bearer ' + user.token!);
 
       await SharedPreferencesHelper.setInt(PREF_ID, user.id);
       await SharedPreferencesHelper.setString(PREF_NAME, user.name);
@@ -55,7 +55,7 @@ class AuthRepositoryImpl extends AuthRepository {
   @override
   Future<DataState<UserDriverEntity>> getDetailDriver() {
     return handleResponse(() => _authApiService.get(), (json) async {
-      final userModel = UserModel.fromJson(json['driver']);
+      final userModel = UserModel.fromJson(json);
 
       return UserDriverEntity(
           id: userModel.id,

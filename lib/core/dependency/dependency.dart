@@ -27,6 +27,7 @@ import 'package:lara_jek/app/use_case/booking/booking_get_all.dart';
 import 'package:lara_jek/app/use_case/booking/booking_get_by_id.dart';
 import 'package:lara_jek/app/use_case/booking/booking_get_today.dart';
 import 'package:lara_jek/app/use_case/booking/booking_update_status.dart';
+import 'package:lara_jek/app/use_case/booking/driver_get_status.dart';
 import 'package:lara_jek/app/use_case/booking/tracking_get_by_id.dart';
 import 'package:lara_jek/core/network/app_interceptor.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
@@ -45,20 +46,24 @@ void initDependency() {
 
   sl.registerSingleton<Dio>(dio);
 
-// Api Service
+// API SERVICE
   sl.registerSingleton<AuthApiService>(AuthApiService(dio));
   sl.registerSingleton<BookingApiService>(BookingApiService(dio));
   sl.registerSingleton<TrackingApiService>(TrackingApiService(dio));
+  // END API SERVICE
 
-// Repository
+// REPOSITORY
   sl.registerSingleton<AuthRepository>(AuthRepositoryImpl(sl()));
   sl.registerSingleton<BookingRepository>(BookingRepositoryImpl(sl()));
   sl.registerSingleton<TrackingRepository>(TrackingRepositoryImpl(sl()));
+  // END REPOSITORY
 
-// Use Case
+// USE CASE
+  // ======================= Auth Use Case =======================
   sl.registerSingleton<AuthLoginUseCase>(AuthLoginUseCase(sl()));
   sl.registerSingleton<AuthLogoutUseCase>(AuthLogoutUseCase(sl()));
   sl.registerSingleton<AuthRegisterUseCase>(AuthRegisterUseCase(sl()));
+  // ====================== Booking Use Case =======================
   sl.registerSingleton<BookingGetAllUseCase>(BookingGetAllUseCase(sl()));
   sl.registerSingleton<BookingGetByIdUseCase>(BookingGetByIdUseCase(sl()));
   sl.registerSingleton<BookingGetTodayUseCase>(BookingGetTodayUseCase(sl()));
@@ -68,9 +73,14 @@ void initDependency() {
   sl.registerSingleton<BookingCreateUseCase>(BookingCreateUseCase(sl()));
   sl.registerSingleton<BookingCheckPriceUseCase>(
       BookingCheckPriceUseCase(sl()));
-  sl.registerSingleton<TrackingGetByIdUseCase>(TrackingGetByIdUseCase(sl()));
+// ===================== Driver Use Case ======================
 
-// Provider
+  sl.registerSingleton<DriverGetStatusUseCase>(DriverGetStatusUseCase(sl()));
+// ===================== Tracking Use Case ======================
+  sl.registerSingleton<TrackingGetByIdUseCase>(TrackingGetByIdUseCase(sl()));
+// END USE CASE
+
+// PROVIDER
   sl.registerFactoryParam<LoginNotifier, void, void>(
     (param1, param2) => LoginNotifier(sl()),
   );
@@ -96,10 +106,11 @@ void initDependency() {
   );
 
   sl.registerFactoryParam<DHomeNotifier, void, void>(
-    (param1, param2) => DHomeNotifier(sl()),
+    (param1, param2) => DHomeNotifier(sl(), sl()),
   );
 
   sl.registerFactoryParam<ConfirmOrderNotifier, void, void>(
     (param1, param2) => ConfirmOrderNotifier(),
   );
+//END PROVIDER
 }
