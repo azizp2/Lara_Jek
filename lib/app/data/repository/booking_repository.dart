@@ -32,7 +32,7 @@ class BookingRepositoryImpl extends BookingRepository {
   }
 
   @override
-  Future<DataState<BookingEntity>> create(BookingCreateParamEntity param) {
+  Future<DataState<int>> create(BookingCreateParamEntity param) {
     return handleResponse(() => _bookingApiService.create(body: param.toJson()),
         (json) async {
       return json['booking']['id'];
@@ -40,7 +40,7 @@ class BookingRepositoryImpl extends BookingRepository {
   }
 
   @override
-  Future<DataState<BookingEntity>> accept(int id) {
+  Future<DataState<int>> accept(int id) {
     return handleResponse(() => _bookingApiService.accept(id: id),
         (json) async {
       return json['id'];
@@ -65,7 +65,7 @@ class BookingRepositoryImpl extends BookingRepository {
   }
 
   @override
-  Future<DataState<double>> checkPrice(double param) {
+  Future<DataState<int>> checkPrice(double param) {
     return handleResponse(
         () => _bookingApiService.checkPrice(body: {'distance': param}),
         (data) async {

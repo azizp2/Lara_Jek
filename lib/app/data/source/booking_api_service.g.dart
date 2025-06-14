@@ -14,7 +14,7 @@ class _BookingApiService implements BookingApiService {
     this.baseUrl,
     this.errorLogger,
   }) {
-    baseUrl ??= 'http://192.168.29.108:8000/';
+    baseUrl ??= 'http://172.20.10.5:8000/';
   }
 
   final Dio _dio;

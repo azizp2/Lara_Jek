@@ -168,7 +168,7 @@ class CHomeScreen extends AppWidget<CHomeNotifier, void, void> {
                               ?.copyWith(
                                   color: GlobalHelper.getColorScheme(context)
                                       .onSurfaceVariant)),
-                      onTap: () => {},
+                      onTap: () => _onPressCreateOrder(context),
                     ),
                     const SizedBox(
                       height: 10,
@@ -184,7 +184,7 @@ class CHomeScreen extends AppWidget<CHomeNotifier, void, void> {
                               ?.copyWith(
                                   color: GlobalHelper.getColorScheme(context)
                                       .onSurfaceVariant)),
-                      onTap: () => {},
+                      onTap: () => _onPressCreateOrder(context),
                     )
                   ],
                 ))
@@ -347,9 +347,10 @@ class CHomeScreen extends AppWidget<CHomeNotifier, void, void> {
     );
   }
 
-  _onPressCreateOrder(BuildContext context) {
-    Navigator.push(
+  _onPressCreateOrder(BuildContext context) async {
+    await Navigator.push(
         context, MaterialPageRoute(builder: (context) => CreateOrderScreen()));
+    notifier.init();
   }
 
   _onPressAllHistory(BuildContext context) {

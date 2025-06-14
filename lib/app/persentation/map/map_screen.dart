@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lara_jek/app/domain/entity/location.dart';
 import 'package:location_picker_flutter_map/location_picker_flutter_map.dart';
 
 class MapScreen extends StatelessWidget {
@@ -28,7 +29,13 @@ class MapScreen extends StatelessWidget {
           searchBarBackgroundColor: Colors.white,
           mapLanguage: 'id',
           selectLocationButtonText: 'Pilih Lokasi',
-          onPicked: (onPicked) => {}),
+          onPicked: (pickedData) {
+            final result = LocationEntity(
+                address: pickedData.address,
+                latitude: pickedData.latLong.latitude,
+                longitude: pickedData.latLong.longitude);
+            Navigator.pop(context, result);
+          }),
     );
   }
 }

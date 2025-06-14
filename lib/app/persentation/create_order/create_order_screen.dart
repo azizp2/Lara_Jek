@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_osm_plugin/flutter_osm_plugin.dart';
+import 'package:lara_jek/app/domain/entity/location.dart';
 import 'package:lara_jek/app/persentation/create_order/create_order_notifier.dart';
+import 'package:lara_jek/app/persentation/detail_order/detail_order_screen.dart';
 import 'package:lara_jek/app/persentation/map/map_screen.dart';
 import 'package:lara_jek/core/helper/global_helper.dart';
+import 'package:lara_jek/core/helper/number_helper.dart';
 import 'package:lara_jek/core/widget/app_widget.dart';
 
 // ignore: must_be_immutable
@@ -44,6 +47,17 @@ class CreateOrderScreen extends AppWidget<CreateOrderNotifier, void, void> {
         _footerLayout(context)
       ],
     );
+  }
+
+  @override
+  checkVariabelAfterUi(BuildContext context) {
+    if (notifier.isSuccessId == 1) {
+      Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(
+              builder: (context) =>
+                  DetailOrderScreen(param1: notifier.isSuccessId)));
+    }
   }
 
   _routeLayout(BuildContext context) {
@@ -111,7 +125,9 @@ class CreateOrderScreen extends AppWidget<CreateOrderNotifier, void, void> {
                                                 .onSurfaceVariant),
                                   ),
                                   Text(
-                                    'Lokasi aifias09fdkasofjnas faisdf jadsiofjasjfiaosjfisaojf aoifjoia faoisjf oiasj fiasjoija dsifjosafj oisajfisaojf iaojfiasjfisadjfijas fiojsafoajfiaj foiasjfiosjdfo ia',
+                                    notifier?.locationOrigin?.address ??
+                                        'Pilih Lokasi Jemput',
+                                    // 'Lokasi aifias09fdkasofjnas faisdf jadsiofjasjfiaosjfisaojf aoifjoia faoisjf oiasj fiasjoija dsifjosafj oisajfisaojf iaojfiasjfisadjfijas fiojsafoajfiaj foiasjfiosjdfo ia',
                                     style: GlobalHelper.getTextTheme(context,
                                             appTextStyle:
                                                 AppTextStyle.BODY_SMALL)
@@ -129,9 +145,9 @@ class CreateOrderScreen extends AppWidget<CreateOrderNotifier, void, void> {
                             const SizedBox(
                               width: 10,
                             ),
-                            IconButton(
-                                onPressed: () => _onPressOgiginMap(context),
-                                icon: const Icon(Icons.map))
+                            IconButton.filledTonal(
+                                onPressed: () => _onPressOriginMap(context),
+                                icon: Icon(Icons.map))
                           ],
                         ),
                       ),
@@ -154,7 +170,10 @@ class CreateOrderScreen extends AppWidget<CreateOrderNotifier, void, void> {
                                                 .onSurfaceVariant),
                                   ),
                                   Text(
-                                    'Lokasi aifias09fdkasofjnas faisdf jadsiofjasjfiaosjfisaojf aoifjoia faoisjf oiasj fiasjoija dsifjosafj oisajfisaojf iaojfiasjfisadjfijas fiojsafoajfiaj foiasjfiosjdfo ia',
+                                    notifier?.locationDestination?.address ??
+                                        'Pilih Lokasi Tujuan ',
+
+                                    // 'Lokasi aifias09fdkasofjnas faisdf jadsiofjasjfiaosjfisaojf aoifjoia faoisjf oiasj fiasjoija dsifjosafj oisajfisaojf iaojfiasjfisadjfijas fiojsafoajfiaj foiasjfiosjdfo ia',
                                     style: GlobalHelper.getTextTheme(context,
                                             appTextStyle:
                                                 AppTextStyle.BODY_SMALL)
@@ -172,9 +191,10 @@ class CreateOrderScreen extends AppWidget<CreateOrderNotifier, void, void> {
                             const SizedBox(
                               width: 10,
                             ),
-                            IconButton(
-                                onPressed: () => {},
-                                icon: const Icon(Icons.map))
+                            IconButton.filledTonal(
+                                onPressed: () =>
+                                    _onPressDestinationMap(context),
+                                icon: Icon(Icons.map))
                           ],
                         ),
                       )
@@ -235,20 +255,27 @@ class CreateOrderScreen extends AppWidget<CreateOrderNotifier, void, void> {
             Row(
               children: [
                 Expanded(
+                    child: _itemSummaryLayout(context, Icons.route, 'Jarak',
+                        '${notifier.distance ?? '-'} KM')),
+                const SizedBox(
+                  width: 20,
+                ),
+                Expanded(
                     child: _itemSummaryLayout(
-                        context, Icons.route, 'Jarak', '4 KM')),
+                        context,
+                        Icons.timer_outlined,
+                        'Estimasi Waktu',
+                        '${(notifier.timeEstimate != null) ? Duration(seconds: notifier.timeEstimate!.round()).inMinutes : '-'} Menit')),
                 const SizedBox(
                   width: 20,
                 ),
                 Expanded(
-                    child: _itemSummaryLayout(context, Icons.timer_outlined,
-                        'Estimasi Waktu', '10 Menit')),
-                const SizedBox(
-                  width: 20,
-                ),
-                Expanded(
-                    child: _itemSummaryLayout(context, Icons.payment_outlined,
-                        'Biaya', 'Rp. 40.000')),
+                    child: _itemSummaryLayout(
+                        context,
+                        Icons.payment_outlined,
+                        'Biaya',
+                        NumberHelper.formatIdr(
+                            notifier.price?.toDouble() ?? 0.0))),
               ],
             )
           ],
@@ -297,12 +324,30 @@ class CreateOrderScreen extends AppWidget<CreateOrderNotifier, void, void> {
   _footerLayout(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.only(left: 10, right: 10),
-      child: FilledButton(onPressed: () => {}, child: Text('Pesan Seakrang')),
+      child: FilledButton(
+          onPressed: () => _onPressCreate(), child: Text('Pesan Seakrang')),
     );
   }
 
-  _onPressOgiginMap(BuildContext context) {
-    Navigator.push(
-        context, MaterialPageRoute(builder: (context) => const MapScreen()));
+  _onPressOriginMap(BuildContext context) async {
+    LocationEntity? location = await Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => const MapScreen(),
+        ));
+    if (location != null) notifier.locationOrigin = location;
+  }
+
+  _onPressDestinationMap(BuildContext context) async {
+    LocationEntity? location = await Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => MapScreen(),
+        ));
+    if (location != null) notifier.locationDestination = location;
+  }
+
+  _onPressCreate() {
+    notifier.create();
   }
 }

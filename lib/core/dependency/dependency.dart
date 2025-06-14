@@ -21,6 +21,8 @@ import 'package:lara_jek/app/use_case/auth/auth_login.dart';
 import 'package:lara_jek/app/use_case/auth/auth_logout.dart';
 import 'package:lara_jek/app/use_case/auth/auth_register.dart';
 import 'package:lara_jek/app/use_case/booking/booking_cancel.dart';
+import 'package:lara_jek/app/use_case/booking/booking_check_price.dart';
+import 'package:lara_jek/app/use_case/booking/booking_create.dart';
 import 'package:lara_jek/app/use_case/booking/booking_get_all.dart';
 import 'package:lara_jek/app/use_case/booking/booking_get_by_id.dart';
 import 'package:lara_jek/app/use_case/booking/booking_get_today.dart';
@@ -63,6 +65,9 @@ void initDependency() {
   sl.registerSingleton<BookingUpdateStatusUseCase>(
       BookingUpdateStatusUseCase(sl()));
   sl.registerSingleton<BookingCancelUseCase>(BookingCancelUseCase(sl()));
+  sl.registerSingleton<BookingCreateUseCase>(BookingCreateUseCase(sl()));
+  sl.registerSingleton<BookingCheckPriceUseCase>(
+      BookingCheckPriceUseCase(sl()));
   sl.registerSingleton<TrackingGetByIdUseCase>(TrackingGetByIdUseCase(sl()));
 
 // Provider
@@ -79,7 +84,7 @@ void initDependency() {
   );
 
   sl.registerFactoryParam<CreateOrderNotifier, void, void>(
-    (param1, param2) => CreateOrderNotifier(),
+    (param1, param2) => CreateOrderNotifier(sl(), sl()),
   );
 
   sl.registerFactoryParam<HistoryNotifier, void, void>(

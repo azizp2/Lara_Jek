@@ -1157,7 +1157,7 @@ class _$BookingStatusParamEntityImpl implements BookingStatusParamEntity {
             @JsonKey(name: 'address_origin') String addressOrigin,
             @JsonKey(name: 'latitude_destination') double latitudeDestination,
             @JsonKey(name: 'longitude_destination') double longitudeDestination,
-            @JsonKey(name: 'address_destination') String addressDestination,
+            @JsonKey(name: '`address_destinationq `') String addressDestination,
             double distance,
             @JsonKey(name: 'time_estimate') int timeEstimate,
             double price,
