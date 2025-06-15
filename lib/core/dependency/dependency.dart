@@ -31,9 +31,12 @@ import 'package:lara_jek/app/use_case/booking/booking_get_all.dart';
 import 'package:lara_jek/app/use_case/booking/booking_get_by_id.dart';
 import 'package:lara_jek/app/use_case/booking/booking_get_today.dart';
 import 'package:lara_jek/app/use_case/booking/booking_update_status.dart';
+import 'package:lara_jek/app/use_case/driver/driver_get_interval.dart';
 import 'package:lara_jek/app/use_case/driver/driver_get_stats.dart';
 import 'package:lara_jek/app/use_case/driver/driver_get_status.dart';
-import 'package:lara_jek/app/use_case/booking/tracking_get_by_id.dart';
+import 'package:lara_jek/app/use_case/driver/driver_set_active.dart';
+import 'package:lara_jek/app/use_case/tracking/tracking_get_by_id.dart';
+import 'package:lara_jek/app/use_case/tracking/tracking_send.dart';
 import 'package:lara_jek/core/network/app_interceptor.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 
@@ -81,10 +84,14 @@ void initDependency() {
   sl.registerSingleton<BookingCheckPriceUseCase>(
       BookingCheckPriceUseCase(sl()));
 // ===================== Driver Use Case ======================
+  sl.registerSingleton<DriverGetIntervalUseCase>(
+      DriverGetIntervalUseCase(sl()));
   sl.registerSingleton<DriverGetStatusUseCase>(DriverGetStatusUseCase(sl()));
   sl.registerSingleton<DriverGetStatsUseCase>(DriverGetStatsUseCase(sl()));
+  sl.registerSingleton<DriverSetActiveUseCase>(DriverSetActiveUseCase(sl()));
 // ===================== Tracking Use Case ======================
   sl.registerSingleton<TrackingGetByIdUseCase>(TrackingGetByIdUseCase(sl()));
+  sl.registerSingleton<TrackingSendUseCase>(TrackingSendUseCase(sl()));
 // END USE CASE
 
 // PROVIDER
@@ -113,7 +120,7 @@ void initDependency() {
   );
 
   sl.registerFactoryParam<DHomeNotifier, void, void>(
-    (param1, param2) => DHomeNotifier(sl(), sl(), sl()),
+    (param1, param2) => DHomeNotifier(sl(), sl(), sl(), sl(), sl()),
   );
 
   sl.registerFactoryParam<ConfirmOrderNotifier, void, void>(

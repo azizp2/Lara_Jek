@@ -4,7 +4,7 @@ import 'package:lara_jek/app/domain/entity/booking.dart';
 import 'package:lara_jek/app/use_case/booking/booking_cancel.dart';
 import 'package:lara_jek/app/use_case/booking/booking_get_by_id.dart';
 import 'package:lara_jek/app/use_case/booking/booking_update_status.dart';
-import 'package:lara_jek/app/use_case/booking/tracking_get_by_id.dart';
+import 'package:lara_jek/app/use_case/tracking/tracking_get_by_id.dart';
 import 'package:lara_jek/core/constant/constant.dart';
 import 'package:lara_jek/core/helper/shared_preferences_helper.dart';
 import 'package:lara_jek/core/provider/app_provider.dart';

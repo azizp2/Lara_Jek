@@ -1,4 +1,4 @@
-const String BASE_URL = 'http://172.20.10.5:8000/';
+const String BASE_URL = 'http://192.168.189.108:8000/';
 const String BOOKING_PATH_URL = '/api/booking';
 const String DRIVER_PATH_URL = '/api/driver';
 
@@ -20,3 +20,10 @@ const String STATUS_DRIVER_DELIVER = 'driver_deliver';
 const String STATUS_ARRIVED = 'arrived';
 const String STATUS_PAID = 'paid';
 const String STATUS_CANCELLED = 'cancelled';
+
+// ignore: constant_identifier_names
+const String CHANNEL_ID = 'tracking-location-background-service-id';
+// ignore: constant_identifier_names
+const String CHANNEL_NAME = 'tracking-location-background-service';
+// ignore: constant_identifier_names
+const int NOTIF_ID = 99999;
