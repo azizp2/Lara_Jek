@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:lara_jek/app/persentation/confirm_order/confirm_order_notifier.dart';
+import 'package:lara_jek/app/persentation/detail_order/detail_order_screen.dart';
 import 'package:lara_jek/core/helper/global_helper.dart';
+import 'package:lara_jek/core/helper/number_helper.dart';
 import 'package:lara_jek/core/widget/app_widget.dart';
 
 // ignore: must_be_immutable
-class ConfirmOrderScreen extends AppWidget<ConfirmOrderNotifier, void, void> {
-  ConfirmOrderScreen({super.key});
+class ConfirmOrderScreen extends AppWidget<ConfirmOrderNotifier, int, void> {
+  ConfirmOrderScreen({required super.param1});
 
   @override
   AppBar? appBarBuild(BuildContext context) {
@@ -41,6 +43,20 @@ class ConfirmOrderScreen extends AppWidget<ConfirmOrderNotifier, void, void> {
             )),
       ],
     ));
+  }
+
+  @override
+  checkVariabelAfterUi(BuildContext context) {
+    if (notifier.idSuccess > 0) {
+      Navigator.pushAndRemoveUntil(
+        context,
+        MaterialPageRoute(
+            builder: (context) => DetailOrderScreen(
+                  param1: param1,
+                )),
+        (route) => false,
+      );
+    }
   }
 
   _headerLayout(BuildContext context) {
@@ -85,7 +101,7 @@ class ConfirmOrderScreen extends AppWidget<ConfirmOrderNotifier, void, void> {
                           ?.copyWith(color: color.onPrimary),
                     ),
                     Text(
-                      'Rp. 56.000',
+                      NumberHelper.formatIdr(notifier.booking?.price ?? 0),
                       style: GlobalHelper.getTextTheme(context,
                               appTextStyle: AppTextStyle.HEADLINE_SMALL)
                           ?.copyWith(color: color.onPrimary),
@@ -117,7 +133,7 @@ class ConfirmOrderScreen extends AppWidget<ConfirmOrderNotifier, void, void> {
             ),
             Expanded(
                 child: Text(
-              'Nama Customer',
+              notifier.booking?.customer?.name ?? '',
               style: GlobalHelper.getTextTheme(context,
                       appTextStyle: AppTextStyle.TITLE_MEDIUM)
                   ?.copyWith(fontWeight: FontWeight.bold),
@@ -137,14 +153,17 @@ class ConfirmOrderScreen extends AppWidget<ConfirmOrderNotifier, void, void> {
             Row(
               children: [
                 Expanded(
-                    child: _itemSummaryLayout(
-                        context, Icons.route, 'Jarak', '4 KM')),
+                    child: _itemSummaryLayout(context, Icons.route, 'Jarak',
+                        '${notifier.booking?.distance} KM')),
                 const SizedBox(
                   width: 20,
                 ),
                 Expanded(
-                    child: _itemSummaryLayout(context, Icons.timer_outlined,
-                        'Estimasi Waktu', '10 Menit')),
+                    child: _itemSummaryLayout(
+                        context,
+                        Icons.timer_outlined,
+                        'Estimasi Waktu',
+                        '${Duration(seconds: notifier.booking?.timeEstimate ?? 0).inMinutes} Menit')),
               ],
             )
           ],
@@ -228,7 +247,7 @@ class ConfirmOrderScreen extends AppWidget<ConfirmOrderNotifier, void, void> {
                                   .onSurfaceVariant),
                     ),
                     Text(
-                      'Alamat',
+                      notifier.booking?.addressOrigin ?? '',
                       style: GlobalHelper.getTextTheme(context,
                               appTextStyle: AppTextStyle.BODY_LARGE)
                           ?.copyWith(fontWeight: FontWeight.bold),
@@ -262,7 +281,7 @@ class ConfirmOrderScreen extends AppWidget<ConfirmOrderNotifier, void, void> {
                                   .onSurfaceVariant),
                     ),
                     Text(
-                      'Alamat Tujuan',
+                      notifier.booking?.addressDestination ?? '',
                       style: GlobalHelper.getTextTheme(context,
                               appTextStyle: AppTextStyle.BODY_LARGE)
                           ?.copyWith(fontWeight: FontWeight.bold),
@@ -281,12 +300,17 @@ class ConfirmOrderScreen extends AppWidget<ConfirmOrderNotifier, void, void> {
     return Row(
       children: [
         Expanded(
-            child: OutlinedButton(onPressed: () => {}, child: Text('Tolak'))),
+            child: OutlinedButton(
+                onPressed: () {
+                  Navigator.of(context, rootNavigator: true).pop();
+                },
+                child: Text('Tolak'))),
         SizedBox(
           width: 20,
         ),
         Expanded(
-            child: FilledButton(onPressed: () => {}, child: Text('Terima'))),
+            child: FilledButton(
+                onPressed: () => notifier.accept(), child: Text('Terima'))),
       ],
     );
   }

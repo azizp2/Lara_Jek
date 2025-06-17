@@ -147,7 +147,7 @@ class _BookingApiService implements BookingApiService {
     )
         .compose(
           _dio.options,
-          '/api/driver/booking/${id}/accet',
+          '/api/driver/booking/${id}/accept',
           queryParameters: queryParameters,
           data: _data,
         )

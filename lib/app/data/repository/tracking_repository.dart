@@ -17,10 +17,9 @@ class TrackingRepositoryImpl extends TrackingRepository {
         (json) async {
       final availableBookings = json['available_bookings'];
       if (availableBookings != null) {
-        return List<BookingNotifEntity>.from(availableBookings.map((item) => {
-              BookingNotifEntity(
-                  id: item['id'], text: 'Dari ${item['pickup_address']}')
-            }));
+        return List<BookingNotifEntity>.from(availableBookings.map((item) =>
+            BookingNotifEntity(
+                id: item['id'], text: 'Dari ${item['address_origin']}')));
       } else {
         return [];
       }

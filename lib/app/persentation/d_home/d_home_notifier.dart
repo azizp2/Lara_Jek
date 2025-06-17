@@ -56,7 +56,9 @@ class DHomeNotifier extends AppProvider {
           notificationAppLaunchDetails?.notificationResponse?.payload ?? '';
       if (payload.isNotEmpty) {
         navigatorKey.currentState?.pushReplacement(MaterialPageRoute(
-          builder: (context) => ConfirmOrderScreen(),
+          builder: (context) => ConfirmOrderScreen(
+            param1: int.parse(payload),
+          ),
         ));
       }
     }

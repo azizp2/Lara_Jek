@@ -161,7 +161,9 @@ void onDidReceiveNotificationResponse(
   if (payload != null && payload.isNotEmpty) {
     final id = int.parse(payload);
     navigatorKey.currentState?.push(MaterialPageRoute(
-      builder: (context) => ConfirmOrderScreen(),
+      builder: (context) => ConfirmOrderScreen(
+        param1: id,
+      ),
     ));
   }
 }

@@ -1,6 +1,5 @@
 import 'package:get_it/get_it.dart';
 import 'package:dio/dio.dart';
-import 'package:lara_jek/app/data/model/user.dart';
 import 'package:lara_jek/app/data/repository/auth_repository.dart';
 import 'package:lara_jek/app/data/repository/booking_repository.dart';
 import 'package:lara_jek/app/data/repository/driver_repository.dart';
@@ -24,6 +23,7 @@ import 'package:lara_jek/app/persentation/register/register_notifier.dart';
 import 'package:lara_jek/app/use_case/auth/auth_login.dart';
 import 'package:lara_jek/app/use_case/auth/auth_logout.dart';
 import 'package:lara_jek/app/use_case/auth/auth_register.dart';
+import 'package:lara_jek/app/use_case/booking/booking_accept.dart';
 import 'package:lara_jek/app/use_case/booking/booking_cancel.dart';
 import 'package:lara_jek/app/use_case/booking/booking_check_price.dart';
 import 'package:lara_jek/app/use_case/booking/booking_create.dart';
@@ -68,30 +68,28 @@ void initDependency() {
   sl.registerSingleton<TrackingRepository>(TrackingRepositoryImpl(sl()));
   // END REPOSITORY
 
-// USE CASE
-  // ======================= Auth Use Case =======================
+// USE CASE//use case
+  sl.registerSingleton<AuthRegisterUseCase>(AuthRegisterUseCase(sl()));
   sl.registerSingleton<AuthLoginUseCase>(AuthLoginUseCase(sl()));
   sl.registerSingleton<AuthLogoutUseCase>(AuthLogoutUseCase(sl()));
-  sl.registerSingleton<AuthRegisterUseCase>(AuthRegisterUseCase(sl()));
-  // ====================== Booking Use Case =======================
+  sl.registerSingleton<BookingGetTodayUseCase>(BookingGetTodayUseCase(sl()));
   sl.registerSingleton<BookingGetAllUseCase>(BookingGetAllUseCase(sl()));
   sl.registerSingleton<BookingGetByIdUseCase>(BookingGetByIdUseCase(sl()));
-  sl.registerSingleton<BookingGetTodayUseCase>(BookingGetTodayUseCase(sl()));
   sl.registerSingleton<BookingUpdateStatusUseCase>(
       BookingUpdateStatusUseCase(sl()));
   sl.registerSingleton<BookingCancelUseCase>(BookingCancelUseCase(sl()));
   sl.registerSingleton<BookingCreateUseCase>(BookingCreateUseCase(sl()));
   sl.registerSingleton<BookingCheckPriceUseCase>(
       BookingCheckPriceUseCase(sl()));
-// ===================== Driver Use Case ======================
-  sl.registerSingleton<DriverGetIntervalUseCase>(
-      DriverGetIntervalUseCase(sl()));
-  sl.registerSingleton<DriverGetStatusUseCase>(DriverGetStatusUseCase(sl()));
-  sl.registerSingleton<DriverGetStatsUseCase>(DriverGetStatsUseCase(sl()));
-  sl.registerSingleton<DriverSetActiveUseCase>(DriverSetActiveUseCase(sl()));
-// ===================== Tracking Use Case ======================
+  sl.registerSingleton<BookingAcceptUseCase>(BookingAcceptUseCase(sl()));
   sl.registerSingleton<TrackingGetByIdUseCase>(TrackingGetByIdUseCase(sl()));
   sl.registerSingleton<TrackingSendUseCase>(TrackingSendUseCase(sl()));
+  sl.registerSingleton<DriverGetStatusUseCase>(DriverGetStatusUseCase(sl()));
+  sl.registerSingleton<DriverGetStatsUseCase>(DriverGetStatsUseCase(sl()));
+  sl.registerSingleton<DriverGetIntervalUseCase>(
+      DriverGetIntervalUseCase(sl()));
+  sl.registerSingleton<DriverSetActiveUseCase>(DriverSetActiveUseCase(sl()));
+
 // END USE CASE
 
 // PROVIDER
@@ -123,8 +121,8 @@ void initDependency() {
     (param1, param2) => DHomeNotifier(sl(), sl(), sl(), sl(), sl()),
   );
 
-  sl.registerFactoryParam<ConfirmOrderNotifier, void, void>(
-    (param1, param2) => ConfirmOrderNotifier(),
+  sl.registerFactoryParam<ConfirmOrderNotifier, int, void>(
+    (param1, param2) => ConfirmOrderNotifier(param1, sl(), sl()),
   );
 //END PROVIDER
 }

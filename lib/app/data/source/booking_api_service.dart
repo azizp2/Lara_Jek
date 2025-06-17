@@ -22,7 +22,7 @@ abstract class BookingApiService {
   Future<HttpResponse<DataState>> create(
       {@Body() required Map<String, dynamic> body});
 
-  @POST('/api/driver/booking/{id}/accet')
+  @POST('/api/driver/booking/{id}/accept')
   Future<HttpResponse<DataState>> accept({@Path('id') required int id});
 
   @PUT('/api/driver/booking/{id}/status')
