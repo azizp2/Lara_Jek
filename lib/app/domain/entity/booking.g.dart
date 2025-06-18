@@ -19,6 +19,8 @@ _$BookingEntityImpl _$$BookingEntityImplFromJson(Map<String, dynamic> json) =>
       timeEstimate: (json['time_estimate'] as num).toInt(),
       price: (json['price'] as num).toDouble(),
       status: json['status'] as String,
+      rating: (json['rating'] as num?)?.toInt(),
+      comment: json['comment'] as String?,
       customer:
           UserCustomerEntity.fromJson(json['customer'] as Map<String, dynamic>),
       driver: json['driver'] == null
@@ -41,6 +43,8 @@ Map<String, dynamic> _$$BookingEntityImplToJson(_$BookingEntityImpl instance) =>
       'time_estimate': instance.timeEstimate,
       'price': instance.price,
       'status': instance.status,
+      'rating': instance.rating,
+      'comment': instance.comment,
       'customer': instance.customer,
       'driver': instance.driver,
       'created_at': instance.createdAt,

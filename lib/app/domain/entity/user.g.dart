@@ -39,6 +39,7 @@ _$UserDriverEntityImpl _$$UserDriverEntityImplFromJson(
       phone: json['whatsapp'] as String,
       isActive: json['is_active'] as bool,
       VehicleNumber: json['vehicle_number'] as String,
+      avgRating: (json['avg_rating'] as num).toDouble(),
       $type: json['runtimeType'] as String?,
     );
 
@@ -53,5 +54,6 @@ Map<String, dynamic> _$$UserDriverEntityImplToJson(
       'whatsapp': instance.phone,
       'is_active': instance.isActive,
       'vehicle_number': instance.VehicleNumber,
+      'avg_rating': instance.avgRating,
       'runtimeType': instance.$type,
     };

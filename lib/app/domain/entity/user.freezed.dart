@@ -48,7 +48,8 @@ mixin _$User {
             @JsonKey(name: 'photo_url') String photoUrl,
             @JsonKey(name: 'whatsapp') String phone,
             @JsonKey(name: 'is_active') bool isActive,
-            @JsonKey(name: 'vehicle_number') String VehicleNumber)
+            @JsonKey(name: 'vehicle_number') String VehicleNumber,
+            @JsonKey(name: 'avg_rating') double avgRating)
         driverEntity,
   }) =>
       throw _privateConstructorUsedError;
@@ -65,7 +66,8 @@ mixin _$User {
             @JsonKey(name: 'photo_url') String photoUrl,
             @JsonKey(name: 'whatsapp') String phone,
             @JsonKey(name: 'is_active') bool isActive,
-            @JsonKey(name: 'vehicle_number') String VehicleNumber)?
+            @JsonKey(name: 'vehicle_number') String VehicleNumber,
+            @JsonKey(name: 'avg_rating') double avgRating)?
         driverEntity,
   }) =>
       throw _privateConstructorUsedError;
@@ -82,7 +84,8 @@ mixin _$User {
             @JsonKey(name: 'photo_url') String photoUrl,
             @JsonKey(name: 'whatsapp') String phone,
             @JsonKey(name: 'is_active') bool isActive,
-            @JsonKey(name: 'vehicle_number') String VehicleNumber)?
+            @JsonKey(name: 'vehicle_number') String VehicleNumber,
+            @JsonKey(name: 'avg_rating') double avgRating)?
         driverEntity,
     required TResult orElse(),
   }) =>
@@ -309,7 +312,8 @@ class _$UserCustomerEntityImpl implements UserCustomerEntity {
             @JsonKey(name: 'photo_url') String photoUrl,
             @JsonKey(name: 'whatsapp') String phone,
             @JsonKey(name: 'is_active') bool isActive,
-            @JsonKey(name: 'vehicle_number') String VehicleNumber)
+            @JsonKey(name: 'vehicle_number') String VehicleNumber,
+            @JsonKey(name: 'avg_rating') double avgRating)
         driverEntity,
   }) {
     return customerEntity(id, name, email, role, phone);
@@ -329,7 +333,8 @@ class _$UserCustomerEntityImpl implements UserCustomerEntity {
             @JsonKey(name: 'photo_url') String photoUrl,
             @JsonKey(name: 'whatsapp') String phone,
             @JsonKey(name: 'is_active') bool isActive,
-            @JsonKey(name: 'vehicle_number') String VehicleNumber)?
+            @JsonKey(name: 'vehicle_number') String VehicleNumber,
+            @JsonKey(name: 'avg_rating') double avgRating)?
         driverEntity,
   }) {
     return customerEntity?.call(id, name, email, role, phone);
@@ -349,7 +354,8 @@ class _$UserCustomerEntityImpl implements UserCustomerEntity {
             @JsonKey(name: 'photo_url') String photoUrl,
             @JsonKey(name: 'whatsapp') String phone,
             @JsonKey(name: 'is_active') bool isActive,
-            @JsonKey(name: 'vehicle_number') String VehicleNumber)?
+            @JsonKey(name: 'vehicle_number') String VehicleNumber,
+            @JsonKey(name: 'avg_rating') double avgRating)?
         driverEntity,
     required TResult orElse(),
   }) {
@@ -446,7 +452,8 @@ abstract class _$$UserDriverEntityImplCopyWith<$Res>
       @JsonKey(name: 'photo_url') String photoUrl,
       @JsonKey(name: 'whatsapp') String phone,
       @JsonKey(name: 'is_active') bool isActive,
-      @JsonKey(name: 'vehicle_number') String VehicleNumber});
+      @JsonKey(name: 'vehicle_number') String VehicleNumber,
+      @JsonKey(name: 'avg_rating') double avgRating});
 }
 
 /// @nodoc
@@ -470,6 +477,7 @@ class __$$UserDriverEntityImplCopyWithImpl<$Res>
     Object? phone = null,
     Object? isActive = null,
     Object? VehicleNumber = null,
+    Object? avgRating = null,
   }) {
     return _then(_$UserDriverEntityImpl(
       id: null == id
@@ -504,6 +512,10 @@ class __$$UserDriverEntityImplCopyWithImpl<$Res>
           ? _value.VehicleNumber
           : VehicleNumber // ignore: cast_nullable_to_non_nullable
               as String,
+      avgRating: null == avgRating
+          ? _value.avgRating
+          : avgRating // ignore: cast_nullable_to_non_nullable
+              as double,
     ));
   }
 }
@@ -520,6 +532,7 @@ class _$UserDriverEntityImpl implements UserDriverEntity {
       @JsonKey(name: 'whatsapp') required this.phone,
       @JsonKey(name: 'is_active') required this.isActive,
       @JsonKey(name: 'vehicle_number') required this.VehicleNumber,
+      @JsonKey(name: 'avg_rating') required this.avgRating,
       final String? $type})
       : $type = $type ?? 'driverEntity';
 
@@ -546,13 +559,16 @@ class _$UserDriverEntityImpl implements UserDriverEntity {
   @override
   @JsonKey(name: 'vehicle_number')
   final String VehicleNumber;
+  @override
+  @JsonKey(name: 'avg_rating')
+  final double avgRating;
 
   @JsonKey(name: 'runtimeType')
   final String $type;
 
   @override
   String toString() {
-    return 'User.driverEntity(id: $id, name: $name, email: $email, role: $role, photoUrl: $photoUrl, phone: $phone, isActive: $isActive, VehicleNumber: $VehicleNumber)';
+    return 'User.driverEntity(id: $id, name: $name, email: $email, role: $role, photoUrl: $photoUrl, phone: $phone, isActive: $isActive, VehicleNumber: $VehicleNumber, avgRating: $avgRating)';
   }
 
   @override
@@ -570,13 +586,15 @@ class _$UserDriverEntityImpl implements UserDriverEntity {
             (identical(other.isActive, isActive) ||
                 other.isActive == isActive) &&
             (identical(other.VehicleNumber, VehicleNumber) ||
-                other.VehicleNumber == VehicleNumber));
+                other.VehicleNumber == VehicleNumber) &&
+            (identical(other.avgRating, avgRating) ||
+                other.avgRating == avgRating));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, id, name, email, role, photoUrl,
-      phone, isActive, VehicleNumber);
+      phone, isActive, VehicleNumber, avgRating);
 
   /// Create a copy of User
   /// with the given fields replaced by the non-null parameter values.
@@ -601,11 +619,12 @@ class _$UserDriverEntityImpl implements UserDriverEntity {
             @JsonKey(name: 'photo_url') String photoUrl,
             @JsonKey(name: 'whatsapp') String phone,
             @JsonKey(name: 'is_active') bool isActive,
-            @JsonKey(name: 'vehicle_number') String VehicleNumber)
+            @JsonKey(name: 'vehicle_number') String VehicleNumber,
+            @JsonKey(name: 'avg_rating') double avgRating)
         driverEntity,
   }) {
-    return driverEntity(
-        id, name, email, role, photoUrl, phone, isActive, VehicleNumber);
+    return driverEntity(id, name, email, role, photoUrl, phone, isActive,
+        VehicleNumber, avgRating);
   }
 
   @override
@@ -622,11 +641,12 @@ class _$UserDriverEntityImpl implements UserDriverEntity {
             @JsonKey(name: 'photo_url') String photoUrl,
             @JsonKey(name: 'whatsapp') String phone,
             @JsonKey(name: 'is_active') bool isActive,
-            @JsonKey(name: 'vehicle_number') String VehicleNumber)?
+            @JsonKey(name: 'vehicle_number') String VehicleNumber,
+            @JsonKey(name: 'avg_rating') double avgRating)?
         driverEntity,
   }) {
-    return driverEntity?.call(
-        id, name, email, role, photoUrl, phone, isActive, VehicleNumber);
+    return driverEntity?.call(id, name, email, role, photoUrl, phone, isActive,
+        VehicleNumber, avgRating);
   }
 
   @override
@@ -643,13 +663,14 @@ class _$UserDriverEntityImpl implements UserDriverEntity {
             @JsonKey(name: 'photo_url') String photoUrl,
             @JsonKey(name: 'whatsapp') String phone,
             @JsonKey(name: 'is_active') bool isActive,
-            @JsonKey(name: 'vehicle_number') String VehicleNumber)?
+            @JsonKey(name: 'vehicle_number') String VehicleNumber,
+            @JsonKey(name: 'avg_rating') double avgRating)?
         driverEntity,
     required TResult orElse(),
   }) {
     if (driverEntity != null) {
-      return driverEntity(
-          id, name, email, role, photoUrl, phone, isActive, VehicleNumber);
+      return driverEntity(id, name, email, role, photoUrl, phone, isActive,
+          VehicleNumber, avgRating);
     }
     return orElse();
   }
@@ -695,15 +716,16 @@ class _$UserDriverEntityImpl implements UserDriverEntity {
 
 abstract class UserDriverEntity implements User {
   factory UserDriverEntity(
-      {required final int id,
-      required final String name,
-      required final String email,
-      required final String role,
-      @JsonKey(name: 'photo_url') required final String photoUrl,
-      @JsonKey(name: 'whatsapp') required final String phone,
-      @JsonKey(name: 'is_active') required final bool isActive,
-      @JsonKey(name: 'vehicle_number')
-      required final String VehicleNumber}) = _$UserDriverEntityImpl;
+          {required final int id,
+          required final String name,
+          required final String email,
+          required final String role,
+          @JsonKey(name: 'photo_url') required final String photoUrl,
+          @JsonKey(name: 'whatsapp') required final String phone,
+          @JsonKey(name: 'is_active') required final bool isActive,
+          @JsonKey(name: 'vehicle_number') required final String VehicleNumber,
+          @JsonKey(name: 'avg_rating') required final double avgRating}) =
+      _$UserDriverEntityImpl;
 
   factory UserDriverEntity.fromJson(Map<String, dynamic> json) =
       _$UserDriverEntityImpl.fromJson;
@@ -725,6 +747,8 @@ abstract class UserDriverEntity implements User {
   bool get isActive;
   @JsonKey(name: 'vehicle_number')
   String get VehicleNumber;
+  @JsonKey(name: 'avg_rating')
+  double get avgRating;
 
   /// Create a copy of User
   /// with the given fields replaced by the non-null parameter values.

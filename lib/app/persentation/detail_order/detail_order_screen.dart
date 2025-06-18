@@ -1,5 +1,7 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_osm_plugin/flutter_osm_plugin.dart';
+import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:lara_jek/app/persentation/detail_order/detail_order_notifier.dart';
 import 'package:lara_jek/app/persentation/rating/rating_screen.dart';
 import 'package:lara_jek/core/constant/constant.dart';
@@ -215,10 +217,14 @@ class DetailOrderScreen extends AppWidget<DetailOrderNotifier, int, void> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
-              'Informasi Pengemudi',
-              style: GlobalHelper.getTextTheme(context,
-                  appTextStyle: AppTextStyle.TITLE_MEDIUM),
+            Column(
+              children: [
+                Text(
+                  'Informasi Pengemudi',
+                  style: GlobalHelper.getTextTheme(context,
+                      appTextStyle: AppTextStyle.TITLE_MEDIUM),
+                ),
+              ],
             ),
             SizedBox(
               height: 20,
@@ -242,16 +248,16 @@ class DetailOrderScreen extends AppWidget<DetailOrderNotifier, int, void> {
                       style: GlobalHelper.getTextTheme(context,
                           appTextStyle: AppTextStyle.TITLE_MEDIUM),
                     ),
-                    // RatingBarIndicator(
-                    //   rating: notifier.booking?.driver?.avgRating ?? 0,
-                    //   itemBuilder: (context, index) => Icon(
-                    //     Icons.star,
-                    //     color: Colors.amber,
-                    //   ),
-                    //   itemCount: 5,
-                    //   itemSize: 20.0,
-                    //   direction: Axis.horizontal,
-                    // ),
+                    RatingBarIndicator(
+                      rating: notifier.booking?.driver?.avgRating ?? 0,
+                      itemBuilder: (context, index) => Icon(
+                        Icons.star,
+                        color: Colors.amber,
+                      ),
+                      itemCount: 5,
+                      itemSize: 20.0,
+                      direction: Axis.horizontal,
+                    ),
                   ],
                 ))
               ],
@@ -394,12 +400,59 @@ class DetailOrderScreen extends AppWidget<DetailOrderNotifier, int, void> {
             minimumSize: Size(double.maxFinite, 48)),
       );
     } else if (notifier.role == ROLE_CUSTOMER &&
-        notifier.booking?.status == STATUS_PAID) {
+        notifier.booking?.status == STATUS_PAID &&
+        notifier.booking?.rating == null) {
       return FilledButton(
           onPressed: () => _onPressRating(context),
           child: Text('Berikan Rating'),
           style: ElevatedButton.styleFrom(
               minimumSize: Size(double.maxFinite, 48)));
+    } else if (notifier.booking?.rating != null) {
+      return Column(
+        children: [
+          RatingBarIndicator(
+            rating: notifier.booking?.rating?.toDouble() ?? 0,
+            itemBuilder: (context, index) => const Icon(
+              Icons.star,
+              color: Colors.amber,
+            ),
+            itemPadding: const EdgeInsets.symmetric(horizontal: 5),
+            itemCount: 5,
+            itemSize: 50.0,
+            direction: Axis.horizontal,
+          ),
+          const SizedBox(height: 16), // Added spacing between rating and card
+          SizedBox(
+            width: double.maxFinite,
+            child: Card(
+              margin: EdgeInsets.zero,
+              child: Padding(
+                padding: const EdgeInsets.all(20),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      'Komentar',
+                      style: GlobalHelper.getTextTheme(
+                        context,
+                        appTextStyle: AppTextStyle.TITLE_MEDIUM,
+                      )?.copyWith(fontWeight: FontWeight.bold),
+                    ),
+                    const SizedBox(height: 10),
+                    Text(
+                      notifier.booking?.comment ?? '-',
+                      style: GlobalHelper.getTextTheme(
+                        context,
+                        appTextStyle: AppTextStyle.TITLE_MEDIUM,
+                      )?.copyWith(fontWeight: FontWeight.normal),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ),
+        ],
+      );
     } else if (notifier.role == ROLE_DRIVER &&
         notifier.booking?.status != STATUS_PAID &&
         notifier.booking?.status != STATUS_CANCELLED) {

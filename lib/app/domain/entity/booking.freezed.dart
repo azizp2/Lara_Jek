@@ -49,6 +49,8 @@ mixin _$Booking {
             @JsonKey(name: 'time_estimate') int timeEstimate,
             double price,
             String status,
+            int? rating,
+            String? comment,
             UserCustomerEntity customer,
             UserDriverEntity? driver,
             @JsonKey(name: 'created_at') String createdAt)
@@ -84,6 +86,8 @@ mixin _$Booking {
             @JsonKey(name: 'time_estimate') int timeEstimate,
             double price,
             String status,
+            int? rating,
+            String? comment,
             UserCustomerEntity customer,
             UserDriverEntity? driver,
             @JsonKey(name: 'created_at') String createdAt)?
@@ -119,6 +123,8 @@ mixin _$Booking {
             @JsonKey(name: 'time_estimate') int timeEstimate,
             double price,
             String status,
+            int? rating,
+            String? comment,
             UserCustomerEntity customer,
             UserDriverEntity? driver,
             @JsonKey(name: 'created_at') String createdAt)?
@@ -212,6 +218,8 @@ abstract class _$$BookingEntityImplCopyWith<$Res> {
       @JsonKey(name: 'time_estimate') int timeEstimate,
       double price,
       String status,
+      int? rating,
+      String? comment,
       UserCustomerEntity customer,
       UserDriverEntity? driver,
       @JsonKey(name: 'created_at') String createdAt});
@@ -241,6 +249,8 @@ class __$$BookingEntityImplCopyWithImpl<$Res>
     Object? timeEstimate = null,
     Object? price = null,
     Object? status = null,
+    Object? rating = freezed,
+    Object? comment = freezed,
     Object? customer = freezed,
     Object? driver = freezed,
     Object? createdAt = null,
@@ -290,6 +300,14 @@ class __$$BookingEntityImplCopyWithImpl<$Res>
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
               as String,
+      rating: freezed == rating
+          ? _value.rating
+          : rating // ignore: cast_nullable_to_non_nullable
+              as int?,
+      comment: freezed == comment
+          ? _value.comment
+          : comment // ignore: cast_nullable_to_non_nullable
+              as String?,
       customer: freezed == customer
           ? _value.customer
           : customer // ignore: cast_nullable_to_non_nullable
@@ -322,6 +340,8 @@ class _$BookingEntityImpl implements BookingEntity {
       @JsonKey(name: 'time_estimate') required this.timeEstimate,
       required this.price,
       required this.status,
+      this.rating,
+      this.comment,
       required this.customer,
       this.driver,
       @JsonKey(name: 'created_at') required this.createdAt,
@@ -361,6 +381,10 @@ class _$BookingEntityImpl implements BookingEntity {
   @override
   final String status;
   @override
+  final int? rating;
+  @override
+  final String? comment;
+  @override
   final UserCustomerEntity customer;
   @override
   final UserDriverEntity? driver;
@@ -373,7 +397,7 @@ class _$BookingEntityImpl implements BookingEntity {
 
   @override
   String toString() {
-    return 'Booking.driverEntity(id: $id, latitudeOrigin: $latitudeOrigin, longitudeOrigin: $longitudeOrigin, addressOrigin: $addressOrigin, latitudeDestination: $latitudeDestination, longitudeDestination: $longitudeDestination, addressDestination: $addressDestination, distance: $distance, timeEstimate: $timeEstimate, price: $price, status: $status, customer: $customer, driver: $driver, createdAt: $createdAt)';
+    return 'Booking.driverEntity(id: $id, latitudeOrigin: $latitudeOrigin, longitudeOrigin: $longitudeOrigin, addressOrigin: $addressOrigin, latitudeDestination: $latitudeDestination, longitudeDestination: $longitudeDestination, addressDestination: $addressDestination, distance: $distance, timeEstimate: $timeEstimate, price: $price, status: $status, rating: $rating, comment: $comment, customer: $customer, driver: $driver, createdAt: $createdAt)';
   }
 
   @override
@@ -400,6 +424,8 @@ class _$BookingEntityImpl implements BookingEntity {
                 other.timeEstimate == timeEstimate) &&
             (identical(other.price, price) || other.price == price) &&
             (identical(other.status, status) || other.status == status) &&
+            (identical(other.rating, rating) || other.rating == rating) &&
+            (identical(other.comment, comment) || other.comment == comment) &&
             const DeepCollectionEquality().equals(other.customer, customer) &&
             const DeepCollectionEquality().equals(other.driver, driver) &&
             (identical(other.createdAt, createdAt) ||
@@ -421,6 +447,8 @@ class _$BookingEntityImpl implements BookingEntity {
       timeEstimate,
       price,
       status,
+      rating,
+      comment,
       const DeepCollectionEquality().hash(customer),
       const DeepCollectionEquality().hash(driver),
       createdAt);
@@ -448,6 +476,8 @@ class _$BookingEntityImpl implements BookingEntity {
             @JsonKey(name: 'time_estimate') int timeEstimate,
             double price,
             String status,
+            int? rating,
+            String? comment,
             UserCustomerEntity customer,
             UserDriverEntity? driver,
             @JsonKey(name: 'created_at') String createdAt)
@@ -480,6 +510,8 @@ class _$BookingEntityImpl implements BookingEntity {
         timeEstimate,
         price,
         status,
+        rating,
+        comment,
         customer,
         driver,
         createdAt);
@@ -500,6 +532,8 @@ class _$BookingEntityImpl implements BookingEntity {
             @JsonKey(name: 'time_estimate') int timeEstimate,
             double price,
             String status,
+            int? rating,
+            String? comment,
             UserCustomerEntity customer,
             UserDriverEntity? driver,
             @JsonKey(name: 'created_at') String createdAt)?
@@ -532,6 +566,8 @@ class _$BookingEntityImpl implements BookingEntity {
         timeEstimate,
         price,
         status,
+        rating,
+        comment,
         customer,
         driver,
         createdAt);
@@ -552,6 +588,8 @@ class _$BookingEntityImpl implements BookingEntity {
             @JsonKey(name: 'time_estimate') int timeEstimate,
             double price,
             String status,
+            int? rating,
+            String? comment,
             UserCustomerEntity customer,
             UserDriverEntity? driver,
             @JsonKey(name: 'created_at') String createdAt)?
@@ -586,6 +624,8 @@ class _$BookingEntityImpl implements BookingEntity {
           timeEstimate,
           price,
           status,
+          rating,
+          comment,
           customer,
           driver,
           createdAt);
@@ -657,6 +697,8 @@ abstract class BookingEntity implements Booking {
       @JsonKey(name: 'time_estimate') required final int timeEstimate,
       required final double price,
       required final String status,
+      final int? rating,
+      final String? comment,
       required final UserCustomerEntity customer,
       final UserDriverEntity? driver,
       @JsonKey(name: 'created_at')
@@ -683,6 +725,8 @@ abstract class BookingEntity implements Booking {
   int get timeEstimate;
   double get price;
   String get status;
+  int? get rating;
+  String? get comment;
   UserCustomerEntity get customer;
   UserDriverEntity? get driver;
   @JsonKey(name: 'created_at')
@@ -884,6 +928,8 @@ class _$BookingCreateParamEntityImpl implements BookingCreateParamEntity {
             @JsonKey(name: 'time_estimate') int timeEstimate,
             double price,
             String status,
+            int? rating,
+            String? comment,
             UserCustomerEntity customer,
             UserDriverEntity? driver,
             @JsonKey(name: 'created_at') String createdAt)
@@ -930,6 +976,8 @@ class _$BookingCreateParamEntityImpl implements BookingCreateParamEntity {
             @JsonKey(name: 'time_estimate') int timeEstimate,
             double price,
             String status,
+            int? rating,
+            String? comment,
             UserCustomerEntity customer,
             UserDriverEntity? driver,
             @JsonKey(name: 'created_at') String createdAt)?
@@ -976,6 +1024,8 @@ class _$BookingCreateParamEntityImpl implements BookingCreateParamEntity {
             @JsonKey(name: 'time_estimate') int timeEstimate,
             double price,
             String status,
+            int? rating,
+            String? comment,
             UserCustomerEntity customer,
             UserDriverEntity? driver,
             @JsonKey(name: 'created_at') String createdAt)?
@@ -1200,6 +1250,8 @@ class _$BookingStatusParamEntityImpl implements BookingStatusParamEntity {
             @JsonKey(name: 'time_estimate') int timeEstimate,
             double price,
             String status,
+            int? rating,
+            String? comment,
             UserCustomerEntity customer,
             UserDriverEntity? driver,
             @JsonKey(name: 'created_at') String createdAt)
@@ -1238,6 +1290,8 @@ class _$BookingStatusParamEntityImpl implements BookingStatusParamEntity {
             @JsonKey(name: 'time_estimate') int timeEstimate,
             double price,
             String status,
+            int? rating,
+            String? comment,
             UserCustomerEntity customer,
             UserDriverEntity? driver,
             @JsonKey(name: 'created_at') String createdAt)?
@@ -1276,6 +1330,8 @@ class _$BookingStatusParamEntityImpl implements BookingStatusParamEntity {
             @JsonKey(name: 'time_estimate') int timeEstimate,
             double price,
             String status,
+            int? rating,
+            String? comment,
             UserCustomerEntity customer,
             UserDriverEntity? driver,
             @JsonKey(name: 'created_at') String createdAt)?
@@ -1467,6 +1523,8 @@ class _$BookingNotifEntityImpl implements BookingNotifEntity {
             @JsonKey(name: 'time_estimate') int timeEstimate,
             double price,
             String status,
+            int? rating,
+            String? comment,
             UserCustomerEntity customer,
             UserDriverEntity? driver,
             @JsonKey(name: 'created_at') String createdAt)
@@ -1505,6 +1563,8 @@ class _$BookingNotifEntityImpl implements BookingNotifEntity {
             @JsonKey(name: 'time_estimate') int timeEstimate,
             double price,
             String status,
+            int? rating,
+            String? comment,
             UserCustomerEntity customer,
             UserDriverEntity? driver,
             @JsonKey(name: 'created_at') String createdAt)?
@@ -1543,6 +1603,8 @@ class _$BookingNotifEntityImpl implements BookingNotifEntity {
             @JsonKey(name: 'time_estimate') int timeEstimate,
             double price,
             String status,
+            int? rating,
+            String? comment,
             UserCustomerEntity customer,
             UserDriverEntity? driver,
             @JsonKey(name: 'created_at') String createdAt)?
@@ -1748,6 +1810,8 @@ class _$BookingParamRatingEntityImpl implements BookingParamRatingEntity {
             @JsonKey(name: 'time_estimate') int timeEstimate,
             double price,
             String status,
+            int? rating,
+            String? comment,
             UserCustomerEntity customer,
             UserDriverEntity? driver,
             @JsonKey(name: 'created_at') String createdAt)
@@ -1786,6 +1850,8 @@ class _$BookingParamRatingEntityImpl implements BookingParamRatingEntity {
             @JsonKey(name: 'time_estimate') int timeEstimate,
             double price,
             String status,
+            int? rating,
+            String? comment,
             UserCustomerEntity customer,
             UserDriverEntity? driver,
             @JsonKey(name: 'created_at') String createdAt)?
@@ -1824,6 +1890,8 @@ class _$BookingParamRatingEntityImpl implements BookingParamRatingEntity {
             @JsonKey(name: 'time_estimate') int timeEstimate,
             double price,
             String status,
+            int? rating,
+            String? comment,
             UserCustomerEntity customer,
             UserDriverEntity? driver,
             @JsonKey(name: 'created_at') String createdAt)?

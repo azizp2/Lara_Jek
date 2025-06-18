@@ -65,7 +65,8 @@ class AuthRepositoryImpl extends AuthRepository {
           photoUrl: userModel.photoUrl!,
           phone: userModel.phone,
           isActive: userModel.driver!.isActive,
-          VehicleNumber: userModel.driver!.vehicleNumber);
+          VehicleNumber: userModel.driver!.vehicleNumber,
+          avgRating: userModel.driver!.avgRating);
     });
   }
 }

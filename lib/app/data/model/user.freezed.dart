@@ -497,25 +497,32 @@ mixin _$Driver {
   String get vehicleNumber => throw _privateConstructorUsedError;
   @JsonKey(name: 'is_active')
   bool get isActive => throw _privateConstructorUsedError;
+  @JsonKey(name: 'avg_rating')
+  double get avgRating => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(
             @JsonKey(name: 'vehicle_number') String vehicleNumber,
-            @JsonKey(name: 'is_active') bool isActive)
+            @JsonKey(name: 'is_active') bool isActive,
+            @JsonKey(name: 'avg_rating') double avgRating)
         model,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(@JsonKey(name: 'vehicle_number') String vehicleNumber,
-            @JsonKey(name: 'is_active') bool isActive)?
+    TResult? Function(
+            @JsonKey(name: 'vehicle_number') String vehicleNumber,
+            @JsonKey(name: 'is_active') bool isActive,
+            @JsonKey(name: 'avg_rating') double avgRating)?
         model,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(@JsonKey(name: 'vehicle_number') String vehicleNumber,
-            @JsonKey(name: 'is_active') bool isActive)?
+    TResult Function(
+            @JsonKey(name: 'vehicle_number') String vehicleNumber,
+            @JsonKey(name: 'is_active') bool isActive,
+            @JsonKey(name: 'avg_rating') double avgRating)?
         model,
     required TResult orElse(),
   }) =>
@@ -553,7 +560,8 @@ abstract class $DriverCopyWith<$Res> {
   @useResult
   $Res call(
       {@JsonKey(name: 'vehicle_number') String vehicleNumber,
-      @JsonKey(name: 'is_active') bool isActive});
+      @JsonKey(name: 'is_active') bool isActive,
+      @JsonKey(name: 'avg_rating') double avgRating});
 }
 
 /// @nodoc
@@ -573,6 +581,7 @@ class _$DriverCopyWithImpl<$Res, $Val extends Driver>
   $Res call({
     Object? vehicleNumber = null,
     Object? isActive = null,
+    Object? avgRating = null,
   }) {
     return _then(_value.copyWith(
       vehicleNumber: null == vehicleNumber
@@ -583,6 +592,10 @@ class _$DriverCopyWithImpl<$Res, $Val extends Driver>
           ? _value.isActive
           : isActive // ignore: cast_nullable_to_non_nullable
               as bool,
+      avgRating: null == avgRating
+          ? _value.avgRating
+          : avgRating // ignore: cast_nullable_to_non_nullable
+              as double,
     ) as $Val);
   }
 }
@@ -597,7 +610,8 @@ abstract class _$$DriverModelImplCopyWith<$Res>
   @useResult
   $Res call(
       {@JsonKey(name: 'vehicle_number') String vehicleNumber,
-      @JsonKey(name: 'is_active') bool isActive});
+      @JsonKey(name: 'is_active') bool isActive,
+      @JsonKey(name: 'avg_rating') double avgRating});
 }
 
 /// @nodoc
@@ -615,6 +629,7 @@ class __$$DriverModelImplCopyWithImpl<$Res>
   $Res call({
     Object? vehicleNumber = null,
     Object? isActive = null,
+    Object? avgRating = null,
   }) {
     return _then(_$DriverModelImpl(
       vehicleNumber: null == vehicleNumber
@@ -625,6 +640,10 @@ class __$$DriverModelImplCopyWithImpl<$Res>
           ? _value.isActive
           : isActive // ignore: cast_nullable_to_non_nullable
               as bool,
+      avgRating: null == avgRating
+          ? _value.avgRating
+          : avgRating // ignore: cast_nullable_to_non_nullable
+              as double,
     ));
   }
 }
@@ -634,7 +653,8 @@ class __$$DriverModelImplCopyWithImpl<$Res>
 class _$DriverModelImpl implements DriverModel {
   _$DriverModelImpl(
       {@JsonKey(name: 'vehicle_number') required this.vehicleNumber,
-      @JsonKey(name: 'is_active') required this.isActive});
+      @JsonKey(name: 'is_active') required this.isActive,
+      @JsonKey(name: 'avg_rating') required this.avgRating});
 
   factory _$DriverModelImpl.fromJson(Map<String, dynamic> json) =>
       _$$DriverModelImplFromJson(json);
@@ -645,10 +665,13 @@ class _$DriverModelImpl implements DriverModel {
   @override
   @JsonKey(name: 'is_active')
   final bool isActive;
+  @override
+  @JsonKey(name: 'avg_rating')
+  final double avgRating;
 
   @override
   String toString() {
-    return 'Driver.model(vehicleNumber: $vehicleNumber, isActive: $isActive)';
+    return 'Driver.model(vehicleNumber: $vehicleNumber, isActive: $isActive, avgRating: $avgRating)';
   }
 
   @override
@@ -659,12 +682,15 @@ class _$DriverModelImpl implements DriverModel {
             (identical(other.vehicleNumber, vehicleNumber) ||
                 other.vehicleNumber == vehicleNumber) &&
             (identical(other.isActive, isActive) ||
-                other.isActive == isActive));
+                other.isActive == isActive) &&
+            (identical(other.avgRating, avgRating) ||
+                other.avgRating == avgRating));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(runtimeType, vehicleNumber, isActive);
+  int get hashCode =>
+      Object.hash(runtimeType, vehicleNumber, isActive, avgRating);
 
   /// Create a copy of Driver
   /// with the given fields replaced by the non-null parameter values.
@@ -679,32 +705,37 @@ class _$DriverModelImpl implements DriverModel {
   TResult when<TResult extends Object?>({
     required TResult Function(
             @JsonKey(name: 'vehicle_number') String vehicleNumber,
-            @JsonKey(name: 'is_active') bool isActive)
+            @JsonKey(name: 'is_active') bool isActive,
+            @JsonKey(name: 'avg_rating') double avgRating)
         model,
   }) {
-    return model(vehicleNumber, isActive);
+    return model(vehicleNumber, isActive, avgRating);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(@JsonKey(name: 'vehicle_number') String vehicleNumber,
-            @JsonKey(name: 'is_active') bool isActive)?
+    TResult? Function(
+            @JsonKey(name: 'vehicle_number') String vehicleNumber,
+            @JsonKey(name: 'is_active') bool isActive,
+            @JsonKey(name: 'avg_rating') double avgRating)?
         model,
   }) {
-    return model?.call(vehicleNumber, isActive);
+    return model?.call(vehicleNumber, isActive, avgRating);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(@JsonKey(name: 'vehicle_number') String vehicleNumber,
-            @JsonKey(name: 'is_active') bool isActive)?
+    TResult Function(
+            @JsonKey(name: 'vehicle_number') String vehicleNumber,
+            @JsonKey(name: 'is_active') bool isActive,
+            @JsonKey(name: 'avg_rating') double avgRating)?
         model,
     required TResult orElse(),
   }) {
     if (model != null) {
-      return model(vehicleNumber, isActive);
+      return model(vehicleNumber, isActive, avgRating);
     }
     return orElse();
   }
@@ -748,7 +779,8 @@ class _$DriverModelImpl implements DriverModel {
 abstract class DriverModel implements Driver {
   factory DriverModel(
           {@JsonKey(name: 'vehicle_number') required final String vehicleNumber,
-          @JsonKey(name: 'is_active') required final bool isActive}) =
+          @JsonKey(name: 'is_active') required final bool isActive,
+          @JsonKey(name: 'avg_rating') required final double avgRating}) =
       _$DriverModelImpl;
 
   factory DriverModel.fromJson(Map<String, dynamic> json) =
@@ -760,6 +792,9 @@ abstract class DriverModel implements Driver {
   @override
   @JsonKey(name: 'is_active')
   bool get isActive;
+  @override
+  @JsonKey(name: 'avg_rating')
+  double get avgRating;
 
   /// Create a copy of Driver
   /// with the given fields replaced by the non-null parameter values.

@@ -20,6 +20,8 @@ sealed class Booking with _$Booking {
       @JsonKey(name: 'time_estimate') required int timeEstimate,
       required double price,
       required String status,
+      int? rating,
+      String? comment,
       required UserCustomerEntity customer,
       UserDriverEntity? driver,
       @JsonKey(name: 'created_at') required String createdAt}) = BookingEntity;

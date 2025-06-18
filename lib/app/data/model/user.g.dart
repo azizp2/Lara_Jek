@@ -38,10 +38,12 @@ _$DriverModelImpl _$$DriverModelImplFromJson(Map<String, dynamic> json) =>
     _$DriverModelImpl(
       vehicleNumber: json['vehicle_number'] as String,
       isActive: json['is_active'] as bool,
+      avgRating: (json['avg_rating'] as num).toDouble(),
     );
 
 Map<String, dynamic> _$$DriverModelImplToJson(_$DriverModelImpl instance) =>
     <String, dynamic>{
       'vehicle_number': instance.vehicleNumber,
       'is_active': instance.isActive,
+      'avg_rating': instance.avgRating,
     };

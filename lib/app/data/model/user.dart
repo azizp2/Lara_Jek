@@ -21,9 +21,11 @@ sealed class User with _$User {
 
 @freezed
 sealed class Driver with _$Driver {
-  factory Driver.model(
-      {@JsonKey(name: 'vehicle_number') required String vehicleNumber,
-      @JsonKey(name: 'is_active') required bool isActive}) = DriverModel;
+  factory Driver.model({
+    @JsonKey(name: 'vehicle_number') required String vehicleNumber,
+    @JsonKey(name: 'is_active') required bool isActive,
+    @JsonKey(name: 'avg_rating') required double avgRating,
+  }) = DriverModel;
 
   factory Driver.fromJson(Map<String, dynamic> json) => _$DriverFromJson(json);
 }
