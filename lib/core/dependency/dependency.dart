@@ -3,14 +3,17 @@ import 'package:dio/dio.dart';
 import 'package:lara_jek/app/data/repository/auth_repository.dart';
 import 'package:lara_jek/app/data/repository/booking_repository.dart';
 import 'package:lara_jek/app/data/repository/driver_repository.dart';
+import 'package:lara_jek/app/data/repository/fcm_repository.dart';
 import 'package:lara_jek/app/data/repository/tracking_repository.dart';
 import 'package:lara_jek/app/data/source/auth_api_service.dart';
 import 'package:lara_jek/app/data/source/booking_api_service.dart';
 import 'package:lara_jek/app/data/source/driver_api_service.dart';
+import 'package:lara_jek/app/data/source/fcm_api_service.dart';
 import 'package:lara_jek/app/data/source/tracking_api_service.dart';
 import 'package:lara_jek/app/domain/repository/auth_repository.dart';
 import 'package:lara_jek/app/domain/repository/booking_repository.dart';
 import 'package:lara_jek/app/domain/repository/driver_repository.dart';
+import 'package:lara_jek/app/domain/repository/fcm_repository.dart';
 import 'package:lara_jek/app/domain/repository/tracking_repository.dart';
 import 'package:lara_jek/app/persentation/c_home/c_home_notifier.dart';
 import 'package:lara_jek/app/persentation/confirm_order/confirm_order_notifier.dart';
@@ -37,6 +40,7 @@ import 'package:lara_jek/app/use_case/driver/driver_get_interval.dart';
 import 'package:lara_jek/app/use_case/driver/driver_get_stats.dart';
 import 'package:lara_jek/app/use_case/driver/driver_get_status.dart';
 import 'package:lara_jek/app/use_case/driver/driver_set_active.dart';
+import 'package:lara_jek/app/use_case/fcm_update.dart';
 import 'package:lara_jek/app/use_case/tracking/tracking_get_by_id.dart';
 import 'package:lara_jek/app/use_case/tracking/tracking_send.dart';
 import 'package:lara_jek/core/network/app_interceptor.dart';
@@ -61,6 +65,7 @@ void initDependency() {
   sl.registerSingleton<BookingApiService>(BookingApiService(dio));
   sl.registerSingleton<DriverApiService>(DriverApiService(dio));
   sl.registerSingleton<TrackingApiService>(TrackingApiService(dio));
+  sl.registerSingleton<FcmApiService>(FcmApiService(dio));
   // END API SERVICE
 
 // REPOSITORY
@@ -68,6 +73,7 @@ void initDependency() {
   sl.registerSingleton<BookingRepository>(BookingRepositoryImpl(sl()));
   sl.registerSingleton<DriverRepository>(DriverRepositoryImpl(sl()));
   sl.registerSingleton<TrackingRepository>(TrackingRepositoryImpl(sl()));
+  sl.registerSingleton<FcmRepository>(FcmRepositoryImpl(sl()));
   // END REPOSITORY
 
 // USE CASE//use case
@@ -93,12 +99,13 @@ void initDependency() {
   sl.registerSingleton<DriverSetActiveUseCase>(DriverSetActiveUseCase(sl()));
   sl.registerSingleton<BookingSendRatingUseCase>(
       BookingSendRatingUseCase(sl()));
+  sl.registerSingleton<FcmUpdateUseCase>(FcmUpdateUseCase(sl()));
 
 // END USE CASE
 
 // PROVIDER
   sl.registerFactoryParam<LoginNotifier, void, void>(
-    (param1, param2) => LoginNotifier(sl()),
+    (param1, param2) => LoginNotifier(sl(), sl()),
   );
 
   sl.registerFactoryParam<RegisterNotifier, void, void>(
@@ -132,5 +139,6 @@ void initDependency() {
   sl.registerFactoryParam<RatingNotifier, int, void>(
     (param1, param2) => RatingNotifier(param1, sl()),
   );
+
 //END PROVIDER
 }
