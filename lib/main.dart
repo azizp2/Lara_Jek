@@ -2,6 +2,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:lara_jek/app/persentation/login/login_screen.dart';
 import 'package:lara_jek/core/dependency/dependency.dart';
+import 'package:lara_jek/core/service/notification_service.dart';
 import 'package:lara_jek/core/service/tracking_service.dart';
 import 'package:lara_jek/firebase_options.dart';
 import 'package:lara_jek/theme/app_theme.dart';
@@ -14,6 +15,7 @@ void main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+  await NotificationService.init();
   await initializeDateFormatting('id', null);
   initDependency();
 
