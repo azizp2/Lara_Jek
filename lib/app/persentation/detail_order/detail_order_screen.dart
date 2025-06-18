@@ -38,12 +38,12 @@ class DetailOrderScreen extends AppWidget<DetailOrderNotifier, int, void> {
                   SizedBox(
                     height: 20,
                   ),
-                  _driverLayout(context),
-                  // (notifier.role == ROLE_DRIVER)
-                  //     ? _customerLayout(context)
-                  //     : (notifier.role == ROLE_CUSTOMER)
-                  //         ? _driverLayout(context)
-                  //         : SizedBox(),
+                  // _driv erLayout(context),
+                  (notifier.role == ROLE_DRIVER)
+                      ? _customerLayout(context)
+                      : (notifier.role == ROLE_CUSTOMER)
+                          ? _driverLayout(context)
+                          : SizedBox(),
                   SizedBox(
                     height: 20,
                   ),
