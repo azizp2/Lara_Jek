@@ -15,6 +15,7 @@ _$UserModelImpl _$$UserModelImplFromJson(Map<String, dynamic> json) =>
       role: json['role'] as String,
       phone: json['whatsapp'] as String,
       photoUrl: json['photo_url'] as String?,
+      avgRating: (json['avg_rating'] as num?)?.toDouble(),
       driver: json['driver'] == null
           ? null
           : DriverModel.fromJson(json['driver'] as Map<String, dynamic>),
@@ -29,6 +30,7 @@ Map<String, dynamic> _$$UserModelImplToJson(_$UserModelImpl instance) =>
       'role': instance.role,
       'whatsapp': instance.phone,
       'photo_url': instance.photoUrl,
+      'avg_rating': instance.avgRating,
       'driver': instance.driver,
     };
 

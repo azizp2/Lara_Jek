@@ -29,6 +29,8 @@ mixin _$User {
   String get phone => throw _privateConstructorUsedError;
   @JsonKey(name: 'photo_url')
   String? get photoUrl => throw _privateConstructorUsedError;
+  @JsonKey(name: 'avg_rating')
+  double? get avgRating => throw _privateConstructorUsedError;
   DriverModel? get driver => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
@@ -40,6 +42,7 @@ mixin _$User {
             String role,
             @JsonKey(name: 'whatsapp') String phone,
             @JsonKey(name: 'photo_url') String? photoUrl,
+            @JsonKey(name: 'avg_rating') double? avgRating,
             DriverModel? driver)
         model,
   }) =>
@@ -54,6 +57,7 @@ mixin _$User {
             String role,
             @JsonKey(name: 'whatsapp') String phone,
             @JsonKey(name: 'photo_url') String? photoUrl,
+            @JsonKey(name: 'avg_rating') double? avgRating,
             DriverModel? driver)?
         model,
   }) =>
@@ -68,6 +72,7 @@ mixin _$User {
             String role,
             @JsonKey(name: 'whatsapp') String phone,
             @JsonKey(name: 'photo_url') String? photoUrl,
+            @JsonKey(name: 'avg_rating') double? avgRating,
             DriverModel? driver)?
         model,
     required TResult orElse(),
@@ -112,6 +117,7 @@ abstract class $UserCopyWith<$Res> {
       String role,
       @JsonKey(name: 'whatsapp') String phone,
       @JsonKey(name: 'photo_url') String? photoUrl,
+      @JsonKey(name: 'avg_rating') double? avgRating,
       DriverModel? driver});
 }
 
@@ -137,6 +143,7 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
     Object? role = null,
     Object? phone = null,
     Object? photoUrl = freezed,
+    Object? avgRating = freezed,
     Object? driver = freezed,
   }) {
     return _then(_value.copyWith(
@@ -168,6 +175,10 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
           ? _value.photoUrl
           : photoUrl // ignore: cast_nullable_to_non_nullable
               as String?,
+      avgRating: freezed == avgRating
+          ? _value.avgRating
+          : avgRating // ignore: cast_nullable_to_non_nullable
+              as double?,
       driver: freezed == driver
           ? _value.driver
           : driver // ignore: cast_nullable_to_non_nullable
@@ -191,6 +202,7 @@ abstract class _$$UserModelImplCopyWith<$Res> implements $UserCopyWith<$Res> {
       String role,
       @JsonKey(name: 'whatsapp') String phone,
       @JsonKey(name: 'photo_url') String? photoUrl,
+      @JsonKey(name: 'avg_rating') double? avgRating,
       DriverModel? driver});
 }
 
@@ -214,6 +226,7 @@ class __$$UserModelImplCopyWithImpl<$Res>
     Object? role = null,
     Object? phone = null,
     Object? photoUrl = freezed,
+    Object? avgRating = freezed,
     Object? driver = freezed,
   }) {
     return _then(_$UserModelImpl(
@@ -245,6 +258,10 @@ class __$$UserModelImplCopyWithImpl<$Res>
           ? _value.photoUrl
           : photoUrl // ignore: cast_nullable_to_non_nullable
               as String?,
+      avgRating: freezed == avgRating
+          ? _value.avgRating
+          : avgRating // ignore: cast_nullable_to_non_nullable
+              as double?,
       driver: freezed == driver
           ? _value.driver
           : driver // ignore: cast_nullable_to_non_nullable
@@ -264,6 +281,7 @@ class _$UserModelImpl implements UserModel {
       required this.role,
       @JsonKey(name: 'whatsapp') required this.phone,
       @JsonKey(name: 'photo_url') required this.photoUrl,
+      @JsonKey(name: 'avg_rating') required this.avgRating,
       this.driver});
 
   factory _$UserModelImpl.fromJson(Map<String, dynamic> json) =>
@@ -286,11 +304,14 @@ class _$UserModelImpl implements UserModel {
   @JsonKey(name: 'photo_url')
   final String? photoUrl;
   @override
+  @JsonKey(name: 'avg_rating')
+  final double? avgRating;
+  @override
   final DriverModel? driver;
 
   @override
   String toString() {
-    return 'User.model(token: $token, id: $id, name: $name, email: $email, role: $role, phone: $phone, photoUrl: $photoUrl, driver: $driver)';
+    return 'User.model(token: $token, id: $id, name: $name, email: $email, role: $role, phone: $phone, photoUrl: $photoUrl, avgRating: $avgRating, driver: $driver)';
   }
 
   @override
@@ -306,13 +327,15 @@ class _$UserModelImpl implements UserModel {
             (identical(other.phone, phone) || other.phone == phone) &&
             (identical(other.photoUrl, photoUrl) ||
                 other.photoUrl == photoUrl) &&
+            (identical(other.avgRating, avgRating) ||
+                other.avgRating == avgRating) &&
             const DeepCollectionEquality().equals(other.driver, driver));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, token, id, name, email, role,
-      phone, photoUrl, const DeepCollectionEquality().hash(driver));
+      phone, photoUrl, avgRating, const DeepCollectionEquality().hash(driver));
 
   /// Create a copy of User
   /// with the given fields replaced by the non-null parameter values.
@@ -333,10 +356,12 @@ class _$UserModelImpl implements UserModel {
             String role,
             @JsonKey(name: 'whatsapp') String phone,
             @JsonKey(name: 'photo_url') String? photoUrl,
+            @JsonKey(name: 'avg_rating') double? avgRating,
             DriverModel? driver)
         model,
   }) {
-    return model(token, id, name, email, role, phone, photoUrl, driver);
+    return model(
+        token, id, name, email, role, phone, photoUrl, avgRating, driver);
   }
 
   @override
@@ -350,10 +375,12 @@ class _$UserModelImpl implements UserModel {
             String role,
             @JsonKey(name: 'whatsapp') String phone,
             @JsonKey(name: 'photo_url') String? photoUrl,
+            @JsonKey(name: 'avg_rating') double? avgRating,
             DriverModel? driver)?
         model,
   }) {
-    return model?.call(token, id, name, email, role, phone, photoUrl, driver);
+    return model?.call(
+        token, id, name, email, role, phone, photoUrl, avgRating, driver);
   }
 
   @override
@@ -367,12 +394,14 @@ class _$UserModelImpl implements UserModel {
             String role,
             @JsonKey(name: 'whatsapp') String phone,
             @JsonKey(name: 'photo_url') String? photoUrl,
+            @JsonKey(name: 'avg_rating') double? avgRating,
             DriverModel? driver)?
         model,
     required TResult orElse(),
   }) {
     if (model != null) {
-      return model(token, id, name, email, role, phone, photoUrl, driver);
+      return model(
+          token, id, name, email, role, phone, photoUrl, avgRating, driver);
     }
     return orElse();
   }
@@ -422,6 +451,7 @@ abstract class UserModel implements User {
       required final String role,
       @JsonKey(name: 'whatsapp') required final String phone,
       @JsonKey(name: 'photo_url') required final String? photoUrl,
+      @JsonKey(name: 'avg_rating') required final double? avgRating,
       final DriverModel? driver}) = _$UserModelImpl;
 
   factory UserModel.fromJson(Map<String, dynamic> json) =
@@ -443,6 +473,9 @@ abstract class UserModel implements User {
   @override
   @JsonKey(name: 'photo_url')
   String? get photoUrl;
+  @override
+  @JsonKey(name: 'avg_rating')
+  double? get avgRating;
   @override
   DriverModel? get driver;
 

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_osm_plugin/flutter_osm_plugin.dart';
 import 'package:lara_jek/app/persentation/detail_order/detail_order_notifier.dart';
+import 'package:lara_jek/app/persentation/rating/rating_screen.dart';
 import 'package:lara_jek/core/constant/constant.dart';
 import 'package:lara_jek/core/helper/dialog_helper.dart';
 import 'package:lara_jek/core/helper/global_helper.dart';
@@ -35,11 +36,12 @@ class DetailOrderScreen extends AppWidget<DetailOrderNotifier, int, void> {
                   SizedBox(
                     height: 20,
                   ),
-                  (notifier.role == ROLE_DRIVER)
-                      ? _customerLayout(context)
-                      : (notifier.role == ROLE_CUSTOMER)
-                          ? _driverLayout(context)
-                          : SizedBox(),
+                  _driverLayout(context),
+                  // (notifier.role == ROLE_DRIVER)
+                  //     ? _customerLayout(context)
+                  //     : (notifier.role == ROLE_CUSTOMER)
+                  //         ? _driverLayout(context)
+                  //         : SizedBox(),
                   SizedBox(
                     height: 20,
                   ),
@@ -391,6 +393,13 @@ class DetailOrderScreen extends AppWidget<DetailOrderNotifier, int, void> {
             backgroundColor: Colors.red,
             minimumSize: Size(double.maxFinite, 48)),
       );
+    } else if (notifier.role == ROLE_CUSTOMER &&
+        notifier.booking?.status == STATUS_PAID) {
+      return FilledButton(
+          onPressed: () => _onPressRating(context),
+          child: Text('Berikan Rating'),
+          style: ElevatedButton.styleFrom(
+              minimumSize: Size(double.maxFinite, 48)));
     } else if (notifier.role == ROLE_DRIVER &&
         notifier.booking?.status != STATUS_PAID &&
         notifier.booking?.status != STATUS_CANCELLED) {
@@ -468,12 +477,14 @@ class DetailOrderScreen extends AppWidget<DetailOrderNotifier, int, void> {
     notifier.updateStatus();
   }
 
-  // _onPressRating(BuildContext context) async {
-  //   await Navigator.push(
-  //       context,
-  //       MaterialPageRoute(
-  //         builder: (context) => {null},
-  //       ));
-  //   notifier.init();
-  // }
+  _onPressRating(BuildContext context) async {
+    await Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => RatingScreen(
+            param1: param1,
+          ),
+        ));
+    notifier.init();
+  }
 }

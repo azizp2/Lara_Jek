@@ -1,4 +1,4 @@
-const String BASE_URL = 'http://192.168.189.108:8000/';
+const String BASE_URL = 'http://192.168.43.108:8000/';
 const String BOOKING_PATH_URL = '/api/booking';
 const String DRIVER_PATH_URL = '/api/driver';
 

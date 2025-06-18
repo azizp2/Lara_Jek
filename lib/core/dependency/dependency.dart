@@ -19,6 +19,7 @@ import 'package:lara_jek/app/persentation/d_home/d_home_notifier.dart';
 import 'package:lara_jek/app/persentation/detail_order/detail_order_notifier.dart';
 import 'package:lara_jek/app/persentation/history/history_notifier.dart';
 import 'package:lara_jek/app/persentation/login/login_notifier.dart';
+import 'package:lara_jek/app/persentation/rating/rating_notifier.dart';
 import 'package:lara_jek/app/persentation/register/register_notifier.dart';
 import 'package:lara_jek/app/use_case/auth/auth_login.dart';
 import 'package:lara_jek/app/use_case/auth/auth_logout.dart';
@@ -30,6 +31,7 @@ import 'package:lara_jek/app/use_case/booking/booking_create.dart';
 import 'package:lara_jek/app/use_case/booking/booking_get_all.dart';
 import 'package:lara_jek/app/use_case/booking/booking_get_by_id.dart';
 import 'package:lara_jek/app/use_case/booking/booking_get_today.dart';
+import 'package:lara_jek/app/use_case/booking/booking_send_rating.dart';
 import 'package:lara_jek/app/use_case/booking/booking_update_status.dart';
 import 'package:lara_jek/app/use_case/driver/driver_get_interval.dart';
 import 'package:lara_jek/app/use_case/driver/driver_get_stats.dart';
@@ -89,6 +91,8 @@ void initDependency() {
   sl.registerSingleton<DriverGetIntervalUseCase>(
       DriverGetIntervalUseCase(sl()));
   sl.registerSingleton<DriverSetActiveUseCase>(DriverSetActiveUseCase(sl()));
+  sl.registerSingleton<BookingSendRatingUseCase>(
+      BookingSendRatingUseCase(sl()));
 
 // END USE CASE
 
@@ -123,6 +127,10 @@ void initDependency() {
 
   sl.registerFactoryParam<ConfirmOrderNotifier, int, void>(
     (param1, param2) => ConfirmOrderNotifier(param1, sl(), sl()),
+  );
+
+  sl.registerFactoryParam<RatingNotifier, int, void>(
+    (param1, param2) => RatingNotifier(param1, sl()),
   );
 //END PROVIDER
 }

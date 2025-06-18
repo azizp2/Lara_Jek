@@ -24,6 +24,8 @@ Booking _$BookingFromJson(Map<String, dynamic> json) {
       return BookingStatusParamEntity.fromJson(json);
     case 'notifEntity':
       return BookingNotifEntity.fromJson(json);
+    case 'paramRatingEntity':
+      return BookingParamRatingEntity.fromJson(json);
 
     default:
       throw CheckedFromJsonException(json, 'runtimeType', 'Booking',
@@ -63,6 +65,9 @@ mixin _$Booking {
         createParamEntity,
     required TResult Function(int id, String status) statusParamEntity,
     required TResult Function(int id, String text) notifEntity,
+    required TResult Function(
+            @JsonKey(name: 'booking_id') int id, int rating, String? comment)
+        paramRatingEntity,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -95,6 +100,9 @@ mixin _$Booking {
         createParamEntity,
     TResult? Function(int id, String status)? statusParamEntity,
     TResult? Function(int id, String text)? notifEntity,
+    TResult? Function(
+            @JsonKey(name: 'booking_id') int id, int rating, String? comment)?
+        paramRatingEntity,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -127,6 +135,9 @@ mixin _$Booking {
         createParamEntity,
     TResult Function(int id, String status)? statusParamEntity,
     TResult Function(int id, String text)? notifEntity,
+    TResult Function(
+            @JsonKey(name: 'booking_id') int id, int rating, String? comment)?
+        paramRatingEntity,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -136,6 +147,7 @@ mixin _$Booking {
     required TResult Function(BookingCreateParamEntity value) createParamEntity,
     required TResult Function(BookingStatusParamEntity value) statusParamEntity,
     required TResult Function(BookingNotifEntity value) notifEntity,
+    required TResult Function(BookingParamRatingEntity value) paramRatingEntity,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -144,6 +156,7 @@ mixin _$Booking {
     TResult? Function(BookingCreateParamEntity value)? createParamEntity,
     TResult? Function(BookingStatusParamEntity value)? statusParamEntity,
     TResult? Function(BookingNotifEntity value)? notifEntity,
+    TResult? Function(BookingParamRatingEntity value)? paramRatingEntity,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -152,6 +165,7 @@ mixin _$Booking {
     TResult Function(BookingCreateParamEntity value)? createParamEntity,
     TResult Function(BookingStatusParamEntity value)? statusParamEntity,
     TResult Function(BookingNotifEntity value)? notifEntity,
+    TResult Function(BookingParamRatingEntity value)? paramRatingEntity,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -450,6 +464,9 @@ class _$BookingEntityImpl implements BookingEntity {
         createParamEntity,
     required TResult Function(int id, String status) statusParamEntity,
     required TResult Function(int id, String text) notifEntity,
+    required TResult Function(
+            @JsonKey(name: 'booking_id') int id, int rating, String? comment)
+        paramRatingEntity,
   }) {
     return driverEntity(
         id,
@@ -499,6 +516,9 @@ class _$BookingEntityImpl implements BookingEntity {
         createParamEntity,
     TResult? Function(int id, String status)? statusParamEntity,
     TResult? Function(int id, String text)? notifEntity,
+    TResult? Function(
+            @JsonKey(name: 'booking_id') int id, int rating, String? comment)?
+        paramRatingEntity,
   }) {
     return driverEntity?.call(
         id,
@@ -548,6 +568,9 @@ class _$BookingEntityImpl implements BookingEntity {
         createParamEntity,
     TResult Function(int id, String status)? statusParamEntity,
     TResult Function(int id, String text)? notifEntity,
+    TResult Function(
+            @JsonKey(name: 'booking_id') int id, int rating, String? comment)?
+        paramRatingEntity,
     required TResult orElse(),
   }) {
     if (driverEntity != null) {
@@ -577,6 +600,7 @@ class _$BookingEntityImpl implements BookingEntity {
     required TResult Function(BookingCreateParamEntity value) createParamEntity,
     required TResult Function(BookingStatusParamEntity value) statusParamEntity,
     required TResult Function(BookingNotifEntity value) notifEntity,
+    required TResult Function(BookingParamRatingEntity value) paramRatingEntity,
   }) {
     return driverEntity(this);
   }
@@ -588,6 +612,7 @@ class _$BookingEntityImpl implements BookingEntity {
     TResult? Function(BookingCreateParamEntity value)? createParamEntity,
     TResult? Function(BookingStatusParamEntity value)? statusParamEntity,
     TResult? Function(BookingNotifEntity value)? notifEntity,
+    TResult? Function(BookingParamRatingEntity value)? paramRatingEntity,
   }) {
     return driverEntity?.call(this);
   }
@@ -599,6 +624,7 @@ class _$BookingEntityImpl implements BookingEntity {
     TResult Function(BookingCreateParamEntity value)? createParamEntity,
     TResult Function(BookingStatusParamEntity value)? statusParamEntity,
     TResult Function(BookingNotifEntity value)? notifEntity,
+    TResult Function(BookingParamRatingEntity value)? paramRatingEntity,
     required TResult orElse(),
   }) {
     if (driverEntity != null) {
@@ -874,6 +900,9 @@ class _$BookingCreateParamEntityImpl implements BookingCreateParamEntity {
         createParamEntity,
     required TResult Function(int id, String status) statusParamEntity,
     required TResult Function(int id, String text) notifEntity,
+    required TResult Function(
+            @JsonKey(name: 'booking_id') int id, int rating, String? comment)
+        paramRatingEntity,
   }) {
     return createParamEntity(
         latitudeOrigin,
@@ -917,6 +946,9 @@ class _$BookingCreateParamEntityImpl implements BookingCreateParamEntity {
         createParamEntity,
     TResult? Function(int id, String status)? statusParamEntity,
     TResult? Function(int id, String text)? notifEntity,
+    TResult? Function(
+            @JsonKey(name: 'booking_id') int id, int rating, String? comment)?
+        paramRatingEntity,
   }) {
     return createParamEntity?.call(
         latitudeOrigin,
@@ -960,6 +992,9 @@ class _$BookingCreateParamEntityImpl implements BookingCreateParamEntity {
         createParamEntity,
     TResult Function(int id, String status)? statusParamEntity,
     TResult Function(int id, String text)? notifEntity,
+    TResult Function(
+            @JsonKey(name: 'booking_id') int id, int rating, String? comment)?
+        paramRatingEntity,
     required TResult orElse(),
   }) {
     if (createParamEntity != null) {
@@ -983,6 +1018,7 @@ class _$BookingCreateParamEntityImpl implements BookingCreateParamEntity {
     required TResult Function(BookingCreateParamEntity value) createParamEntity,
     required TResult Function(BookingStatusParamEntity value) statusParamEntity,
     required TResult Function(BookingNotifEntity value) notifEntity,
+    required TResult Function(BookingParamRatingEntity value) paramRatingEntity,
   }) {
     return createParamEntity(this);
   }
@@ -994,6 +1030,7 @@ class _$BookingCreateParamEntityImpl implements BookingCreateParamEntity {
     TResult? Function(BookingCreateParamEntity value)? createParamEntity,
     TResult? Function(BookingStatusParamEntity value)? statusParamEntity,
     TResult? Function(BookingNotifEntity value)? notifEntity,
+    TResult? Function(BookingParamRatingEntity value)? paramRatingEntity,
   }) {
     return createParamEntity?.call(this);
   }
@@ -1005,6 +1042,7 @@ class _$BookingCreateParamEntityImpl implements BookingCreateParamEntity {
     TResult Function(BookingCreateParamEntity value)? createParamEntity,
     TResult Function(BookingStatusParamEntity value)? statusParamEntity,
     TResult Function(BookingNotifEntity value)? notifEntity,
+    TResult Function(BookingParamRatingEntity value)? paramRatingEntity,
     required TResult orElse(),
   }) {
     if (createParamEntity != null) {
@@ -1157,7 +1195,7 @@ class _$BookingStatusParamEntityImpl implements BookingStatusParamEntity {
             @JsonKey(name: 'address_origin') String addressOrigin,
             @JsonKey(name: 'latitude_destination') double latitudeDestination,
             @JsonKey(name: 'longitude_destination') double longitudeDestination,
-            @JsonKey(name: '`address_destinationq `') String addressDestination,
+            @JsonKey(name: 'address_destination') String addressDestination,
             double distance,
             @JsonKey(name: 'time_estimate') int timeEstimate,
             double price,
@@ -1178,6 +1216,9 @@ class _$BookingStatusParamEntityImpl implements BookingStatusParamEntity {
         createParamEntity,
     required TResult Function(int id, String status) statusParamEntity,
     required TResult Function(int id, String text) notifEntity,
+    required TResult Function(
+            @JsonKey(name: 'booking_id') int id, int rating, String? comment)
+        paramRatingEntity,
   }) {
     return statusParamEntity(id, status);
   }
@@ -1213,6 +1254,9 @@ class _$BookingStatusParamEntityImpl implements BookingStatusParamEntity {
         createParamEntity,
     TResult? Function(int id, String status)? statusParamEntity,
     TResult? Function(int id, String text)? notifEntity,
+    TResult? Function(
+            @JsonKey(name: 'booking_id') int id, int rating, String? comment)?
+        paramRatingEntity,
   }) {
     return statusParamEntity?.call(id, status);
   }
@@ -1248,6 +1292,9 @@ class _$BookingStatusParamEntityImpl implements BookingStatusParamEntity {
         createParamEntity,
     TResult Function(int id, String status)? statusParamEntity,
     TResult Function(int id, String text)? notifEntity,
+    TResult Function(
+            @JsonKey(name: 'booking_id') int id, int rating, String? comment)?
+        paramRatingEntity,
     required TResult orElse(),
   }) {
     if (statusParamEntity != null) {
@@ -1263,6 +1310,7 @@ class _$BookingStatusParamEntityImpl implements BookingStatusParamEntity {
     required TResult Function(BookingCreateParamEntity value) createParamEntity,
     required TResult Function(BookingStatusParamEntity value) statusParamEntity,
     required TResult Function(BookingNotifEntity value) notifEntity,
+    required TResult Function(BookingParamRatingEntity value) paramRatingEntity,
   }) {
     return statusParamEntity(this);
   }
@@ -1274,6 +1322,7 @@ class _$BookingStatusParamEntityImpl implements BookingStatusParamEntity {
     TResult? Function(BookingCreateParamEntity value)? createParamEntity,
     TResult? Function(BookingStatusParamEntity value)? statusParamEntity,
     TResult? Function(BookingNotifEntity value)? notifEntity,
+    TResult? Function(BookingParamRatingEntity value)? paramRatingEntity,
   }) {
     return statusParamEntity?.call(this);
   }
@@ -1285,6 +1334,7 @@ class _$BookingStatusParamEntityImpl implements BookingStatusParamEntity {
     TResult Function(BookingCreateParamEntity value)? createParamEntity,
     TResult Function(BookingStatusParamEntity value)? statusParamEntity,
     TResult Function(BookingNotifEntity value)? notifEntity,
+    TResult Function(BookingParamRatingEntity value)? paramRatingEntity,
     required TResult orElse(),
   }) {
     if (statusParamEntity != null) {
@@ -1433,6 +1483,9 @@ class _$BookingNotifEntityImpl implements BookingNotifEntity {
         createParamEntity,
     required TResult Function(int id, String status) statusParamEntity,
     required TResult Function(int id, String text) notifEntity,
+    required TResult Function(
+            @JsonKey(name: 'booking_id') int id, int rating, String? comment)
+        paramRatingEntity,
   }) {
     return notifEntity(id, text);
   }
@@ -1468,6 +1521,9 @@ class _$BookingNotifEntityImpl implements BookingNotifEntity {
         createParamEntity,
     TResult? Function(int id, String status)? statusParamEntity,
     TResult? Function(int id, String text)? notifEntity,
+    TResult? Function(
+            @JsonKey(name: 'booking_id') int id, int rating, String? comment)?
+        paramRatingEntity,
   }) {
     return notifEntity?.call(id, text);
   }
@@ -1503,6 +1559,9 @@ class _$BookingNotifEntityImpl implements BookingNotifEntity {
         createParamEntity,
     TResult Function(int id, String status)? statusParamEntity,
     TResult Function(int id, String text)? notifEntity,
+    TResult Function(
+            @JsonKey(name: 'booking_id') int id, int rating, String? comment)?
+        paramRatingEntity,
     required TResult orElse(),
   }) {
     if (notifEntity != null) {
@@ -1518,6 +1577,7 @@ class _$BookingNotifEntityImpl implements BookingNotifEntity {
     required TResult Function(BookingCreateParamEntity value) createParamEntity,
     required TResult Function(BookingStatusParamEntity value) statusParamEntity,
     required TResult Function(BookingNotifEntity value) notifEntity,
+    required TResult Function(BookingParamRatingEntity value) paramRatingEntity,
   }) {
     return notifEntity(this);
   }
@@ -1529,6 +1589,7 @@ class _$BookingNotifEntityImpl implements BookingNotifEntity {
     TResult? Function(BookingCreateParamEntity value)? createParamEntity,
     TResult? Function(BookingStatusParamEntity value)? statusParamEntity,
     TResult? Function(BookingNotifEntity value)? notifEntity,
+    TResult? Function(BookingParamRatingEntity value)? paramRatingEntity,
   }) {
     return notifEntity?.call(this);
   }
@@ -1540,6 +1601,7 @@ class _$BookingNotifEntityImpl implements BookingNotifEntity {
     TResult Function(BookingCreateParamEntity value)? createParamEntity,
     TResult Function(BookingStatusParamEntity value)? statusParamEntity,
     TResult Function(BookingNotifEntity value)? notifEntity,
+    TResult Function(BookingParamRatingEntity value)? paramRatingEntity,
     required TResult orElse(),
   }) {
     if (notifEntity != null) {
@@ -1572,4 +1634,288 @@ abstract class BookingNotifEntity implements Booking {
   @JsonKey(includeFromJson: false, includeToJson: false)
   _$$BookingNotifEntityImplCopyWith<_$BookingNotifEntityImpl> get copyWith =>
       throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$BookingParamRatingEntityImplCopyWith<$Res> {
+  factory _$$BookingParamRatingEntityImplCopyWith(
+          _$BookingParamRatingEntityImpl value,
+          $Res Function(_$BookingParamRatingEntityImpl) then) =
+      __$$BookingParamRatingEntityImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({@JsonKey(name: 'booking_id') int id, int rating, String? comment});
+}
+
+/// @nodoc
+class __$$BookingParamRatingEntityImplCopyWithImpl<$Res>
+    extends _$BookingCopyWithImpl<$Res, _$BookingParamRatingEntityImpl>
+    implements _$$BookingParamRatingEntityImplCopyWith<$Res> {
+  __$$BookingParamRatingEntityImplCopyWithImpl(
+      _$BookingParamRatingEntityImpl _value,
+      $Res Function(_$BookingParamRatingEntityImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of Booking
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? id = null,
+    Object? rating = null,
+    Object? comment = freezed,
+  }) {
+    return _then(_$BookingParamRatingEntityImpl(
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as int,
+      rating: null == rating
+          ? _value.rating
+          : rating // ignore: cast_nullable_to_non_nullable
+              as int,
+      comment: freezed == comment
+          ? _value.comment
+          : comment // ignore: cast_nullable_to_non_nullable
+              as String?,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$BookingParamRatingEntityImpl implements BookingParamRatingEntity {
+  _$BookingParamRatingEntityImpl(
+      {@JsonKey(name: 'booking_id') required this.id,
+      required this.rating,
+      this.comment,
+      final String? $type})
+      : $type = $type ?? 'paramRatingEntity';
+
+  factory _$BookingParamRatingEntityImpl.fromJson(Map<String, dynamic> json) =>
+      _$$BookingParamRatingEntityImplFromJson(json);
+
+  @override
+  @JsonKey(name: 'booking_id')
+  final int id;
+  @override
+  final int rating;
+  @override
+  final String? comment;
+
+  @JsonKey(name: 'runtimeType')
+  final String $type;
+
+  @override
+  String toString() {
+    return 'Booking.paramRatingEntity(id: $id, rating: $rating, comment: $comment)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$BookingParamRatingEntityImpl &&
+            (identical(other.id, id) || other.id == id) &&
+            (identical(other.rating, rating) || other.rating == rating) &&
+            (identical(other.comment, comment) || other.comment == comment));
+  }
+
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  int get hashCode => Object.hash(runtimeType, id, rating, comment);
+
+  /// Create a copy of Booking
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$BookingParamRatingEntityImplCopyWith<_$BookingParamRatingEntityImpl>
+      get copyWith => __$$BookingParamRatingEntityImplCopyWithImpl<
+          _$BookingParamRatingEntityImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(
+            int id,
+            @JsonKey(name: 'latitude_origin') double latitudeOrigin,
+            @JsonKey(name: 'longitude_origin') double longitudeOrigin,
+            @JsonKey(name: 'address_origin') String addressOrigin,
+            @JsonKey(name: 'latitude_destination') double latitudeDestination,
+            @JsonKey(name: 'longitude_destination') double longitudeDestination,
+            @JsonKey(name: 'address_destination') String addressDestination,
+            double distance,
+            @JsonKey(name: 'time_estimate') int timeEstimate,
+            double price,
+            String status,
+            UserCustomerEntity customer,
+            UserDriverEntity? driver,
+            @JsonKey(name: 'created_at') String createdAt)
+        driverEntity,
+    required TResult Function(
+            @JsonKey(name: 'latitude_origin') double latitudeOrigin,
+            @JsonKey(name: 'longitude_origin') double longitudeOrigin,
+            @JsonKey(name: 'address_origin') String addressOrigin,
+            @JsonKey(name: 'latitude_destination') double latitudeDestination,
+            @JsonKey(name: 'longitude_destination') double longitudeDestination,
+            @JsonKey(name: 'address_destination') String addressDestination,
+            double distance,
+            @JsonKey(name: 'time_estimate') int timeEstimate)
+        createParamEntity,
+    required TResult Function(int id, String status) statusParamEntity,
+    required TResult Function(int id, String text) notifEntity,
+    required TResult Function(
+            @JsonKey(name: 'booking_id') int id, int rating, String? comment)
+        paramRatingEntity,
+  }) {
+    return paramRatingEntity(id, rating, comment);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(
+            int id,
+            @JsonKey(name: 'latitude_origin') double latitudeOrigin,
+            @JsonKey(name: 'longitude_origin') double longitudeOrigin,
+            @JsonKey(name: 'address_origin') String addressOrigin,
+            @JsonKey(name: 'latitude_destination') double latitudeDestination,
+            @JsonKey(name: 'longitude_destination') double longitudeDestination,
+            @JsonKey(name: 'address_destination') String addressDestination,
+            double distance,
+            @JsonKey(name: 'time_estimate') int timeEstimate,
+            double price,
+            String status,
+            UserCustomerEntity customer,
+            UserDriverEntity? driver,
+            @JsonKey(name: 'created_at') String createdAt)?
+        driverEntity,
+    TResult? Function(
+            @JsonKey(name: 'latitude_origin') double latitudeOrigin,
+            @JsonKey(name: 'longitude_origin') double longitudeOrigin,
+            @JsonKey(name: 'address_origin') String addressOrigin,
+            @JsonKey(name: 'latitude_destination') double latitudeDestination,
+            @JsonKey(name: 'longitude_destination') double longitudeDestination,
+            @JsonKey(name: 'address_destination') String addressDestination,
+            double distance,
+            @JsonKey(name: 'time_estimate') int timeEstimate)?
+        createParamEntity,
+    TResult? Function(int id, String status)? statusParamEntity,
+    TResult? Function(int id, String text)? notifEntity,
+    TResult? Function(
+            @JsonKey(name: 'booking_id') int id, int rating, String? comment)?
+        paramRatingEntity,
+  }) {
+    return paramRatingEntity?.call(id, rating, comment);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(
+            int id,
+            @JsonKey(name: 'latitude_origin') double latitudeOrigin,
+            @JsonKey(name: 'longitude_origin') double longitudeOrigin,
+            @JsonKey(name: 'address_origin') String addressOrigin,
+            @JsonKey(name: 'latitude_destination') double latitudeDestination,
+            @JsonKey(name: 'longitude_destination') double longitudeDestination,
+            @JsonKey(name: 'address_destination') String addressDestination,
+            double distance,
+            @JsonKey(name: 'time_estimate') int timeEstimate,
+            double price,
+            String status,
+            UserCustomerEntity customer,
+            UserDriverEntity? driver,
+            @JsonKey(name: 'created_at') String createdAt)?
+        driverEntity,
+    TResult Function(
+            @JsonKey(name: 'latitude_origin') double latitudeOrigin,
+            @JsonKey(name: 'longitude_origin') double longitudeOrigin,
+            @JsonKey(name: 'address_origin') String addressOrigin,
+            @JsonKey(name: 'latitude_destination') double latitudeDestination,
+            @JsonKey(name: 'longitude_destination') double longitudeDestination,
+            @JsonKey(name: 'address_destination') String addressDestination,
+            double distance,
+            @JsonKey(name: 'time_estimate') int timeEstimate)?
+        createParamEntity,
+    TResult Function(int id, String status)? statusParamEntity,
+    TResult Function(int id, String text)? notifEntity,
+    TResult Function(
+            @JsonKey(name: 'booking_id') int id, int rating, String? comment)?
+        paramRatingEntity,
+    required TResult orElse(),
+  }) {
+    if (paramRatingEntity != null) {
+      return paramRatingEntity(id, rating, comment);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(BookingEntity value) driverEntity,
+    required TResult Function(BookingCreateParamEntity value) createParamEntity,
+    required TResult Function(BookingStatusParamEntity value) statusParamEntity,
+    required TResult Function(BookingNotifEntity value) notifEntity,
+    required TResult Function(BookingParamRatingEntity value) paramRatingEntity,
+  }) {
+    return paramRatingEntity(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(BookingEntity value)? driverEntity,
+    TResult? Function(BookingCreateParamEntity value)? createParamEntity,
+    TResult? Function(BookingStatusParamEntity value)? statusParamEntity,
+    TResult? Function(BookingNotifEntity value)? notifEntity,
+    TResult? Function(BookingParamRatingEntity value)? paramRatingEntity,
+  }) {
+    return paramRatingEntity?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(BookingEntity value)? driverEntity,
+    TResult Function(BookingCreateParamEntity value)? createParamEntity,
+    TResult Function(BookingStatusParamEntity value)? statusParamEntity,
+    TResult Function(BookingNotifEntity value)? notifEntity,
+    TResult Function(BookingParamRatingEntity value)? paramRatingEntity,
+    required TResult orElse(),
+  }) {
+    if (paramRatingEntity != null) {
+      return paramRatingEntity(this);
+    }
+    return orElse();
+  }
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$BookingParamRatingEntityImplToJson(
+      this,
+    );
+  }
+}
+
+abstract class BookingParamRatingEntity implements Booking {
+  factory BookingParamRatingEntity(
+      {@JsonKey(name: 'booking_id') required final int id,
+      required final int rating,
+      final String? comment}) = _$BookingParamRatingEntityImpl;
+
+  factory BookingParamRatingEntity.fromJson(Map<String, dynamic> json) =
+      _$BookingParamRatingEntityImpl.fromJson;
+
+  @JsonKey(name: 'booking_id')
+  int get id;
+  int get rating;
+  String? get comment;
+
+  /// Create a copy of Booking
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$BookingParamRatingEntityImplCopyWith<_$BookingParamRatingEntityImpl>
+      get copyWith => throw _privateConstructorUsedError;
 }

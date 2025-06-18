@@ -12,4 +12,5 @@ abstract class BookingRepository {
   Future<DataState> cancel(int id);
 
   Future<DataState<int>> checkPrice(double param);
+  Future<DataState> sendRating(BookingParamRatingEntity param);
 }

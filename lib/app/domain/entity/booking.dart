@@ -42,6 +42,11 @@ sealed class Booking with _$Booking {
   factory Booking.notifEntity({required int id, required String text}) =
       BookingNotifEntity;
 
+  factory Booking.paramRatingEntity(
+      {@JsonKey(name: 'booking_id') required int id,
+      required int rating,
+      String? comment}) = BookingParamRatingEntity;
+
   factory Booking.fromJson(Map<String, dynamic> json) =>
       _$BookingFromJson(json);
 }

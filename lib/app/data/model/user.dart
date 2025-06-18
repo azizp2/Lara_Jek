@@ -13,6 +13,7 @@ sealed class User with _$User {
       required String role,
       @JsonKey(name: 'whatsapp') required String phone,
       @JsonKey(name: 'photo_url') required String? photoUrl,
+      @JsonKey(name: 'avg_rating') required double? avgRating,
       DriverModel? driver}) = UserModel;
 
   factory User.fromJson(Map<String, dynamic> json) => _$UserFromJson(json);

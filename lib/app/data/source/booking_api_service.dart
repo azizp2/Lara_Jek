@@ -36,4 +36,8 @@ abstract class BookingApiService {
   @POST(BOOKING_PATH_URL + '/price-check')
   Future<HttpResponse<DataState>> checkPrice(
       {@Body() required Map<String, dynamic> body});
+
+  @POST(BOOKING_PATH_URL + '/rating')
+  Future<HttpResponse<DataState>> sendRating(
+      {@Body() required Map<String, dynamic> body});
 }

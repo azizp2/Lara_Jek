@@ -106,3 +106,21 @@ Map<String, dynamic> _$$BookingNotifEntityImplToJson(
       'text': instance.text,
       'runtimeType': instance.$type,
     };
+
+_$BookingParamRatingEntityImpl _$$BookingParamRatingEntityImplFromJson(
+        Map<String, dynamic> json) =>
+    _$BookingParamRatingEntityImpl(
+      id: (json['booking_id'] as num).toInt(),
+      rating: (json['rating'] as num).toInt(),
+      comment: json['comment'] as String?,
+      $type: json['runtimeType'] as String?,
+    );
+
+Map<String, dynamic> _$$BookingParamRatingEntityImplToJson(
+        _$BookingParamRatingEntityImpl instance) =>
+    <String, dynamic>{
+      'booking_id': instance.id,
+      'rating': instance.rating,
+      'comment': instance.comment,
+      'runtimeType': instance.$type,
+    };

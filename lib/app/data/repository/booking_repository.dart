@@ -72,4 +72,12 @@ class BookingRepositoryImpl extends BookingRepository {
       return data;
     });
   }
+
+  @override
+  Future<DataState> sendRating(BookingParamRatingEntity param) {
+    return handleResponse(
+        () => _bookingApiService.sendRating(body: param.toJson()), (p0) async {
+      return null;
+    });
+  }
 }
